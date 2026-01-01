@@ -1,10 +1,17 @@
 import p5 from 'p5';
 import './style.css';
+import { globalVariables } from './globalVariables.js';
+import { drawGrid } from './utils/drawGrid.js';
+
 import { SceneManager } from './SceneManager.js';
 import { UIManager } from './ui/UIManager.js';
 import { MenuScene } from './scenes/MenuScene.js';
 import { GameScene } from './scenes/GameScene.js';
 import { scene03 } from './scenes/scene03.js';
+
+import bgImageUrl from './images/ui/background.png';
+
+let bgImage;
 
 // p5.js Instance Mode sketch
 const sketch = (p) => {
@@ -12,7 +19,8 @@ const sketch = (p) => {
   let uiManager;
 
   p.setup = async () => {
-    p.createCanvas(p.windowWidth, p.windowHeight);
+
+    p.createCanvas(globalVariables.canvasWidth, globalVariables.canvasHeight);
 
     // Initialize managers
     sceneManager = new SceneManager();
@@ -28,10 +36,12 @@ const sketch = (p) => {
 
     // Setup UI overlay
     uiManager.setup();
+    bgImage = await p.loadImage(bgImageUrl);
   };
 
   p.draw = () => {
-    // Update and draw current scene
+
+    p.image(bgImage, 0, 0)
     sceneManager.update(p);
     sceneManager.draw(p);
 

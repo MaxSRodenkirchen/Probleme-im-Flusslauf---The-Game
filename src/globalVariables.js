@@ -2,16 +2,25 @@
 // This object is shared across all scenes and UI components
 
 export const globalVariables = {
-    // Game state
-    currentScene: 'menu',
-    score: 0,
-    lives: 3,
-    currentLevel: 1,
 
-    // UI configuration
+    canvasWidth: 1194,
+    canvasHeight: 834,
+
+
+
+    currentScene: 'menu',
+
+
     ui: {
         objectWidth: 100,
         objectHeight: 100,
-        paddingLow: 5
+        paddingLow: 4,
+        paddingMid: 12
+    },
+
+    colors: {
+        light: "#fff",
+        dark: "#000",
+        accent: "#afe0e6ff",
     }
 };
