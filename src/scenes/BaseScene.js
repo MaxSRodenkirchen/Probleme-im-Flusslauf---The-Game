@@ -7,7 +7,7 @@ export class BaseScene {
     }
 
     // Called once when scene is activated
-    setup(p) {
+    async setup(p) {
         throw new Error('setup() must be implemented by subclass');
     }
 

@@ -1,4 +1,4 @@
-import { state } from './state.js';
+import { globalVariables } from './globalVariables.js';
 
 // Manages scene lifecycle and transitions
 export class SceneManager {
@@ -13,7 +13,7 @@ export class SceneManager {
     }
 
     // Switch to a different scene
-    switchScene(name, p) {
+    async switchScene(name, p) {
         // Cleanup old scene
         if (this.currentScene) {
             this.currentScene.cleanup();
@@ -22,8 +22,8 @@ export class SceneManager {
         // Activate new scene
         if (this.scenes[name]) {
             this.currentScene = this.scenes[name];
-            this.currentScene.setup(p);
-            state.currentScene = name;
+            await this.currentScene.setup(p);
+            globalVariables.currentScene = name;
         } else {
             console.error(`Scene "${name}" not found!`);
         }

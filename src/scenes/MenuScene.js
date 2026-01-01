@@ -1,5 +1,5 @@
 import { BaseScene } from './BaseScene.js';
-import { state } from '../state.js';
+import { globalVariables } from '../globalVariables.js';
 
 // Example menu scene
 export class MenuScene extends BaseScene {
@@ -9,15 +9,15 @@ export class MenuScene extends BaseScene {
         this.startButton = null;
     }
 
-    setup(p) {
+    async setup(p) {
         console.log('MenuScene setup');
 
         // Create start button
         this.startButton = p.createButton('Start Game');
         this.startButton.position(p.width / 2 - 50, p.height / 2 + 50);
         this.startButton.size(100, 40);
-        this.startButton.mousePressed(() => {
-            this.sceneManager.switchScene('game', p);
+        this.startButton.mousePressed(async () => {
+            await this.sceneManager.switchScene('game', p);
         });
     }
 
@@ -35,9 +35,9 @@ export class MenuScene extends BaseScene {
         p.text('Press SPACE or click Start', p.width / 2, p.height / 2);
     }
 
-    keyPressed(p) {
+    async keyPressed(p) {
         if (p.key === ' ') {
-            this.sceneManager.switchScene('game', p);
+            await this.sceneManager.switchScene('game', p);
         }
     }
 

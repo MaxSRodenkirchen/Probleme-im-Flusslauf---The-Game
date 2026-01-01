@@ -4,13 +4,14 @@ import { SceneManager } from './SceneManager.js';
 import { UIManager } from './ui/UIManager.js';
 import { MenuScene } from './scenes/MenuScene.js';
 import { GameScene } from './scenes/GameScene.js';
+import { scene03 } from './scenes/scene03.js';
 
 // p5.js Instance Mode sketch
 const sketch = (p) => {
   let sceneManager;
   let uiManager;
 
-  p.setup = () => {
+  p.setup = async () => {
     p.createCanvas(p.windowWidth, p.windowHeight);
 
     // Initialize managers
@@ -18,14 +19,15 @@ const sketch = (p) => {
     uiManager = new UIManager(p);
 
     // Register scenes
+    sceneManager.addScene('scene03', new scene03(sceneManager));
     sceneManager.addScene('menu', new MenuScene(sceneManager));
     sceneManager.addScene('game', new GameScene(sceneManager));
 
     // Start with menu scene
-    sceneManager.switchScene('menu', p);
+    await sceneManager.switchScene('scene03', p);
 
     // Setup UI overlay
-    // uiManager.setup();
+    uiManager.setup();
   };
 
   p.draw = () => {

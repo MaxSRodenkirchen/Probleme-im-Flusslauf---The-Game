@@ -1,5 +1,5 @@
 import { BaseScene } from './BaseScene.js';
-import { state } from '../state.js';
+import { globalVariables } from '../globalVariables.js';
 
 // Example game scene with three sub-levels
 export class GameScene extends BaseScene {
@@ -10,7 +10,7 @@ export class GameScene extends BaseScene {
         this.colors = ['red', 'green', 'blue'];
     }
 
-    setup(p) {
+    async setup(p) {
         console.log('GameScene setup');
         this.subLevel = 1;
     }
@@ -33,10 +33,10 @@ export class GameScene extends BaseScene {
         p.text('Press ESC to return to menu', p.width / 2, p.height / 2 + 40);
 
         // Update state
-        state.currentLevel = this.subLevel;
+        globalVariables.currentLevel = this.subLevel;
     }
 
-    keyPressed(p) {
+    async keyPressed(p) {
         console.log('GameScene keyPressed:', p.key, p.keyCode);
 
         // Navigate between sub-levels
@@ -49,7 +49,7 @@ export class GameScene extends BaseScene {
             this.subLevel = Math.min(3, this.subLevel + 1);
         } else if (p.keyCode === 27) { // ESCAPE
             console.log('ESC pressed');
-            this.sceneManager.switchScene('menu', p);
+            await this.sceneManager.switchScene('menu', p);
         }
 
         // Prevent default browser behavior

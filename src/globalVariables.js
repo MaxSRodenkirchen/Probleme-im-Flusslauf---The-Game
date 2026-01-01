@@ -1,7 +1,7 @@
 // Centralized state management - Single Source of Truth
 // This object is shared across all scenes and UI components
 
-export const state = {
+export const globalVariables = {
     // Game state
     currentScene: 'menu',
     score: 0,
