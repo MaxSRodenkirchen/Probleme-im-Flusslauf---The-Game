@@ -6,21 +6,23 @@ export const globalVariables = {
     canvasWidth: 1194,
     canvasHeight: 834,
 
-
-
-    currentScene: 'menu',
+    currentScene: 0,  // Index der aktuellen Szene
 
 
     ui: {
         objectWidth: 100,
         objectHeight: 100,
         paddingLow: 4,
-        paddingMid: 12
+        paddingMid: 24,
+        fontSize: 20,
+        borderWidth: 2
     },
 
     colors: {
         light: "#fff",
         dark: "#000",
         accent: "#afe0e6ff",
+        success: "#afe0e6ff",
+        error: "#f87171"
     }
 };

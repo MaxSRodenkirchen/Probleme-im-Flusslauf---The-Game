@@ -1,56 +1,48 @@
 import { globalVariables } from './globalVariables.js';
 
-// Manages scene lifecycle and transitions
 export class SceneManager {
     constructor() {
-        this.scenes = {};
+        this.scenes = [];
         this.currentScene = null;
     }
 
     // Register a scene
-    addScene(name, scene) {
-        this.scenes[name] = scene;
+    addScene(scene) {
+        this.scenes.push(scene);
     }
 
-    // Switch to a different scene
-    async switchScene(name, p) {
-        // Cleanup old scene
+    async switchScene(index, p) {
+
         if (this.currentScene) {
             this.currentScene.cleanup();
         }
 
-        // Activate new scene
-        if (this.scenes[name]) {
-            this.currentScene = this.scenes[name];
+        // Check if index is valid
+        if (index >= 0 && index < this.scenes.length) {
+            globalVariables.currentScene = index;
+            this.currentScene = this.scenes[index];
             await this.currentScene.setup(p);
-            globalVariables.currentScene = name;
+            // console.log(`Switched to scene ${index}: ${this.currentScene.name}`);
         } else {
-            console.error(`Scene "${name}" not found!`);
+            console.error(`Scene index ${index} out of bounds!`);
         }
     }
 
-    // Update current scene
     update(p) {
         if (this.currentScene) {
             this.currentScene.update(p);
         }
     }
-
-    // Draw current scene
     draw(p) {
         if (this.currentScene) {
             this.currentScene.draw(p);
         }
     }
-
-    // Delegate keyboard input
     keyPressed(p) {
         if (this.currentScene) {
             this.currentScene.keyPressed(p);
         }
     }
-
-    // Delegate mouse input
     mousePressed(p) {
         if (this.currentScene) {
             this.currentScene.mousePressed(p);

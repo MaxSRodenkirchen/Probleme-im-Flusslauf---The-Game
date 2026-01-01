@@ -4,6 +4,7 @@
 export class BaseScene {
     constructor(name) {
         this.name = name;
+        this.completed = false;  // Szene abgeschlossen?
     }
 
     // Called once when scene is activated
