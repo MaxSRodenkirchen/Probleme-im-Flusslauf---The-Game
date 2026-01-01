@@ -91,6 +91,8 @@ export class bilderRaten {
             btn.style('font-size', `${globalVariables.ui.fontSize}px`);
             btn.style('width', `${buttonSize}px`);
             btn.style('height', `${buttonSize}px`);
+            btn.class("chelsea-market");
+            btn.style('background-color', 'transparent');
 
 
             // Click: Buchstabe auswählen
