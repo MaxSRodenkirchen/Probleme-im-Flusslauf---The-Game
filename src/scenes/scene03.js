@@ -10,10 +10,11 @@ import img4 from '../images/scene03/img4.png';
 import bgImageUrl from '../images/ui/background.png';
 
 export class scene03 extends BaseScene {
-    constructor(sceneManager, uiManager) {
+    constructor(p, sceneManager, uiManager) {
         super("scene03");
         this.sceneManager = sceneManager;
         this.uiManager = uiManager;
+        this.p = p;
         this.imageUrls = [img1, img2, img3, img4];
         this.game = new bilderRaten("WASSER", this);
         this.bgImage = null;  // Hintergrundbild

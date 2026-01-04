@@ -8,11 +8,11 @@ import { SceneManager } from '../SceneManager.js';
 
 
 export class scene01 extends BaseScene {
-    constructor(sceneManager, uiManager) {
+    constructor(p, sceneManager, uiManager) {
         super("scene01");
         this.sceneManager = sceneManager;
         this.uiManager = uiManager;
-
+        this.p = p;
         this.completed = true;
         this.bgImage = null;
         this.startText = null;

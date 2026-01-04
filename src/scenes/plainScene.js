@@ -9,13 +9,13 @@ Change Title and Import
 */
 
 
-export class scene02 extends BaseScene {
-    constructor(sceneManager, uiManager) {
-        super("scene01");
+export class plainScene extends BaseScene {
+    constructor(p, sceneManager, uiManager) {
+        super("plainScene");
         this.sceneManager = sceneManager;
         this.uiManager = uiManager;
+        this.p = p;
 
-        this.completed = true;
         this.bgImage = null;
     }
 

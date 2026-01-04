@@ -110,3 +110,7 @@ button:focus-visible {
   font-style: normal;
   color: var(--color-light)
 }
+
+.activeElement {
+  border: 10px solid var(--color-success);
+}

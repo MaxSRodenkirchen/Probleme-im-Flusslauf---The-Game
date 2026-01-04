@@ -14,18 +14,17 @@ import field from '../images/ablaufRaten/arrow-right.png';
 
 
 export class scene02 extends BaseScene {
-    constructor(sceneManager, uiManager) {
-        super("scene01");
+    constructor(p, sceneManager, uiManager) {
+        super("scene02");
         this.sceneManager = sceneManager;
         this.uiManager = uiManager;
+        this.p = p;
 
-        this.completed = true;
         this.bgImage = null;
 
-
         this.imageUrls = [img1, img2, img3, img4];
-        this.bgFieldUrls = [field, field, field, field];
-        this.game = new ablaufRaten(this);
+        this.bgTilesUrls = [field, field, field, field];
+        this.game = new ablaufRaten(p, this, this.bgTilesUrls, this.imageUrls);
 
     }
 
@@ -33,7 +32,7 @@ export class scene02 extends BaseScene {
         this.bgImage = await p.loadImage(bgImageUrl);
         p.image(this.bgImage, 0, 0);
 
-        await this.game.loadImages(p, this.imageUrls, this.bgFieldUrls);
+        // await this.game.loadImages(p, this.imageUrls, this.bgFieldUrls);
         await this.game.setup(p);
 
         this.uiManager.setup();
@@ -43,11 +42,12 @@ export class scene02 extends BaseScene {
         this.game.draw(p);
 
         this.uiManager.toggleLastSceneButton(true);
-        this.uiManager.toggleNextSceneButton(true);
+        this.uiManager.toggleNextSceneButton(this.completed);
     }
 
     cleanup() {
         this.uiManager.cleanup();
+        this.game.cleanup();
     }
     keyPressed(p) {
     }

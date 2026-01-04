@@ -5,102 +5,137 @@ import { drawGrid } from '../utils/drawGrid.js';
 
 
 export class ablaufRaten {
-    constructor(scene) {
+    constructor(p, scene, bgTilesUrls, imageUrls) {
         this.scene = scene;
+        this.p = p;
 
         this.imgSize = 200;
-
         this.currentField = 0;
-        this.loadedImages = []; //correct array 
-        this.loadedBgFields = [];
-        this.shuffledArray = [];
-        this.imageUrls = []; // URLs für DOM-Elemente
-        this.domImages = []; // DOM <img> Elemente
+        this.clickedOrder = [];
 
-        this.positions = [
-            { width: -this.imgSize, height: -this.imgSize }, // index 0
-            { width: 0, height: -this.imgSize },              // index 1
-            { width: -this.imgSize, height: 0 },              // index 2
-            { width: 0, height: 0 }                           // index 3
-        ];
-    }
-
-    async loadImages(p, imageUrls, bgFieldUrls) {
-        // URLs speichern für DOM-Elemente
+        this.bgTilesUrls = bgTilesUrls;
         this.imageUrls = imageUrls;
+        this.shuffledImageUrlArray = [];
+        this.bgTileDoms = [];
+        this.imageDoms = [];
 
-        this.loadedImages = await Promise.all(
-            imageUrls.map(url => p.loadImage(url))
-        );
-        this.loadedBgFields = await Promise.all(
-            bgFieldUrls.map(url => p.loadImage(url))
-        );
+        this.imageAmount = this.imageUrls.length;
+
+        const center = {
+            w: p.width / 2,
+            h: p.height / 2
+        };
+        this.positions = [
+            { width: center.w - this.imgSize, height: center.h - this.imgSize }, // index 0
+            { width: center.w, height: center.h - this.imgSize },              // index 1
+            { width: center.w - this.imgSize, height: center.h },              // index 2
+            { width: center.w, height: center.h }                           // index 3
+        ];
     }
 
     async setup(p) {
 
-        this.shuffleImages();
-
-        p.push();
-        p.translate(p.width / 2, p.height / 2);
         // drawGrid(p, 50);
-        this.loadedBgFields.forEach((img, index) => this.drawImage(p, index, img));
 
-        // this.imageUrls.forEach((url, index) => {
-        //     const imgElement = p.createImg(url, 'image ' + index);
-        //     const pos = this.positions[index];
-        //     imgElement.position(p.width / 2 + pos.width, p.height / 2 + pos.height);
-        //     imgElement.size(this.imgSize, this.imgSize);
-        //     imgElement.mouseClicked(() => console.log("hi"));
-        //     this.domImages.push(imgElement);
-        // });
+        this.bgTilesUrls.forEach((url, index) => {
+            const img = p.createImg(url, 'image ' + index);
+            img.position(this.positions[index].width, this.positions[index].height);
+            img.size(this.imgSize, this.imgSize);
 
-        this.shuffledArray.forEach((url, index) => {
-            const imgElement = p.createImg(url, 'image ' + index);
-            const size = this.imgSize / 2 - globalVariables.ui.paddingMid / 2;
-            imgElement.position(p.width / 2 - this.imgSize + (index * this.imgSize / 2), p.height - globalVariables.ui.paddingMid - size);
-            imgElement.size(size, size);
-            imgElement.mouseClicked(() => console.log("hi"));
-            this.domImages.push(imgElement);
+            this.bgTileDoms.push(img);
         });
 
-        p.pop();
+        this.setupImages();
+
     }
 
-    shuffleImages() {
-        this.shuffledArray = [...this.imageUrls];
+    setupImages() {
+        this.currentField = 0;
+        this.shuffleImages();
+        this.shuffledImageUrlArray.forEach(([url, originalIndex], shuffledIndex) => {
+            const img = this.p.createImg(url, 'image ' + shuffledIndex);
+            const size = this.imgSize / 2 - globalVariables.ui.paddingMid / 2;
+            img.position(this.p.width / 2 - this.imgSize + (shuffledIndex * this.imgSize / 2), this.p.height - globalVariables.ui.paddingMid - size);
+            img.size(size, size);
+            img.mouseClicked(() => this.positionImages(img, originalIndex, shuffledIndex));
 
-        // Fisher-Yates Shuffle Algorithmus
-        for (let i = this.shuffledArray.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.shuffledArray[i], this.shuffledArray[j]] = [this.shuffledArray[j], this.shuffledArray[i]];
+            this.imageDoms[originalIndex] = img;
+        });
+        this.styleCurrentBgTile();
+
+    }
+
+    positionImages(img, originalIndex, shuffledIndex) {
+        if (this.currentField < this.imageAmount) {
+            img.position(this.positions[this.currentField].width, this.positions[this.currentField].height);
+            img.size(this.imgSize, this.imgSize);
+            this.clickedOrder.push(originalIndex);
+            this.nextField();
+            // console.log('Clicked order:', this.clickedOrder);
         }
-
-        return this.shuffledArray;
     }
 
-    drawImage(p, index, img) {
+    nextField() {
+        this.currentField++;
 
-        switch (index) {
-            case 0:
-                p.image(img, -this.imgSize, -this.imgSize, this.imgSize, this.imgSize);
-                return;
-            case 1:
-                p.image(img, 0, -this.imgSize, this.imgSize, this.imgSize);
-                return;
-            case 2:
-                p.image(img, -this.imgSize, 0, -this.imgSize, this.imgSize);
-                return;
-            case 3:
-                p.image(img, 0, 0, this.imgSize, this.imgSize);
-                return;
+        // this.currentField = this.p.constrain(this.currentField, 0, this.imageAmount - 1)
+        if (this.currentField === this.imageAmount) {
+            this.checkResult();
+        } else {
+            this.styleCurrentBgTile();
 
+        }
+    }
+    checkResult() {
+        for (let i = 0; i < this.imageAmount; i++) {
+            if (this.clickedOrder[i] === i) {
+                console.log("won")
+                this.scene.completed = true;
+            } else {
+                console.log("lost");
+                this.imageDoms.forEach(element => {
+                    element.remove();
+                });
+                this.imageDoms = [];
+                this.setupImages();
+            }
         }
 
     }
 
     draw(p) {
+    }
 
+    styleCurrentBgTile() {
+        this.bgTileDoms.forEach(tile => {
+            tile.removeClass('activeElement');
+        });
 
+        let tile = this.bgTileDoms[this.currentField];
+        tile.addClass('activeElement');
+    }
+    shuffleImages() {
+        // Erstelle Array mit [url, originalIndex] Paaren
+        this.shuffledImageUrlArray = this.imageUrls.map((url, index) => [url, index]);
+
+        // Fisher-Yates Shuffle Algorithmus
+        for (let i = this.shuffledImageUrlArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.shuffledImageUrlArray[i], this.shuffledImageUrlArray[j]] = [this.shuffledImageUrlArray[j], this.shuffledImageUrlArray[i]];
+        }
+
+        return this.shuffledImageUrlArray;
+    }
+    cleanup() {
+
+        this.bgTileDoms.forEach(element => {
+            element.remove();
+        });
+        this.bgTileDoms = [];
+
+        this.imageDoms.forEach(element => {
+            element.remove();
+        });
+        this.imageDoms = [];
     }
 }
