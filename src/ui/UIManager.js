@@ -61,6 +61,7 @@ export class UIManager {
     toggleNextSceneButton(bool) {
         if (bool) {
             this.nextSceneButton.show();
+
         } else {
             this.nextSceneButton.hide();
         }

@@ -9,6 +9,7 @@ next steps:
 - rateSpiel neu coden - Styling mit CSS-Klasse?
 -
 
+- Game-Klassen und Szenen auf Skalierung testen. Kann man die schnell duplizieren?
 
 
 

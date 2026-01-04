@@ -6,6 +6,8 @@ import { SceneManager } from './SceneManager.js';
 
 import { UIManager } from './ui/UIManager.js';
 import { scene01 } from './scenes/scene01.js';
+import { scene02 } from './scenes/scene02.js';
+
 import { scene03 } from './scenes/scene03.js';
 
 
@@ -23,6 +25,8 @@ const sketch = (p) => {
     uiManager = new UIManager(p, sceneManager);
 
     sceneManager.addScene(new scene01(sceneManager, uiManager));  // Index 0
+    sceneManager.addScene(new scene02(sceneManager, uiManager));  // Index 0
+
     sceneManager.addScene(new scene03(sceneManager, uiManager));  // Index 1
 
     // Start with first scene (index 0)
