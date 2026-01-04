@@ -18,6 +18,7 @@ export class ablaufRaten {
         this.shuffledImageUrlArray = [];
         this.bgTileDoms = [];
         this.imageDoms = [];
+        this.correct = false;
 
         this.imageAmount = this.imageUrls.length;
 
@@ -78,9 +79,9 @@ export class ablaufRaten {
     nextField() {
         this.currentField++;
 
-        // this.currentField = this.p.constrain(this.currentField, 0, this.imageAmount - 1)
         if (this.currentField === this.imageAmount) {
             this.checkResult();
+            this.scene.completed = this.correct;
         } else {
             this.styleCurrentBgTile();
 
@@ -89,8 +90,7 @@ export class ablaufRaten {
     checkResult() {
         for (let i = 0; i < this.imageAmount; i++) {
             if (this.clickedOrder[i] === i) {
-                console.log("won")
-                this.scene.completed = true;
+                // this.correct = true
             } else {
                 console.log("lost");
                 this.imageDoms.forEach(element => {
