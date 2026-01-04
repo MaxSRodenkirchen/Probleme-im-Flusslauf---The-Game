@@ -1,9 +1,16 @@
 import { BaseScene } from './BaseScene.js';
 import { globalVariables } from '../globalVariables.js';
 
-import bgImageUrl from '../images/scene01/startScreen.png';
+import { ablaufRaten } from '../games/ablaufRaten.js';
 
+import bgImageUrl from '../images/ui/background.png';
 
+import img1 from '../images/scene03/img1.png';
+import img2 from '../images/scene03/img2.png';
+import img3 from '../images/scene03/img3.png';
+import img4 from '../images/scene03/img4.png';
+
+import field from '../images/ablaufRaten/arrow-right.png';
 
 
 export class scene02 extends BaseScene {
@@ -14,17 +21,27 @@ export class scene02 extends BaseScene {
 
         this.completed = true;
         this.bgImage = null;
+
+
+        this.imageUrls = [img1, img2, img3, img4];
+        this.bgFieldUrls = [field, field, field, field];
+        this.game = new ablaufRaten(this);
+
     }
 
     async setup(p) {
         this.bgImage = await p.loadImage(bgImageUrl);
         p.image(this.bgImage, 0, 0);
 
+        await this.game.loadImages(p, this.imageUrls, this.bgFieldUrls);
+        await this.game.setup(p);
 
         this.uiManager.setup();
     }
 
     draw(p) {
+        this.game.draw(p);
+
         this.uiManager.toggleLastSceneButton(true);
         this.uiManager.toggleNextSceneButton(true);
     }

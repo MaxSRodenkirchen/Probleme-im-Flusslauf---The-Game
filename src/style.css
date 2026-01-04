@@ -80,6 +80,11 @@ button {
   transition: all 0.2s ease;
 }
 
+img {
+  object-fit: cover;
+  object-position: center;
+}
+
 button:hover:not(:disabled) {
   opacity: 0.9;
 }

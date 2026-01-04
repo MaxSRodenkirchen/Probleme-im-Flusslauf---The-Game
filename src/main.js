@@ -24,10 +24,9 @@ const sketch = (p) => {
     sceneManager = new SceneManager();
     uiManager = new UIManager(p, sceneManager);
 
-    sceneManager.addScene(new scene01(sceneManager, uiManager));  // Index 0
-    sceneManager.addScene(new scene02(sceneManager, uiManager));  // Index 0
-
-    sceneManager.addScene(new scene03(sceneManager, uiManager));  // Index 1
+    sceneManager.addScene(new scene01(sceneManager, uiManager));
+    sceneManager.addScene(new scene02(sceneManager, uiManager));
+    sceneManager.addScene(new scene03(sceneManager, uiManager));
 
     // Start with first scene (index 0)
     await sceneManager.switchScene(1, p);
