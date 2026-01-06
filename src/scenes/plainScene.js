@@ -1,8 +1,6 @@
 import { BaseScene } from './BaseScene.js';
 import { globalVariables } from '../globalVariables.js';
 
-import bgImageUrl from '../images/scene01/startScreen.png';
-
 /*
 Für Copy & Paste
 Change Title and Import
@@ -16,14 +14,9 @@ export class plainScene extends BaseScene {
         this.uiManager = uiManager;
         this.p = p;
 
-        this.bgImage = null;
     }
 
     async setup(p) {
-        this.bgImage = await p.loadImage(bgImageUrl);
-        p.image(this.bgImage, 0, 0);
-
-
         this.uiManager.setup();
     }
 
@@ -32,7 +25,7 @@ export class plainScene extends BaseScene {
         this.uiManager.toggleNextSceneButton(true);
     }
 
-    cleanup() {
+    cleanup(p) {
         this.uiManager.cleanup();
     }
     keyPressed(p) {

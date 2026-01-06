@@ -14,6 +14,7 @@ export const globalVariables = {
         objectHeight: 100,
         paddingLow: 4,
         paddingMid: 24,
+        sideSpace: 100,
         fontSize: 20,
         borderWidth: 2
     },
@@ -26,3 +27,9 @@ export const globalVariables = {
         error: "#f87171"
     }
 };
+
+
+export function getRandomDegree() {
+    const randomRotation = (Math.random() * 2) - 1; // -1 to 1 degrees
+    return randomRotation;
+}

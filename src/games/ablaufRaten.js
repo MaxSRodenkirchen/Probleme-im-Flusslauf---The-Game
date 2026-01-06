@@ -1,13 +1,14 @@
-import { globalVariables } from '../globalVariables.js';
+import { getRandomDegree, globalVariables } from '../globalVariables.js';
 import { drawGrid } from '../utils/drawGrid.js';
 
 
 
 
 export class ablaufRaten {
-    constructor(p, scene, bgTilesUrls, imageUrls) {
+    constructor(p, scene, bgTilesUrls, imageUrls, uiManager) {
         this.scene = scene;
         this.p = p;
+        this.uiManager = uiManager;
 
         this.imgSize = 200;
         this.currentField = 0;
@@ -26,11 +27,12 @@ export class ablaufRaten {
             w: p.width / 2,
             h: p.height / 2
         };
+        const gap = globalVariables.ui.paddingLow / 2;
         this.positions = [
-            { width: center.w - this.imgSize, height: center.h - this.imgSize }, // index 0
-            { width: center.w, height: center.h - this.imgSize },              // index 1
-            { width: center.w - this.imgSize, height: center.h },              // index 2
-            { width: center.w, height: center.h }                           // index 3
+            { width: center.w + gap, height: center.h + gap },                           // index 0 (BR)
+            { width: center.w + gap, height: center.h - this.imgSize - gap },              // index 1 (TR)
+            { width: center.w - this.imgSize - gap, height: center.h - this.imgSize - gap }, // index 2 (TL)
+            { width: center.w - this.imgSize - gap, height: center.h + gap }              // index 3 (BL)
         ];
     }
 
@@ -42,34 +44,68 @@ export class ablaufRaten {
             const img = p.createImg(url, 'image ' + index);
             img.position(this.positions[index].width, this.positions[index].height);
             img.size(this.imgSize, this.imgSize);
+            const rotations = [-270, 0, -90, 180]; // degrees for each index
+            const rot = rotations[index] + (getRandomDegree() * 8);
+            img.style('transform', `rotate(${rot}deg)`);
+            img.style("opacity", "0.25")
+            img.class(" borderRadius");
 
             this.bgTileDoms.push(img);
         });
+
+
 
         this.setupImages();
 
     }
 
     setupImages() {
+        this.correct = false;
+        this.clickedOrder = [];
+        this.scene.completed = false;
         this.currentField = 0;
         this.shuffleImages();
         this.shuffledImageUrlArray.forEach(([url, originalIndex], shuffledIndex) => {
             const img = this.p.createImg(url, 'image ' + shuffledIndex);
             const size = this.imgSize / 2 - globalVariables.ui.paddingMid / 2;
-            img.position(this.p.width / 2 - this.imgSize + (shuffledIndex * this.imgSize / 2), this.p.height - globalVariables.ui.paddingMid - size);
+            const posX = this.p.width / 2 - this.imgSize + (shuffledIndex * this.imgSize / 2);
+            const posY = this.p.height - globalVariables.ui.sideSpace - size;
+            img.position(posX, posY);
             img.size(size, size);
+            img.class("shadow borderRadius");
+            img.style('transform', `rotate(${getRandomDegree()}deg)`);
+            if (originalIndex === 0) {
+                img.addClass("clickMe");
+            }
+
             img.mouseClicked(() => this.positionImages(img, originalIndex, shuffledIndex));
 
             this.imageDoms[originalIndex] = img;
         });
         this.styleCurrentBgTile();
 
+
     }
 
     positionImages(img, originalIndex, shuffledIndex) {
+
+        // Prevent double clicking
+        if (this.clickedOrder.includes(originalIndex)) {
+            return;
+        }
+
+        if (originalIndex === 0) {
+            img.removeClass("clickMe");
+        }
         if (this.currentField < this.imageAmount) {
-            img.position(this.positions[this.currentField].width, this.positions[this.currentField].height);
+            const newPosX = this.positions[this.currentField].width;
+            const newPosY = this.positions[this.currentField].height;
+
+            img.position(newPosX, newPosY);
             img.size(this.imgSize, this.imgSize);
+
+
+
             this.clickedOrder.push(originalIndex);
             this.nextField();
             // console.log('Clicked order:', this.clickedOrder);
@@ -88,31 +124,46 @@ export class ablaufRaten {
         }
     }
     checkResult() {
-        for (let i = 0; i < this.imageAmount; i++) {
-            if (this.clickedOrder[i] === i) {
-                // this.correct = true
-            } else {
-                console.log("lost");
+        if (this.clickedOrder[0] === 0 &&
+            this.clickedOrder[1] === 1 &&
+            this.clickedOrder[2] === 2 &&
+            this.clickedOrder[3] === 3) {
+            this.correct = true;
+            this.uiManager.showSolutionUi(this.correct);
+
+            return;
+        };
+        this.uiManager.showSolutionUi(this.correct);
+
+
+        if (this.correct === false) {
+
+
+            setTimeout(() => {
                 this.imageDoms.forEach(element => {
                     element.remove();
                 });
                 this.imageDoms = [];
                 this.setupImages();
-            }
-        }
+            }, 2000)
 
+        }
+        console.log(this.correct)
     }
+
 
     draw(p) {
     }
 
     styleCurrentBgTile() {
         this.bgTileDoms.forEach(tile => {
-            tile.removeClass('activeElement');
+            tile.style("opacity", "0.25")
+
         });
 
         let tile = this.bgTileDoms[this.currentField];
-        tile.addClass('activeElement');
+        tile.style("opacity", "1")
+
     }
     shuffleImages() {
         // Erstelle Array mit [url, originalIndex] Paaren
@@ -137,5 +188,7 @@ export class ablaufRaten {
             element.remove();
         });
         this.imageDoms = [];
+
+
     }
 }

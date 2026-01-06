@@ -19,8 +19,8 @@ export class scene01 extends BaseScene {
     }
 
     async setup(p) {
-        this.bgImage = await p.loadImage(bgImageUrl);
-        p.image(this.bgImage, 0, 0);
+        // this.bgImage = await p.loadImage(bgImageUrl);
+        // p.image(this.bgImage, 0, 0);
 
         this.startText = p.createDiv("Starte Spiel");
         this.startText.id("startText");

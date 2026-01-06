@@ -12,10 +12,18 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+
+  /* Background image that covers entire body */
+  background-image: url('./images/ui/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 canvas {
   display: block;
+  border: 1px solid var(--color-error);
 }
 
 :root {
@@ -32,10 +40,12 @@ canvas {
   --padding-low: 4px;
   --padding-mid: 24px;
 
+  --sideSpace: 100px;
   --font-size-small: 20px;
   --font-size-medium: 50px;
 
   --border-width: 2px;
+  --border-radius: 20px;
 }
 
 #startText {
@@ -48,6 +58,7 @@ canvas {
   color: var(--color-success);
   cursor: pointer;
 }
+
 
 button {
   /* Reset default browser styles */
@@ -85,6 +96,23 @@ img {
   object-position: center;
 }
 
+.borderRadius {
+  border-radius: var(--border-radius);
+
+}
+
+.shadow {
+  box-shadow: var(--padding-low) var(--padding-low) calc(var(--padding-low) * 2) rgba(0, 0, 0, 0.3);
+}
+
+.dropShadow {
+  filter: drop-shadow(var(--padding-low) var(--padding-low) calc(var(--padding-low) * 2) rgba(0, 0, 0, 0.3));
+}
+
+.clickMe {
+  border: var(--border-width) solid var(--color-success);
+}
+
 button:hover:not(:disabled) {
   opacity: 0.9;
 }
@@ -111,6 +139,18 @@ button:focus-visible {
   color: var(--color-light)
 }
 
-.activeElement {
-  border: 10px solid var(--color-success);
+.characterContainer {
+  overflow: hidden;
+  position: absolute;
+  background-color: var(--color-light);
+}
+
+.characterImage {
+  width: 200%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-60%, -25%);
+  pointer-events: none;
 }

@@ -3,39 +3,42 @@ import { globalVariables } from '../globalVariables.js';
 
 import { ablaufRaten } from '../games/ablaufRaten.js';
 
-import bgImageUrl from '../images/ui/background.png';
 
-import img1 from '../images/scene03/img1.png';
-import img2 from '../images/scene03/img2.png';
-import img3 from '../images/scene03/img3.png';
-import img4 from '../images/scene03/img4.png';
+import img1 from '../images/scene04/verdunstung.png';
+import img2 from '../images/scene04/wolkenbildung.png';
+import img3 from '../images/scene04/regen.png';
+import img4 from '../images/scene04/ablauf.png';
 
-import field from '../images/ablaufRaten/arrow-right.png';
+import field from '../images/ui/arrowTurnLeft.png';
+import max1 from '../images/scene04/MaxMare1.png';
 
 
-export class scene02 extends BaseScene {
+
+export class scene04 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
-        super("scene02");
+        super("scene04");
         this.sceneManager = sceneManager;
         this.uiManager = uiManager;
         this.p = p;
 
-        this.bgImage = null;
 
         this.imageUrls = [img1, img2, img3, img4];
         this.bgTilesUrls = [field, field, field, field];
-        this.game = new ablaufRaten(p, this, this.bgTilesUrls, this.imageUrls);
+        this.game = new ablaufRaten(p, this, this.bgTilesUrls, this.imageUrls, this.uiManager);
 
     }
 
     async setup(p) {
-        this.bgImage = await p.loadImage(bgImageUrl);
-        p.image(this.bgImage, 0, 0);
+        // await this.cleanup();
+
 
         // await this.game.loadImages(p, this.imageUrls, this.bgFieldUrls);
         await this.game.setup(p);
 
         this.uiManager.setup();
+
+        this.uiManager.displayCharacter(max1);
+
     }
 
     draw(p) {
