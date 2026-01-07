@@ -44,7 +44,7 @@ canvas {
   --font-size-small: 20px;
   --font-size-medium: 50px;
 
-  --border-width: 2px;
+  --border-width: 4px;
   --border-radius: 20px;
 }
 
@@ -164,6 +164,39 @@ button:focus-visible {
   /* left: 50%; */
   /* transform: translate(-1%, -25%); */
   pointer-events: none;
+}
+
+.factGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: var(--padding-low);
+  /* padding: 20px; */
+  box-sizing: border-box;
+}
+
+.factCard {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-mid);
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: var(--border-width) solid transparent;
+}
+
+.factCard:hover {
+  transform: scale(1.02) rotate(10.5deg);
+  background-color: var(--color-light);
+  border-color: var(--color-accent);
+}
+
+.factCard p {
+  margin: 0;
+  text-align: left;
+  color: var(--color-dark);
 }
 
 .debug {

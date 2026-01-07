@@ -7,6 +7,7 @@ import { SceneManager } from './SceneManager.js';
 import { UIManager } from './ui/UIManager.js';
 import { scene01 } from './scenes/scene01.js';
 import { scene04 } from './scenes/scene04.js';
+import { scene05 } from './scenes/scene05.js';
 
 import { sceneXX } from './scenes/sceneXX.js';
 
@@ -26,11 +27,12 @@ const sketch = (p) => {
 
     sceneManager.addScene(new scene01(p, sceneManager, uiManager));
     sceneManager.addScene(new scene04(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene05(p, sceneManager, uiManager));
 
     sceneManager.addScene(new sceneXX(p, sceneManager, uiManager));
 
     // Start with first scene (index 0)
-    await sceneManager.switchScene(1, p);
+    await sceneManager.switchScene(2, p);
 
     // Setup UI overlay
     // uiManager.setup();
