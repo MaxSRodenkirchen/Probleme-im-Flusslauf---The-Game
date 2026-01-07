@@ -143,6 +143,7 @@ button:focus-visible {
   overflow: hidden;
   position: absolute;
   background-color: var(--color-light);
+  /* border-radius: 100%; */
 }
 
 .characterImage {
@@ -153,4 +154,18 @@ button:focus-visible {
   left: 50%;
   transform: translate(-60%, -25%);
   pointer-events: none;
+}
+
+.nameTag {
+  /* width: 200%;
+  height: auto; */
+  /* position: absolute; */
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-1%, -25%); */
+  pointer-events: none;
+}
+
+.debug {
+  border: 1px solid red;
 }

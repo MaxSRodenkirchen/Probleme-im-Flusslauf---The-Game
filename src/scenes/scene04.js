@@ -37,7 +37,8 @@ export class scene04 extends BaseScene {
 
         this.uiManager.setup();
 
-        this.uiManager.displayCharacter(max1);
+        const text = "Ich muss euch allerdings erstmal prüfen:<br>Wie funktioniert ein Wasserkreislauf? ";
+        this.uiManager.displayCharacter(max1, "Max Mare", text);
 
     }
 

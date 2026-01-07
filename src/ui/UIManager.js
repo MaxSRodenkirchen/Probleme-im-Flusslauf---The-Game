@@ -1,6 +1,7 @@
 import { getRandomDegree, globalVariables } from '../globalVariables.js';
 import arrowRightImg from '../images/ui/arrow-right.png';
 import arrowLeftImg from '../images/ui/arrow-left.png';
+import fullscreen from '../images/ui/fullscreen.png';
 import correct from '../images/ui/correct.png';
 import wrong from '../images/ui/wrong.png';
 
@@ -11,6 +12,7 @@ export class UIManager {
         this.elements = [];
         this.lastSceneButton = null;
         this.nextSceneButton = null;
+        this.fullscreenButton = null;
 
     }
 
@@ -54,6 +56,27 @@ export class UIManager {
             await this.sceneManager.switchScene(globalVariables.currentScene, this.p);
         });
         this.elements.push(this.nextSceneButton);
+
+
+        const fullscreenSize = w / 2;
+        this.fullscreenButton = this.p.createButton('');
+        const offsetY = (globalVariables.ui.objectHeight - fullscreenSize) / 2;
+        this.fullscreenButton.position(this.p.width - gap - fullscreenSize * 1.5, gap + offsetY);
+        this.fullscreenButton.size(fullscreenSize, fullscreenSize);
+        this.fullscreenButton.class("dropShadow")
+        this.fullscreenButton.style('background-image', `url(${fullscreen})`);
+        this.fullscreenButton.style('background-size', 'contain');
+        this.fullscreenButton.style('background-repeat', 'no-repeat');
+        this.fullscreenButton.style('background-position', 'center');
+        this.fullscreenButton.style('background-color', 'transparent');
+        // this.fullscreenButton.mousePressed(async () => {
+
+        //     await globalVariables.currentScene--;
+        //     await this.sceneManager.switchScene(globalVariables.currentScene, this.p);
+
+        // });
+        this.elements.push(this.fullscreenButton);
+
     }
 
     toggleLastSceneButton(bool) {
@@ -93,25 +116,34 @@ export class UIManager {
         }, 2000);
     }
 
-    displayCharacter(url) {
+    displayCharacter(url, name, text) {
         const container = this.p.createDiv("");
-
-
         const posX = globalVariables.ui.sideSpace;
         const posY = globalVariables.ui.sideSpace;
         const size = globalVariables.ui.objectHeight;
 
         container.position(posX, posY);
         container.size(size, size);
-        container.style('transform', `rotate(-4deg)`);
+        container.style('transform', `rotate(-1deg)`);
         container.class("shadow borderRadius characterContainer");
 
         const img = this.p.createImg(url, "An image of the Character");
         img.parent(container);
-
         img.class("characterImage");
 
-        this.elements.push(container); // Push container to cleanup, removing container removes child img too
+        const nameTag = this.p.createP(name);
+        nameTag.position(posX + globalVariables.ui.paddingLow, posY + size + globalVariables.ui.paddingLow);
+        nameTag.class("nameTag chelsea-market");
+        nameTag.style('transform', `rotate(0.7deg)`);
+
+        const speech = this.p.createP(text);
+        speech.position(posX + size + globalVariables.ui.paddingMid, posY + globalVariables.ui.paddingMid);
+        speech.class("nameTag chelsea-market");
+        speech.style('transform', `rotate(-0.3deg)`);
+
+
+        this.elements.push(container, nameTag, speech);
+
     }
 
 

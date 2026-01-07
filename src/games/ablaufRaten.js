@@ -47,7 +47,7 @@ export class ablaufRaten {
             const rotations = [-270, 0, -90, 180]; // degrees for each index
             const rot = rotations[index] + (getRandomDegree() * 8);
             img.style('transform', `rotate(${rot}deg)`);
-            img.style("opacity", "0.25")
+            img.style("opacity", "0.15")
             img.class(" borderRadius");
 
             this.bgTileDoms.push(img);
@@ -157,7 +157,7 @@ export class ablaufRaten {
 
     styleCurrentBgTile() {
         this.bgTileDoms.forEach(tile => {
-            tile.style("opacity", "0.25")
+            tile.style("opacity", "0.05")
 
         });
 
