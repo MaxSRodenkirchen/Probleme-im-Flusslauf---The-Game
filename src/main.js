@@ -18,40 +18,57 @@ const sketch = (p) => {
   let sceneManager;
   let uiManager;
 
+  const updateScale = () => {
+    const container = document.getElementById('game-container');
+    if (!container) return;
+
+    const baseWidth = globalVariables.canvasWidth;
+    const baseHeight = globalVariables.canvasHeight;
+    const scale = Math.min(window.innerWidth / baseWidth, window.innerHeight / baseHeight);
+
+    container.style.transform = `scale(${scale})`;
+  };
+
   p.setup = async () => {
+    const canvas = p.createCanvas(globalVariables.canvasWidth, globalVariables.canvasHeight);
+    canvas.parent('game-container');
 
-    p.createCanvas(globalVariables.canvasWidth, globalVariables.canvasHeight);
-
+    // Auto-parent all p5 DOM elements to the scaled container
+    const domMethods = ['createDiv', 'createP', 'createImg', 'createButton', 'createA', 'createSpan', 'createInput'];
+    domMethods.forEach(method => {
+      const original = p[method];
+      if (original) {
+        p[method] = function () {
+          const el = original.apply(p, arguments);
+          el.parent('game-container');
+          return el;
+        };
+      }
+    });
 
     sceneManager = new SceneManager();
     uiManager = new UIManager(p, sceneManager);
 
     sceneManager.addScene(new scene01(p, sceneManager, uiManager));
     sceneManager.addScene(new scene03(p, sceneManager, uiManager));
-
     sceneManager.addScene(new scene04(p, sceneManager, uiManager));
     sceneManager.addScene(new scene05(p, sceneManager, uiManager));
-
     sceneManager.addScene(new sceneXX(p, sceneManager, uiManager));
 
     // Start with first scene (index 0)
     await sceneManager.switchScene(1, p);
 
-    // Setup UI overlay
-    // uiManager.setup();
+    // Initial scale
+    updateScale();
   };
 
   p.draw = () => {
-
     sceneManager.update(p);
     sceneManager.draw(p);
-
-    // Update UI overlay
-    // uiManager.update();
   };
 
   p.windowResized = () => {
-    p.resizeCanvas(p.windowWidth, p.windowHeight);
+    updateScale();
   };
 
   p.keyPressed = () => {
