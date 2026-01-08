@@ -1,7 +1,6 @@
 import { BaseScene } from './_BaseScene.js';
 import { globalVariables } from '../globalVariables.js';
 
-import bgImageUrl from '../images/scene01/startScreen.png';
 import { SceneManager } from '../SceneManager.js';
 
 
@@ -20,10 +19,6 @@ export class scene01 extends BaseScene {
     async setup(p) {
         this.uiManager.setup();
 
-        const bgImage = p.createImg(bgImageUrl, "Image with Text: Probleme im Flusslauf");
-        bgImage.position(0, 0);
-        bgImage.size(p.width, p.height);
-
         const startText = p.createDiv("Starte Spiel");
         startText.id("startText");
         startText.class("chelsea-market");
@@ -33,8 +28,32 @@ export class scene01 extends BaseScene {
             this.sceneManager.switchScene(globalVariables.currentScene, p);
         })
 
+        const head1 = p.createP("Probleme");
+        head1.class("chelsea-market hugeText");
+        head1.position(245, 195);
+        head1.style('transform', `rotate(-3deg)`);
 
-        this.domElements.push(startText, bgImage);
+        const head2 = p.createP("im");
+        head2.class("chelsea-market hugeText");
+        head2.position(320, 320);
+        head2.style('transform', `rotate(-3deg)`);
+
+        const head3 = p.createP("Flusslauf");
+        head3.class("chelsea-market hugeText");
+        head3.position(500, 330);
+        head3.style('transform', `rotate(-3deg)`);
+
+        const banner = p.createDiv("");
+        banner.class("banner shadow");
+        banner.position(-1200, 100);
+        banner.style('transform', `rotate(-16deg)`);
+
+        const bannerText = p.createP("DEMO");
+        bannerText.class("chelsea-market bigText");
+        bannerText.parent(banner);
+
+
+        this.domElements.push(startText, head1, head2, head3, banner, bannerText);
 
     }
 

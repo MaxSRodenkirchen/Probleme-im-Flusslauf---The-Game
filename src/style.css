@@ -57,6 +57,7 @@ canvas {
   --color-light: #fff;
   --color-dark: #000;
   --color-accent: #afe0e6ff;
+  --color-darkblue: #467DFC;
   --color-success: #afe0e6ff;
   --color-error: #f87171;
 
@@ -71,6 +72,7 @@ canvas {
 
   --font-size-small: 20px;
   --font-size-medium: 50px;
+  --font-size-huge: 106px;
 
   --border-width: 4px;
   --border-radius: 20px;
@@ -271,4 +273,19 @@ button:focus-visible {
 .bigText {
   font-size: var(--font-size-medium);
   line-height: 135%;
+}
+
+.hugeText {
+  font-size: var(--font-size-huge);
+  line-height: 135%;
+}
+
+.banner {
+  background-color: var(--color-darkblue);
+  width: 3000px;
+  /* padding: var(--padding-low);
+  padding-left: 1000px; */
+  display: flex;
+  justify-content: center;
+
 }

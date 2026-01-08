@@ -58,7 +58,7 @@ const sketch = (p) => {
     // sceneManager.addScene(new sceneXX(p, sceneManager, uiManager));
 
     // Start with first scene (index 0)
-    await sceneManager.switchScene(4, p);
+    await sceneManager.switchScene(0, p);
 
     // Initial scale
     updateScale();

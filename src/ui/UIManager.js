@@ -33,6 +33,7 @@ export class UIManager {
         this.lastSceneButton.style('background-repeat', 'no-repeat');
         this.lastSceneButton.style('background-position', 'center');
         this.lastSceneButton.style('background-color', 'transparent');
+        this.lastSceneButton.style('z-index', '9999');
         this.lastSceneButton.mousePressed(async () => {
 
             await globalVariables.currentScene--;
@@ -51,6 +52,7 @@ export class UIManager {
         this.nextSceneButton.style('background-repeat', 'no-repeat');
         this.nextSceneButton.style('background-position', 'center');
         this.nextSceneButton.style('background-color', 'transparent');
+        this.nextSceneButton.style('z-index', '9999');
         this.nextSceneButton.mousePressed(async () => {
             await globalVariables.currentScene++;
             await this.sceneManager.switchScene(globalVariables.currentScene, this.p);
@@ -69,6 +71,7 @@ export class UIManager {
         this.fullscreenButton.style('background-repeat', 'no-repeat');
         this.fullscreenButton.style('background-position', 'center');
         this.fullscreenButton.style('background-color', 'transparent');
+        this.fullscreenButton.style('z-index', '9999');
         // this.fullscreenButton.mousePressed(async () => {
 
         //     await globalVariables.currentScene--;
