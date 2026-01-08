@@ -1,7 +1,7 @@
 import { BaseScene } from './BaseScene.js';
 import { globalVariables } from '../globalVariables.js';
 
-import maxMareUrl from '../images/scene03/maxMare.jpeg';
+import maxMareUrl from '../images/scene03/maxMare.png';
 
 
 export class scene03 extends BaseScene {

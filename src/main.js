@@ -24,10 +24,11 @@ const sketch = (p) => {
 
     const baseWidth = globalVariables.canvasWidth;
     const baseHeight = globalVariables.canvasHeight;
-    const scale = Math.min(window.innerWidth / baseWidth, window.innerHeight / baseHeight);
+    const scaling = Math.min(window.innerWidth / baseWidth, window.innerHeight / baseHeight);
 
-    container.style.transform = `scale(${scale})`;
+    container.style.transform = `scale(${scaling})`;
   };
+
 
   p.setup = async () => {
     const canvas = p.createCanvas(globalVariables.canvasWidth, globalVariables.canvasHeight);
@@ -53,10 +54,10 @@ const sketch = (p) => {
     sceneManager.addScene(new scene03(p, sceneManager, uiManager));
     sceneManager.addScene(new scene04(p, sceneManager, uiManager));
     sceneManager.addScene(new scene05(p, sceneManager, uiManager));
-    sceneManager.addScene(new sceneXX(p, sceneManager, uiManager));
+    // sceneManager.addScene(new sceneXX(p, sceneManager, uiManager));
 
     // Start with first scene (index 0)
-    await sceneManager.switchScene(1, p);
+    await sceneManager.switchScene(3, p);
 
     // Initial scale
     updateScale();

@@ -40,6 +40,7 @@ body {
   flex-shrink: 0;
   /* Allow overflow for shadows or rotations if needed */
   overflow: visible;
+
 }
 
 canvas {
@@ -84,6 +85,12 @@ canvas {
 #startText:hover {
   color: var(--color-success);
   cursor: pointer;
+}
+
+.iconOverlay {
+  z-index: 9999;
+  pointer-events: none;
+  padding: var(--padding-low);
 }
 
 #nameBig {

@@ -39,7 +39,7 @@ export class faktenRaten {
 
             const card = this.p.createDiv("");
             card.parent(container);
-            card.style('transform', `rotate(${getRandomDegree()}deg)`);
+            card.style('transform', `rotate(${getRandomDegree() * 0.75}deg)`);
             card.class("factCard shadow borderRadius");
 
             const p = this.p.createP(factText);

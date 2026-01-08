@@ -107,9 +107,14 @@ export class UIManager {
 
         img.position(posX, posY);
         img.size(size, size);
-        img.style('z-index', '9999');
-        img.style('pointer-events', 'none');
-        img.class("dropShadow")
+        img.class("dropShadow iconOverlay borderRadius shadow").UIManager
+        img.style('transform', `rotate(${getRandomDegree() * 4}deg)`);
+
+        if (condition) {
+            img.style("background-color", globalVariables.colors.success)
+        } else {
+            img.style("background-color", globalVariables.colors.error)
+        }
 
         setTimeout(() => {
             img.remove();
