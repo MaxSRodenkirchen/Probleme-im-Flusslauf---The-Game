@@ -62,6 +62,17 @@ canvas {
   cursor: pointer;
 }
 
+#nameBig {
+  color: var(--color-light);
+  font-size: var(--font-size-medium);
+  transform: rotate(-3DEG);
+}
+
+#maxMare01 {
+  transform: scaleX(-1) rotate(6deg);
+  mix-blend-mode: screen;
+  z-index: -999;
+}
 
 button {
   /* Reset default browser styles */
@@ -219,4 +230,9 @@ button:focus-visible {
 
 .debug {
   border: 1px solid red;
+}
+
+.mediumText {
+  font-size: var(--font-size-small);
+  line-height: 135%;
 }

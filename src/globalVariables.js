@@ -6,6 +6,8 @@ export const globalVariables = {
     canvasWidth: 1194,
     canvasHeight: 834,
 
+    teamName: "flinken Fische",
+
     currentScene: 0,  // Index der aktuellen Szene
 
     timeOutTime: 2000,

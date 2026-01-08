@@ -29,13 +29,12 @@ export class scene04 extends BaseScene {
     }
 
     async setup(p) {
-        // await this.cleanup();
-
+        this.uiManager.setup();
 
         // await this.game.loadImages(p, this.imageUrls, this.bgFieldUrls);
         await this.game.setup(p);
 
-        this.uiManager.setup();
+
 
         const text = "Ich muss euch allerdings erstmal prüfen:<br>Wie funktioniert ein Wasserkreislauf? ";
         this.uiManager.displayCharacter(max1, "Max Mare", text);

@@ -13,19 +13,24 @@ export class plainScene extends BaseScene {
         this.sceneManager = sceneManager;
         this.uiManager = uiManager;
         this.p = p;
-
+        this.domElements = [];
     }
 
     async setup(p) {
         this.uiManager.setup();
+        // this.domElements.push();
     }
 
     draw(p) {
-        this.uiManager.toggleLastSceneButton(true);
-        this.uiManager.toggleNextSceneButton(true);
+        // this.uiManager.toggleLastSceneButton(true);
+        // this.uiManager.toggleNextSceneButton(true);
     }
 
     cleanup(p) {
+        this.domElements.forEach(elements => {
+            elements.remove();
+        });
+        this.domElements = [];
         this.uiManager.cleanup();
     }
     keyPressed(p) {

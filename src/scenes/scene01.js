@@ -13,35 +13,42 @@ export class scene01 extends BaseScene {
         this.sceneManager = sceneManager;
         this.uiManager = uiManager;
         this.p = p;
-        this.completed = true;
-        this.bgImage = null;
-        this.startText = null;
+        this.domElements = [];
+
     }
 
     async setup(p) {
-        // this.bgImage = await p.loadImage(bgImageUrl);
-        // p.image(this.bgImage, 0, 0);
+        this.uiManager.setup();
 
-        this.startText = p.createDiv("Starte Spiel");
-        this.startText.id("startText");
-        this.startText.class("chelsea-market");
-        this.startText.position(p.width / 2 - 250, p.height - 200);
-        await this.startText.mousePressed(() => {
+        const bgImage = p.createImg(bgImageUrl, "Image with Text: Probleme im Flusslauf");
+        bgImage.position(0, 0);
+        bgImage.size(p.width, p.height);
+
+        const startText = p.createDiv("Starte Spiel");
+        startText.id("startText");
+        startText.class("chelsea-market");
+        startText.position(p.width / 2 - 250, p.height - 200);
+        await startText.mousePressed(() => {
             globalVariables.currentScene++;
             this.sceneManager.switchScene(globalVariables.currentScene, p);
-            this.cleanup()
         })
 
-        this.uiManager.setup();
+
+        this.domElements.push(startText, bgImage);
+
     }
 
     draw(p) {
+
         this.uiManager.toggleLastSceneButton(false);
         this.uiManager.toggleNextSceneButton(false);
     }
 
     cleanup() {
-        this.startText.remove();
+        this.domElements.forEach(elements => {
+            elements.remove();
+        });
+        this.domElements = [];
         this.uiManager.cleanup();
     }
     keyPressed(p) {
