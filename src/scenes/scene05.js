@@ -24,10 +24,11 @@ export class scene05 extends BaseScene {
         this.facts = [
             ["Die Gezeiten (Ebbe und Flut) entstehen dadurch, dass riesige Unterwasservulkane am Meeresboden zweimal täglich gleichzeitig ausbrechen und das Wasser an die Küsten drücken.", false],
             ["Nur etwa 5 % bis 10 % der Weltmeere sind bisher erforscht. Der Großteil der Tiefsee bleibt für uns Menschen ein ungelöstes Rätsel.", true],
+            ["Blauwale sind so riesig, dass sie bei jedem Tauchgang bis zu 500 Liter Salzwasser durch ihre Haut aufsaugen können, um ihren Durst zu löschen.", false],
             ["Der tiefste Punkt der Erde liegt im Pazifischen Ozean. Er wird Marianengraben genannt und ist mit rund 11.000 Metern tiefer als der Mount Everest hoch ist.", true],
             ["Wale sind die einzigen Tiere, die kein Wasser trinken müssen, da sie ihren gesamten Flüssigkeitsbedarf durch das Filtern von Wolken decken.", false],
-            ["Blauwale sind so riesig, dass sie bei jedem Tauchgang bis zu 500 Liter Salzwasser durch ihre Haut aufsaugen können, um ihren Durst zu löschen.", false],
-            ["In den Ozeanen gibt es riesige Müllstrudel. Der bekannteste ist der „Great Pacific Garbage Patch“.", false],
+
+            ["In den Ozeanen gibt es riesige Müllstrudel. Der bekannteste ist der „Great Pacific Garbage Patch“.", true],
         ]
 
         this.game = new faktenRaten(p, this, this.uiManager, this.facts);

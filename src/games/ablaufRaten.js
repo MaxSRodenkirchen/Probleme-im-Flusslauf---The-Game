@@ -72,7 +72,7 @@ export class ablaufRaten {
             const posY = this.p.height - globalVariables.ui.sideSpace - size;
             img.position(posX, posY);
             img.size(size, size);
-            img.class("shadow borderRadius");
+            img.class("transition shadow borderRadius ");
             img.style('transform', `rotate(${getRandomDegree()}deg)`);
             if (originalIndex === 0) {
                 img.addClass("clickMe");
@@ -145,7 +145,7 @@ export class ablaufRaten {
                 });
                 this.imageDoms = [];
                 this.setupImages();
-            }, 2000)
+            }, globalVariables.timeOutTime)
 
         }
         console.log(this.correct)

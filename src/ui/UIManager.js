@@ -113,7 +113,7 @@ export class UIManager {
 
         setTimeout(() => {
             img.remove();
-        }, 2000);
+        }, globalVariables.timeOutTime);
     }
 
     displayCharacter(url, name, text) {

@@ -19,6 +19,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+
 }
 
 canvas {
@@ -41,6 +42,8 @@ canvas {
   --padding-mid: 24px;
 
   --sideSpace: 100px;
+  --font-size-smaller: 16px;
+
   --font-size-small: 20px;
   --font-size-medium: 50px;
 
@@ -94,6 +97,7 @@ button {
 img {
   object-fit: cover;
   object-position: center;
+
 }
 
 .borderRadius {
@@ -107,6 +111,10 @@ img {
 
 .dropShadow {
   filter: drop-shadow(var(--padding-low) var(--padding-low) calc(var(--padding-low) * 2) rgba(0, 0, 0, 0.3));
+}
+
+.transition {
+  transition: transform 0.3s ease, left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease;
 }
 
 .clickMe {
@@ -181,16 +189,26 @@ button:focus-visible {
   justify-content: center;
   padding: var(--padding-mid);
   overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
   transition: all 0.3s ease;
+  background-color: var(--color-light);
   border: var(--border-width) solid transparent;
+  font-size: var(--font-size-smaller);
+}
+
+.factCardCorrect {
+  background-color: var(--color-success);
+
+}
+
+.factCardFalse {
+  background-color: var(--color-error);
+
 }
 
 .factCard:hover {
   transform: scale(1.02) rotate(10.5deg);
-  background-color: var(--color-light);
-  border-color: var(--color-accent);
+  /* border-color: var(--color-accent); */
 }
 
 .factCard p {

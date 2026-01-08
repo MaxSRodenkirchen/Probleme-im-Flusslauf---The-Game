@@ -8,6 +8,7 @@ export const globalVariables = {
 
     currentScene: 0,  // Index der aktuellen Szene
 
+    timeOutTime: 2000,
 
     ui: {
         objectWidth: 100,
