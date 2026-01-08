@@ -267,3 +267,8 @@ button:focus-visible {
   font-size: var(--font-size-small);
   line-height: 135%;
 }
+
+.bigText {
+  font-size: var(--font-size-medium);
+  line-height: 135%;
+}

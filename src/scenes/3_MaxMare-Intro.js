@@ -1,4 +1,4 @@
-import { BaseScene } from './BaseScene.js';
+import { BaseScene } from './_BaseScene.js';
 import { globalVariables } from '../globalVariables.js';
 
 import maxMareUrl from '../images/scene03/maxMare.png';
