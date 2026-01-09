@@ -1,0 +1,574 @@
+{
+    "A": {
+        "adjectives": [
+            "agilen",
+            "anhänglichen",
+            "anmutigen",
+            "abenteuerlustigen",
+            "aufgeweckten",
+            "ausgelassenen",
+            "atemberaubenden",
+            "achtsamen",
+            "altklugen",
+            "astreinen"
+        ],
+        "animals": [
+            "Aale",
+            "Albatrosse",
+            "Austern",
+            "Anglerfische",
+            "Amseln",
+            "Alligatoren",
+            "Anemonenfische",
+            "Axolotl",
+            "Argusfische",
+            "Arowanas"
+        ]
+    },
+    "B": {
+        "adjectives": [
+            "beherzten",
+            "bunten",
+            "begeisterten",
+            "behutsamen",
+            "bulligen",
+            "bärigen",
+            "besonnenen",
+            "bequemen",
+            "bombastischen",
+            "bescheidenen"
+        ],
+        "animals": [
+            "Barsche",
+            "Biber",
+            "Buckelwale",
+            "Bartenwale",
+            "Blaumeisen",
+            "Bachforellen",
+            "Barrakudas",
+            "Blauwale",
+            "Buntbarsche",
+            "Brassen"
+        ]
+    },
+    "C": {
+        "adjectives": [
+            "charmanten",
+            "coolen",
+            "cleveren",
+            "chaotischen",
+            "cremigen",
+            "curiosen",
+            "chancreichen",
+            "charakterstarken",
+            "chilligen",
+            "chubby-igen"
+        ],
+        "animals": [
+            "Clownfische",
+            "Cichliden",
+            "Chamäleons",
+            "Chinchillas",
+            "Coyoten",
+            "Cobra-Schlangen",
+            "Cebus-Affen",
+            "Casuare",
+            "Capybaras",
+            "Cocker-Spaniel"
+        ]
+    },
+    "D": {
+        "adjectives": [
+            "dreisten",
+            "drolligen",
+            "dynamischen",
+            "dankbaren",
+            "dusseligen",
+            "duften",
+            "dicken",
+            "drahtigen",
+            "diplomatischen",
+            "dezenten"
+        ],
+        "animals": [
+            "Delfine",
+            "Dorsche",
+            "Degus",
+            "Dornhaie",
+            "Dachse",
+            "Dromedare",
+            "Drosseln",
+            "Dugongs",
+            "Diskusfische",
+            "Degenfische"
+        ]
+    },
+    "E": {
+        "adjectives": [
+            "emsigen",
+            "elevanten",
+            "ehrgeizigen",
+            "einzigartigen",
+            "edlen",
+            "ehrlichen",
+            "eifrigen",
+            "eigenwilligen",
+            "eleganten",
+            "energischen"
+        ],
+        "animals": [
+            "Enten",
+            "Eisbären",
+            "Eisvögel",
+            "Elritzen",
+            "Elefanten",
+            "Echsen",
+            "Eulen",
+            "Eichelhäher",
+            "Esel",
+            "Elche"
+        ]
+    },
+    "F": {
+        "adjectives": [
+            "flinken",
+            "friedlichen",
+            "fröhlichen",
+            "furchtlosen",
+            "frechen",
+            "fluffigen",
+            "fidelen",
+            "feinen",
+            "fabelhaften",
+            "festen"
+        ],
+        "animals": [
+            "Forellen",
+            "Flundern",
+            "Flamingos",
+            "Fächerfische",
+            "Füchse",
+            "Fledermäuse",
+            "Fasane",
+            "Finken",
+            "Flusspferde",
+            "Fadenfische"
+        ]
+    },
+    "G": {
+        "adjectives": [
+            "glubschigen",
+            "gemütlichen",
+            "geduldigen",
+            "geheimnisvollen",
+            "goldigen",
+            "gigantischen",
+            "geschmeidigen",
+            "gesprächigen",
+            "gnädigen",
+            "gutmütigen"
+        ],
+        "animals": [
+            "Garnelen",
+            "Goldfische",
+            "Guppys",
+            "Grundeln",
+            "Gänse",
+            "Gorillas",
+            "Giraffen",
+            "Geckos",
+            "Gimpel",
+            "Gnus"
+        ]
+    },
+    "H": {
+        "adjectives": [
+            "heldenhaften",
+            "hungrigen",
+            "hilfsbereiten",
+            "höflichen",
+            "heiteren",
+            "hibbeligen",
+            "hübschen",
+            "herzlichen",
+            "hochmodernen",
+            "humorvollen"
+        ],
+        "animals": [
+            "Haie",
+            "Hummer",
+            "Hechte",
+            "Heringe",
+            "Heringe",
+            "Hamster",
+            "Hunde",
+            "Hasen",
+            "Hyänen",
+            "Huhner"
+        ]
+    },
+    "I": {
+        "adjectives": [
+            "intelligenten",
+            "impulsiven",
+            "ideenreichen",
+            "interessierten",
+            "imposanten",
+            "idyllischen",
+            "individuellen",
+            "instinktiven",
+            "innigen",
+            "ironischen"
+        ],
+        "animals": [
+            "Igel",
+            "Isopoden",
+            "Iravadi-Delfine",
+            "Ibis-Vögel",
+            "Iguanas",
+            "Impallas",
+            "Indris",
+            "Insekten",
+            "Insel-Füchse",
+            "Island-Ponies"
+        ]
+    },
+    "K": {
+        "adjectives": [
+            "kichernden",
+            "krabbelnden",
+            "kreativen",
+            "kräftigen",
+            "knuffigen",
+            "kessen",
+            "klugen",
+            "kooperativen",
+            "kuriosen",
+            "komischen"
+        ],
+        "animals": [
+            "Krabben",
+            "Karpfen",
+            "Krebse",
+            "Kugelfische",
+            "Katzen",
+            "Koalas",
+            "Kamele",
+            "Kängurus",
+            "Kormorane",
+            "Koi-Karpfen"
+        ]
+    },
+    "L": {
+        "adjectives": [
+            "lachenden",
+            "lustigen",
+            "lebhaften",
+            "loyalen",
+            "lässigen",
+            "liebevollen",
+            "leuchtenden",
+            "launigen",
+            "legendären",
+            "lockeren"
+        ],
+        "animals": [
+            "Lachse",
+            "Langusten",
+            "Leierfische",
+            "Lungenfische",
+            "Löwen",
+            "Lamas",
+            "Lemuren",
+            "Luchse",
+            "Libellen",
+            "Loris"
+        ]
+    },
+    "M": {
+        "adjectives": [
+            "mampfenden",
+            "mutigen",
+            "mysteriösen",
+            "motivierten",
+            "munteren",
+            "majestätischen",
+            "modernen",
+            "muskulösen",
+            "mildem",
+            "mystischen"
+        ],
+        "animals": [
+            "Meeresschildkröten",
+            "Muscheln",
+            "Mantarochen",
+            "Makrelen",
+            "Möwen",
+            "Maulwürfe",
+            "Marder",
+            "Mäuse",
+            "Murmeltiere",
+            "Meerschweinchen"
+        ]
+    },
+    "N": {
+        "adjectives": [
+            "neugierigen",
+            "nassen",
+            "nachdenklichen",
+            "netten",
+            "niedlichen",
+            "nervenstarken",
+            "natürlichen",
+            "noblen",
+            "naiven",
+            "nostalgischen"
+        ],
+        "animals": [
+            "Nashornfische",
+            "Neunaugen",
+            "Narwale",
+            "Nilpferde",
+            "Nashörner",
+            "Nachtigallen",
+            "Nerze",
+            "Nutrias",
+            "Nandus",
+            "Nasenbären"
+        ]
+    },
+    "O": {
+        "adjectives": [
+            "optimistischen",
+            "ordentlichen",
+            "offenen",
+            "originellen",
+            "obercoolen",
+            "objektiven",
+            "obstfarbenen",
+            "olympia-reifen",
+            "ominösen",
+            "organisierten"
+        ],
+        "animals": [
+            "Otter",
+            "Orcas",
+            "Oktopusse",
+            "Ohrenrobben",
+            "Ozelots",
+            "Opossums",
+            "Oryx-Antilopen",
+            "Okapis",
+            "Ochsenfrosche",
+            "Orange-Falterfische"
+        ]
+    },
+    "P": {
+        "adjectives": [
+            "piratigen",
+            "prächtigen",
+            "pfeilschnellen",
+            "pinken",
+            "pompösen",
+            "pfiffigen",
+            "pünktlichen",
+            "passionierten",
+            "phantastischen",
+            "plüschigen"
+        ],
+        "animals": [
+            "Pinguine",
+            "Pottwale",
+            "Polypen",
+            "Pelikane",
+            "Pferde",
+            "Panther",
+            "Papageien",
+            "Pumas",
+            "Paviane",
+            "Plattfische"
+        ]
+    },
+    "Q": {
+        "adjectives": [
+            "quirligen",
+            "quietschigen",
+            "querköpfigen",
+            "qualifizierten",
+            "quasselnden",
+            "quadratischen",
+            "quanten-physikalischen",
+            "quellfrischen",
+            "quer-denkenden",
+            "quittengelben"
+        ],
+        "animals": [
+            "Quallen",
+            "Quastenflosser",
+            "Quappen",
+            "Quokkas",
+            "Quetzale",
+            "Querzahnsalamander",
+            "Quallen-Frosche",
+            "Queensland-Koala",
+            "Querstreifen-Fisch",
+            "Quell-Schnecken"
+        ]
+    },
+    "R": {
+        "adjectives": [
+            "rasenden",
+            "ruhigen",
+            "riesigen",
+            "rasanten",
+            "robusten",
+            "redefreudigen",
+            "raffinierten",
+            "reizenden",
+            "respektvollen",
+            "romantischen"
+        ],
+        "animals": [
+            "Rochen",
+            "Regenbogenforellen",
+            "Riemenfische",
+            "Riffhaie",
+            "Robben",
+            "Ratten",
+            "Rehe",
+            "Rentiere",
+            "Raben",
+            "Rotkehlchen"
+        ]
+    },
+    "S": {
+        "adjectives": [
+            "schläfrigen",
+            "schnellen",
+            "schimmernden",
+            "schlauen",
+            "starken",
+            "stolzen",
+            "sanften",
+            "sorglosen",
+            "sympathischen",
+            "sportlichen"
+        ],
+        "animals": [
+            "Schildkröten",
+            "Seehunde",
+            "Schwertfische",
+            "Seepferdchen",
+            "Schwäne",
+            "Schlangen",
+            "Spatzen",
+            "Spechte",
+            "Seeigel",
+            "Seesterne"
+        ]
+    },
+    "T": {
+        "adjectives": [
+            "tollkühnen",
+            "tiefenentspannten",
+            "tapferen",
+            "treuen",
+            "turbulenten",
+            "tänzelnden",
+            "taktvollen",
+            "talentierten",
+            "tollpatschigen",
+            "träumerischen"
+        ],
+        "animals": [
+            "Tintenfische",
+            "Tümmler",
+            "Tigerhaie",
+            "Thunfische",
+            "Tiger",
+            "Tapire",
+            "Tukane",
+            "Truthähne",
+            "Turteltauben",
+            "Teichmolche"
+        ]
+    },
+    "U": {
+        "adjectives": [
+            "unerschrockenen",
+            "urigen",
+            "unermüdlichen",
+            "unglaublichen",
+            "ulkigen",
+            "umgänglichen",
+            "umsichtigen",
+            "unabhängigen",
+            "unwiderstehlichen",
+            "urbanen"
+        ],
+        "animals": [
+            "Unken",
+            "U-Boot-Fische",
+            "Ukelei",
+            "Uhus",
+            "Urwildpferde",
+            "Uakaris",
+            "Umbrellafische",
+            "Uranoscopidae",
+            "Urial-Schafe",
+            "Uromastyx"
+        ]
+    },
+    "W": {
+        "adjectives": [
+            "wabbeligen",
+            "wilden",
+            "wissbegierigen",
+            "wunderbaren",
+            "weichen",
+            "wachsamen",
+            "wagemutigen",
+            "warmherzigen",
+            "weitsichtigen",
+            "witzigen"
+        ],
+        "animals": [
+            "Wale",
+            "Walrosse",
+            "Welse",
+            "Wasserratten",
+            "Wiesel",
+            "Wolfsfische",
+            "Waschbären",
+            "Wölfe",
+            "Wachteln",
+            "Wühlmäuse"
+        ]
+    },
+    "Z": {
+        "adjectives": [
+            "zappeligen",
+            "zügigen",
+            "zauberhaften",
+            "zufriedenen",
+            "zarten",
+            "zauseligen",
+            "zielstrebigen",
+            "zierlichen",
+            "zornigen",
+            "zuverlässigen"
+        ],
+        "animals": [
+            "Zander",
+            "Zitteraale",
+            "Zackenbarsche",
+            "Zierfische",
+            "Zebras",
+            "Ziegen",
+            "Zaunkönige",
+            "Zobel",
+            "Zebu-Rinder",
+            "Zwergpinguine"
+        ]
+    }
+}

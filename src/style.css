@@ -107,6 +107,17 @@ canvas {
   z-index: -999;
 }
 
+.genContainer {
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.genText {
+  padding: var(--padding-mid);
+  cursor: pointer;
+}
+
 button {
   /* Reset default browser styles */
   margin: 0;

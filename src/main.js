@@ -3,9 +3,12 @@ import './style.css';
 import { globalVariables } from './globalVariables.js';
 import { drawGrid } from './utils/drawGrid.js';
 import { SceneManager } from './SceneManager.js';
+import { initDebugSceneSwitcher } from './utils/debugSceneSwitcher.js';
 
 import { UIManager } from './ui/UIManager.js';
 import { scene01 } from './scenes/1_startScreen.js';
+import { scene02 } from './scenes/2_NameGen.js';
+
 import { scene03 } from './scenes/3_MaxMare-Intro.js';
 import { scene04 } from './scenes/4_Wasserkreislauf.js';
 import { scene05 } from './scenes/5_MeerFakten.js';
@@ -51,14 +54,19 @@ const sketch = (p) => {
     uiManager = new UIManager(p, sceneManager);
 
     sceneManager.addScene(new scene01(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene02(p, sceneManager, uiManager));
+
     sceneManager.addScene(new scene03(p, sceneManager, uiManager));
     sceneManager.addScene(new scene04(p, sceneManager, uiManager));
     sceneManager.addScene(new scene05(p, sceneManager, uiManager));
     sceneManager.addScene(new scene07(p, sceneManager, uiManager));
     sceneManager.addScene(new scene09(p, sceneManager, uiManager));
 
+    // Initialize debug helper
+    initDebugSceneSwitcher(p, sceneManager);
+
     // Start with first scene (index 0)
-    await sceneManager.switchScene(4, p);
+    await sceneManager.switchScene(1, p);
 
     // Initial scale
     updateScale();

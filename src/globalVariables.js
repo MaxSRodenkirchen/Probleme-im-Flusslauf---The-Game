@@ -25,6 +25,7 @@ export const globalVariables = {
     colors: {
         light: "#fff",
         dark: "#000",
+        darkBlue: "#467DFC",
         accent: "#afe0e6ff",
         success: "#afe0e6ff",
         error: "#f87171"

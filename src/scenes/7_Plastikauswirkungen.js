@@ -33,7 +33,7 @@ export class scene07 extends BaseScene {
 
 
 
-        const text = "Ich muss euch allerdings erstmal prüfen:<br>Wie funktioniert ein Wasserkreislauf? ";
+        const text = "Gut erkannt. Das Plastik ist ein großes Problem für uns. <br>Manche Teile erkennt man nicht einmal richtig. Wisst ihr was ich meine?";
         this.uiManager.displayCharacter(max1, "Max Mare", text);
 
     }

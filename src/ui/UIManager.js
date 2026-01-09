@@ -114,7 +114,7 @@ export class UIManager {
         img.style('transform', `rotate(${getRandomDegree() * 4}deg)`);
 
         if (condition) {
-            img.style("background-color", globalVariables.colors.success)
+            img.style("background-color", globalVariables.colors.darkBlue)
         } else {
             img.style("background-color", globalVariables.colors.error)
         }
