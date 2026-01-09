@@ -5,7 +5,7 @@ export class ablaufRaten extends BaseGame {
     constructor(p, scene, bgTilesUrls, imageUrls, uiManager) {
         super(p, scene, uiManager);
 
-        this.imgSize = 200;
+        this.imgSize = globalVariables.ui.objectWidth * 2;
         this.currentField = 0;
         this.clickedOrder = [];
 

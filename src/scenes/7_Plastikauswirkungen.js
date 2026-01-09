@@ -10,6 +10,7 @@ import img3 from '../images/scene07/img3.png';
 import img4 from '../images/scene07/img4.png';
 
 import max1 from '../images/scene04/MaxMare1.png';
+import { drawGrid } from '../utils/drawGrid.js';
 
 
 
@@ -20,7 +21,7 @@ export class scene07 extends BaseScene {
 
         this.imageUrls = [img1, img2, img3, img4];
 
-        this.game = new bilderRaten(p, this, this.uiManager, this.imageUrls);
+        this.game = new bilderRaten(p, this, this.uiManager, this.imageUrls, "MIKROPLASTIK");
 
     }
 
