@@ -20,9 +20,9 @@ export class bilderRaten extends BaseGame {
         this.typedLetters = [];
         this.shuffledLetters = super.shuffle(this.correctLetters);
 
-        const letterSize = 60;
+        const letterSize = 50;
         const spacing = 40; // Spacing between images and keyboard
-        const gap = globalVariables.ui.paddingLow / 2;
+        const gap = globalVariables.ui.paddingLow;
         const keyboardWidth = letterSize * 3 + 60; // Width including padding/gaps
 
         const imgBlockWidth = this.imgSize * 2 + gap;
@@ -32,7 +32,7 @@ export class bilderRaten extends BaseGame {
         const startX = (p.width - totalWidth) / 2;
         const startY = (p.height - totalHeight) / 2;
 
-        // Image positions relative to the container (0, 0 is the top-left of the container)
+
         this.positions = [
             { x: this.imgSize + gap, y: this.imgSize + gap }, // index 0 (BR)
             { x: this.imgSize + gap, y: 0 },                  // index 1 (TR)
@@ -41,10 +41,9 @@ export class bilderRaten extends BaseGame {
         ];
 
         const imgContainer = p.createDiv("");
-        imgContainer.class("imgContainer"); // We'll add a class for custom rotation if needed
+        imgContainer.class("imgContainer");
         imgContainer.position(startX, startY);
         imgContainer.size(imgBlockWidth, imgBlockWidth);
-        imgContainer.style('transform', 'rotate(-1.5deg)'); // Negative rotation as requested
         this.domElements.push(imgContainer);
 
         this.shuffledUrls.forEach((url, index) => {
@@ -52,77 +51,92 @@ export class bilderRaten extends BaseGame {
             img.parent(imgContainer);
             img.position(this.positions[index].x, this.positions[index].y);
             img.size(this.imgSize, this.imgSize);
-            img.style('transform', `rotate(${getRandomDegree()}deg)`);
+            img.style('transform', `rotate(${getRandomDegree() * 0.6}deg)`);
             img.class(" borderRadius shadow");
             // No need to push to domElements individually if parent is pushed, but safe to keep
             this.domElements.push(img);
         });
 
-
-
         const letterContainer = p.createDiv("");
-        letterContainer.class("keyboard borderRadius shadow");
-
+        letterContainer.class("keyboard borderRadius");
         letterContainer.position(startX + imgBlockWidth + spacing, startY);
         letterContainer.style('width', `${keyboardWidth}px`); // 3 columns + padding
         this.domElements.push(letterContainer);
 
-
         const log = p.createDiv("");
         log.parent(letterContainer);
-        log.class("chelsea-market shadow borderRadius transition mediumText letter");
-        log.style('width', '100%');
-        log.style('grid-column', 'span 3');
-        log.style('aspect-ratio', 'auto');
+        log.class("chelsea-market shadow borderRadius transition mediumText log");
         log.style('height', `${letterSize}px`);
         this.logDisplay = log;
 
         this.shuffledLetters.forEach((letter) => {
             const aLetter = p.createP(letter);
             aLetter.parent(letterContainer);
-            aLetter.class("chelsea-market shadow borderRadius transition mediumText letter clickMe");
-            aLetter.style('width', '100%'); // Let grid handle size
+            aLetter.class("chelsea-market shadow borderRadius transition mediumText letter ");
             // aLetter.style('transform', `rotate(${getRandomDegree() * 2}deg)`);
             aLetter.mouseClicked(() => {
-                this.typedLetters.push(letter);
+                if (aLetter.hasClass("used")) return;
+                aLetter.addClass("used");
+                aLetter.style("opacity", "0.2");
+                this.typedLetters.push({ char: letter, el: aLetter });
                 this.updateLog();
                 this.checkSolution();
             });
             this.domElements.push(aLetter);
         });
 
-        // Add delete button to the same grid
-        const deleteButton = p.createP("←");
+        const deleteButton = p.createP("<");
         deleteButton.parent(letterContainer);
-        deleteButton.class("chelsea-market shadow borderRadius transition mediumText letter clickMe");
-        deleteButton.style('width', '100%');
+        deleteButton.class("chelsea-market shadow borderRadius transition mediumText letter");
 
         // Calculate remaining slots in the 3-column grid
         const remainingSlots = 3 - (this.shuffledLetters.length % 3);
         deleteButton.style('grid-column', `span ${remainingSlots}`);
-
         deleteButton.style('aspect-ratio', 'auto');
         deleteButton.style('height', `${letterSize}px`);
         // deleteButton.style('transform', `rotate(${getRandomDegree() * 2}deg)`);
         deleteButton.mouseClicked(() => {
-            this.typedLetters.pop();
+            const last = this.typedLetters.pop();
+            if (last) {
+                last.el.removeClass("used");
+                last.el.style("opacity", "1.0");
+            }
             this.updateLog();
         });
         this.domElements.push(deleteButton);
+
     }
 
     updateLog() {
-        this.logDisplay.html(this.typedLetters.join(''));
+        if (this.typedLetters.length === 0) {
+            this.logDisplay.addClass("logEmpty")
+            this.logDisplay.html('Welches Wort?')
+        } else {
+            this.logDisplay.addClass("logFilled")
+            const word = this.typedLetters.map(item => item.char).join('');
+            this.logDisplay.html(word);
+        }
     }
 
     checkSolution() {
-        if (this.typedLetters.join('') === this.correctLetters.join('')) {
+        const currentWord = this.typedLetters.map(item => item.char).join('');
+        if (currentWord === this.correctLetters.join('')) {
             this.scene.completed = true;
             this.uiManager.showSolutionUi(true);
+
+        } else if (this.typedLetters.length === this.correctLetters.length) {
+            this.uiManager.showSolutionUi(false);
+
+            setTimeout(() => {
+                this.cleanup();
+                this.setup(this.p);
+            }, globalVariables.timeOutTime)
+
         }
     }
 
     draw() {
+        this.updateLog();
 
     }
 
