@@ -10,10 +10,7 @@ import img4 from '../images/sceneXX/img4.png';
 
 export class sceneXX extends BaseScene {
     constructor(p, sceneManager, uiManager) {
-        super("sceneXX");
-        this.sceneManager = sceneManager;
-        this.uiManager = uiManager;
-        this.p = p;
+        super("sceneXX", p, sceneManager, uiManager);
         this.imageUrls = [img1, img2, img3, img4];
         this.game = new bilderRaten("WASSER", this);
     }
@@ -34,12 +31,7 @@ export class sceneXX extends BaseScene {
     }
 
     cleanup() {
+        super.cleanup();
         this.game.cleanup();
-        this.uiManager.cleanup();
-
-    }
-    keyPressed(p) {
-    }
-    mousePressed(p) {
     }
 }

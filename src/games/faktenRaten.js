@@ -1,19 +1,13 @@
 import { getRandomDegree, globalVariables } from '../globalVariables.js';
-import { drawGrid } from '../utils/drawGrid.js';
+import { BaseGame } from './_BaseGame.js';
 
-
-
-
-export class faktenRaten {
+export class faktenRaten extends BaseGame {
     constructor(p, scene, uiManager, facts) {
-        this.scene = scene;
-        this.p = p;
-        this.uiManager = uiManager;
+        super(p, scene, uiManager);
         this.facts = facts;
         this.shuffledFacts = [];
         this.amountOfCorrectFacts = 0;
         this.correctGuesses = 0;
-        this.domElements = [];
     }
 
     setup() {
@@ -26,8 +20,7 @@ export class faktenRaten {
         container.class("factGrid");
         container.size(w, h);
         container.position((this.p.width - w) / 2, (this.p.height - h) / 2);
-        container.style('transform', `rotate(-0.65deg)`); //alles etwas rotieren
-
+        container.style('transform', `rotate(-0.65deg)`);
 
         this.shuffledFacts.forEach((factData, index) => {
             const factText = factData[0];
@@ -47,8 +40,6 @@ export class faktenRaten {
             p.class("chelsea-market");
 
             card.mousePressed(() => {
-                // console.log(`Clicked fact ${index}: ${isCorrect}`);
-
                 if (isCorrect) {
                     card.addClass("factCardCorrect");
                     this.correctGuesses++;
@@ -60,12 +51,10 @@ export class faktenRaten {
                     card.addClass("factCardFalse");
                     this.uiManager.showSolutionUi(false);
 
-
                     setTimeout(() => {
                         this.cleanup();
                         this.setup();
                     }, globalVariables.timeOutTime)
-
                 }
             });
 
@@ -76,14 +65,7 @@ export class faktenRaten {
     }
 
     shuffleFacts() {
-        this.shuffledFacts = [...this.facts];
-
-        // Fisher-Yates Shuffle Algorithmus
-        for (let i = this.shuffledFacts.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.shuffledFacts[i], this.shuffledFacts[j]] = [this.shuffledFacts[j], this.shuffledFacts[i]];
-        }
-
+        this.shuffledFacts = this.shuffle(this.facts);
         return this.shuffledFacts;
     }
 
@@ -91,10 +73,7 @@ export class faktenRaten {
     }
 
     cleanup() {
-        this.scene.completed = false;
+        super.cleanup();
         this.correctGuesses = 0;
-
-        this.domElements.forEach(el => el.remove());
-        this.domElements = [];
     }
 }

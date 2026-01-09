@@ -5,12 +5,7 @@ import { globalVariables } from '../globalVariables.js';
 
 export class scene09 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
-        super("scene01");
-        this.sceneManager = sceneManager;
-        this.uiManager = uiManager;
-        this.p = p;
-        this.domElements = [];
-
+        super("scene09", p, sceneManager, uiManager);
     }
 
     async setup(p) {
@@ -62,14 +57,6 @@ export class scene09 extends BaseScene {
     }
 
     cleanup() {
-        this.domElements.forEach(elements => {
-            elements.remove();
-        });
-        this.domElements = [];
-        this.uiManager.cleanup();
-    }
-    keyPressed(p) {
-    }
-    mousePressed(p) {
+        super.cleanup();
     }
 }

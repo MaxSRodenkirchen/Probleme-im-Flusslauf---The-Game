@@ -16,10 +16,7 @@ import max1 from '../images/scene04/MaxMare1.png';
 
 export class scene05 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
-        super("scene05");
-        this.sceneManager = sceneManager;
-        this.uiManager = uiManager;
-        this.p = p;
+        super("scene05", p, sceneManager, uiManager);
 
         this.facts = [
             ["Die Gezeiten (Ebbe und Flut) entstehen dadurch, dass riesige Unterwasservulkane am Meeresboden zweimal täglich gleichzeitig ausbrechen und das Wasser an die Küsten drücken.", false],
@@ -54,11 +51,7 @@ export class scene05 extends BaseScene {
     }
 
     cleanup() {
-        this.uiManager.cleanup();
+        super.cleanup();
         this.game.cleanup();
-    }
-    keyPressed(p) {
-    }
-    mousePressed(p) {
     }
 }

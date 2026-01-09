@@ -8,13 +8,9 @@ import { SceneManager } from '../SceneManager.js';
 
 export class scene01 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
-        super("scene01");
-        this.sceneManager = sceneManager;
-        this.uiManager = uiManager;
-        this.p = p;
-        this.domElements = [];
-
+        super("scene01", p, sceneManager, uiManager);
     }
+
 
     async setup(p) {
         this.uiManager.setup();
@@ -64,14 +60,7 @@ export class scene01 extends BaseScene {
     }
 
     cleanup() {
-        this.domElements.forEach(elements => {
-            elements.remove();
-        });
-        this.domElements = [];
-        this.uiManager.cleanup();
+        super.cleanup();
     }
-    keyPressed(p) {
-    }
-    mousePressed(p) {
-    }
+
 }

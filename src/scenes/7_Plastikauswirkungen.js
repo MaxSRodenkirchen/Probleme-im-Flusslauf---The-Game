@@ -1,26 +1,26 @@
 import { BaseScene } from './_BaseScene.js';
 import { globalVariables } from '../globalVariables.js';
 
-import { ablaufRaten } from '../games/ablaufRaten.js';
+import { bilderRaten } from '../games/bilderRaten.js';
 
 
-import img1 from '../images/scene04/verdunstung.png';
-import img2 from '../images/scene04/wolkenbildung.png';
-import img3 from '../images/scene04/regen.png';
-import img4 from '../images/scene04/ablauf.png';
+import img1 from '../images/scene07/img1.png';
+import img2 from '../images/scene07/img2.png';
+import img3 from '../images/scene07/img3.png';
+import img4 from '../images/scene07/img4.png';
 
-import field from '../images/ui/arrowTurnLeft.png';
 import max1 from '../images/scene04/MaxMare1.png';
 
 
 
-export class scene04 extends BaseScene {
+export class scene07 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
-        super("scene04", p, sceneManager, uiManager);
+        super("scene07", p, sceneManager, uiManager);
+
 
         this.imageUrls = [img1, img2, img3, img4];
-        this.bgTilesUrls = [field, field, field, field];
-        this.game = new ablaufRaten(p, this, this.bgTilesUrls, this.imageUrls, this.uiManager);
+
+        this.game = new bilderRaten(p, this, this.uiManager, this.imageUrls);
 
     }
 

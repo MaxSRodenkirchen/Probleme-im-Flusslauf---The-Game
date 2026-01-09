@@ -9,8 +9,8 @@ import { scene01 } from './scenes/1_startScreen.js';
 import { scene03 } from './scenes/3_MaxMare-Intro.js';
 import { scene04 } from './scenes/4_Wasserkreislauf.js';
 import { scene05 } from './scenes/5_MeerFakten.js';
+import { scene07 } from './scenes/7_Plastikauswirkungen.js';
 import { scene09 } from './scenes/9_demoEnd.js';
-import { sceneXX } from './scenes/sceneXX.js';
 
 
 
@@ -54,11 +54,11 @@ const sketch = (p) => {
     sceneManager.addScene(new scene03(p, sceneManager, uiManager));
     sceneManager.addScene(new scene04(p, sceneManager, uiManager));
     sceneManager.addScene(new scene05(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene07(p, sceneManager, uiManager));
     sceneManager.addScene(new scene09(p, sceneManager, uiManager));
-    // sceneManager.addScene(new sceneXX(p, sceneManager, uiManager));
 
     // Start with first scene (index 0)
-    await sceneManager.switchScene(0, p);
+    await sceneManager.switchScene(4, p);
 
     // Initial scale
     updateScale();
@@ -73,15 +73,8 @@ const sketch = (p) => {
     updateScale();
   };
 
-  p.keyPressed = () => {
-    sceneManager.keyPressed(p);
-    return false; // Prevent default browser behavior
-  };
-
-  p.mousePressed = () => {
-    sceneManager.mousePressed(p);
-  };
 };
+
 
 // Create p5 instance
 new p5(sketch);

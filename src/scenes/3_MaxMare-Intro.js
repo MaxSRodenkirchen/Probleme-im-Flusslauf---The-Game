@@ -6,13 +6,9 @@ import maxMareUrl from '../images/scene03/maxMare.png';
 
 export class scene03 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
-        super("scene03");
-        this.sceneManager = sceneManager;
-        this.uiManager = uiManager;
-        this.p = p;
+        super("scene03", p, sceneManager, uiManager);
 
         this.speech = `Wir haben ein großes Problem. Seit kurzem ist die Stimme der Meere ganz leise geworden. Ohne sie läuft hier gar nichts mehr. Könnt ihr, die ${globalVariables.teamName}, uns helfen?`;
-        this.domElements = [];
     }
 
     async setup(p) {
@@ -46,14 +42,6 @@ export class scene03 extends BaseScene {
     }
 
     cleanup() {
-        this.domElements.forEach(elements => {
-            elements.remove();
-        });
-        this.domElements = [];
-        this.uiManager.cleanup();
-    }
-    keyPressed(p) {
-    }
-    mousePressed(p) {
+        super.cleanup();
     }
 }

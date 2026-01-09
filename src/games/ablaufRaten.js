@@ -1,14 +1,9 @@
 import { getRandomDegree, globalVariables } from '../globalVariables.js';
-import { drawGrid } from '../utils/drawGrid.js';
+import { BaseGame } from './_BaseGame.js';
 
-
-
-
-export class ablaufRaten {
+export class ablaufRaten extends BaseGame {
     constructor(p, scene, bgTilesUrls, imageUrls, uiManager) {
-        this.scene = scene;
-        this.p = p;
-        this.uiManager = uiManager;
+        super(p, scene, uiManager);
 
         this.imgSize = 200;
         this.currentField = 0;
@@ -37,9 +32,6 @@ export class ablaufRaten {
     }
 
     async setup(p) {
-
-        // drawGrid(p, 50);
-
         this.bgTilesUrls.forEach((url, index) => {
             const img = p.createImg(url, 'image ' + index);
             img.position(this.positions[index].width, this.positions[index].height);
@@ -53,10 +45,7 @@ export class ablaufRaten {
             this.bgTileDoms.push(img);
         });
 
-
-
         this.setupImages();
-
     }
 
     setupImages() {
@@ -83,13 +72,9 @@ export class ablaufRaten {
             this.imageDoms[originalIndex] = img;
         });
         this.styleCurrentBgTile();
-
-
     }
 
     positionImages(img, originalIndex, shuffledIndex) {
-
-        // Prevent double clicking
         if (this.clickedOrder.includes(originalIndex)) {
             return;
         }
@@ -104,11 +89,8 @@ export class ablaufRaten {
             img.position(newPosX, newPosY);
             img.size(this.imgSize, this.imgSize);
 
-
-
             this.clickedOrder.push(originalIndex);
             this.nextField();
-            // console.log('Clicked order:', this.clickedOrder);
         }
     }
 
@@ -120,9 +102,9 @@ export class ablaufRaten {
             this.scene.completed = this.correct;
         } else {
             this.styleCurrentBgTile();
-
         }
     }
+
     checkResult() {
         if (this.clickedOrder[0] === 0 &&
             this.clickedOrder[1] === 1 &&
@@ -130,15 +112,11 @@ export class ablaufRaten {
             this.clickedOrder[3] === 3) {
             this.correct = true;
             this.uiManager.showSolutionUi(this.correct);
-
             return;
         };
         this.uiManager.showSolutionUi(this.correct);
 
-
         if (this.correct === false) {
-
-
             setTimeout(() => {
                 this.imageDoms.forEach(element => {
                     element.remove();
@@ -146,11 +124,8 @@ export class ablaufRaten {
                 this.imageDoms = [];
                 this.setupImages();
             }, globalVariables.timeOutTime)
-
         }
-        console.log(this.correct)
     }
-
 
     draw(p) {
     }
@@ -158,37 +133,23 @@ export class ablaufRaten {
     styleCurrentBgTile() {
         this.bgTileDoms.forEach(tile => {
             tile.style("opacity", "0.05")
-
         });
 
         let tile = this.bgTileDoms[this.currentField];
         tile.style("opacity", "1")
-
     }
+
     shuffleImages() {
-        // Erstelle Array mit [url, originalIndex] Paaren
-        this.shuffledImageUrlArray = this.imageUrls.map((url, index) => [url, index]);
-
-        // Fisher-Yates Shuffle Algorithmus
-        for (let i = this.shuffledImageUrlArray.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.shuffledImageUrlArray[i], this.shuffledImageUrlArray[j]] = [this.shuffledImageUrlArray[j], this.shuffledImageUrlArray[i]];
-        }
-
+        const pairs = this.imageUrls.map((url, index) => [url, index]);
+        this.shuffledImageUrlArray = this.shuffle(pairs);
         return this.shuffledImageUrlArray;
     }
+
     cleanup() {
-
-        this.bgTileDoms.forEach(element => {
-            element.remove();
-        });
+        super.cleanup();
+        this.bgTileDoms.forEach(element => element.remove());
         this.bgTileDoms = [];
-
-        this.imageDoms.forEach(element => {
-            element.remove();
-        });
+        this.imageDoms.forEach(element => element.remove());
         this.imageDoms = [];
-
-
     }
 }

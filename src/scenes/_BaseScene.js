@@ -2,9 +2,13 @@
 // All scenes must extend this class and implement the required methods
 
 export class BaseScene {
-    constructor(name) {
+    constructor(name, p, sceneManager, uiManager) {
         this.name = name;
+        this.p = p;
+        this.sceneManager = sceneManager;
+        this.uiManager = uiManager;
         this.completed = false;  // Szene abgeschlossen?
+        this.domElements = [];
     }
 
     // Called once when scene is activated
@@ -24,16 +28,15 @@ export class BaseScene {
 
     // Called when scene is deactivated
     cleanup() {
-        // Optional - can be overridden
+        this.domElements.forEach(el => {
+            if (el && typeof el.remove === 'function') {
+                el.remove();
+            }
+        });
+        this.domElements = [];
+        this.uiManager.cleanup();
     }
 
-    // Handle keyboard input
-    keyPressed(p) {
-        // Optional - can be overridden
-    }
-
-    // Handle mouse clicks
-    mousePressed(p) {
-        // Optional - can be overridden
-    }
 }
+
+

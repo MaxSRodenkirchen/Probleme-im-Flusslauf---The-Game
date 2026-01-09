@@ -9,11 +9,7 @@ Change Title and Import
 
 export class plainScene extends BaseScene {
     constructor(p, sceneManager, uiManager) {
-        super("plainScene");
-        this.sceneManager = sceneManager;
-        this.uiManager = uiManager;
-        this.p = p;
-        this.domElements = [];
+        super("plainScene", p, sceneManager, uiManager);
     }
 
     async setup(p) {
@@ -27,14 +23,6 @@ export class plainScene extends BaseScene {
     }
 
     cleanup(p) {
-        this.domElements.forEach(elements => {
-            elements.remove();
-        });
-        this.domElements = [];
-        this.uiManager.cleanup();
-    }
-    keyPressed(p) {
-    }
-    mousePressed(p) {
+        super.cleanup();
     }
 }

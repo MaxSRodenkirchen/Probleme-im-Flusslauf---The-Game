@@ -38,14 +38,5 @@ export class SceneManager {
             this.currentScene.draw(p);
         }
     }
-    keyPressed(p) {
-        if (this.currentScene) {
-            this.currentScene.keyPressed(p);
-        }
-    }
-    mousePressed(p) {
-        if (this.currentScene) {
-            this.currentScene.mousePressed(p);
-        }
-    }
 }
+
