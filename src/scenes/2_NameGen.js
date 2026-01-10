@@ -17,14 +17,15 @@ export class scene02 extends BaseScene {
 
         // 4. Zufälliges Adjektiv und Tier aus der Gruppe ziehen
 
+        this.getALetter();
+        this.getAdj();
+        this.getAnimal();
+        this.setName();
     }
 
     async setup(p) {
         this.uiManager.setup();
 
-        this.getALetter();
-        this.getAdj();
-        this.getAnimal();
 
 
         const header = p.createP("Bevor ihr losreisen könnt<br> braucht ihr einen Teamnamen.")

@@ -13,6 +13,7 @@ export class scene03 extends BaseScene {
 
     async setup(p) {
         this.uiManager.setup();
+        this.speech = `Wir haben ein großes Problem. Seit kurzem ist die Stimme der Meere ganz leise geworden. Ohne sie läuft hier gar nichts mehr. Könnt ihr, die ${globalVariables.teamName}, uns helfen?`;
 
         const name = p.createDiv("Max Mare");
         name.id("nameBig");
