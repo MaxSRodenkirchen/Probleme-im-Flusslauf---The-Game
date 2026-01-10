@@ -12,6 +12,7 @@ import { scene02 } from './scenes/2_NameGen.js';
 import { scene03 } from './scenes/3_MaxMare-Intro.js';
 import { scene04 } from './scenes/4_Wasserkreislauf.js';
 import { scene05 } from './scenes/5_MeerFakten.js';
+import { scene06 } from './scenes/6_Plastikverschmutzung.js';
 import { scene07 } from './scenes/7_Plastikauswirkungen.js';
 import { scene09 } from './scenes/9_demoEnd.js';
 
@@ -55,10 +56,10 @@ const sketch = (p) => {
 
     sceneManager.addScene(new scene01(p, sceneManager, uiManager));
     sceneManager.addScene(new scene02(p, sceneManager, uiManager));
-
     sceneManager.addScene(new scene03(p, sceneManager, uiManager));
     sceneManager.addScene(new scene04(p, sceneManager, uiManager));
     sceneManager.addScene(new scene05(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene06(p, sceneManager, uiManager));
     sceneManager.addScene(new scene07(p, sceneManager, uiManager));
     sceneManager.addScene(new scene09(p, sceneManager, uiManager));
 
@@ -66,7 +67,7 @@ const sketch = (p) => {
     initDebugSceneSwitcher(p, sceneManager);
 
     // Start with first scene (index 0)
-    await sceneManager.switchScene(1, p);
+    await sceneManager.switchScene(5, p);
 
     // Initial scale
     updateScale();

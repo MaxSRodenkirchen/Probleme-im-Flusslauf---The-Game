@@ -91,21 +91,21 @@ export class scene02 extends BaseScene {
         const rotation = 32;
         const size = globalVariables.ui.objectWidth / 2.6;
 
-        const click1 = p.createImg(clickHere);
+        const click1 = p.createImg(clickHere, "click here");
         click1.parent(die);
         click1.class("clickHereButton dropShadow borderRadius");
         click1.position(offsetX, offsetY);
         click1.size(size, size);
         click1.style("transform", `rotate(${getRandomDegree() * rotation + 270}deg)`);
 
-        const click2 = p.createImg(clickHere);
+        const click2 = p.createImg(clickHere, "click here");
         click2.parent(adjDom);
         click2.class("clickHereButton dropShadow borderRadius");
         click2.position(offsetX, offsetY);
         click2.size(size, size);
         click2.style("transform", `rotate(${getRandomDegree() * rotation + 270}deg)`);
 
-        const click3 = p.createImg(clickHere);
+        const click3 = p.createImg(clickHere, "click here");
         click3.parent(animalDom);
         click3.class("clickHereButton dropShadow borderRadius");
         click3.position(offsetX, offsetY);

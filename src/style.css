@@ -367,3 +367,23 @@ button:focus-visible {
   color: var(--color-darkblue);
   cursor: pointer;
 }
+
+.wimmelbildContainer {
+  display: flex;
+  justify-content: center;
+  width: 55%;
+  height: 55%;
+  overflow: hidden;
+  transform: rotate(0.4deg);
+
+}
+
+.wimmelbild {
+  position: absolute;
+  width: 100%
+}
+
+.clickField {
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+}
