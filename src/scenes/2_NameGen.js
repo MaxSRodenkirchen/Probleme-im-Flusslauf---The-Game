@@ -1,6 +1,7 @@
 import { BaseScene } from './_BaseScene.js';
 import { getRandomDegree, globalVariables } from '../globalVariables.js';
 
+import clickHere from '../images/ui/clickHere.png'
 import nameData from '../names.json';
 
 export class scene02 extends BaseScene {
@@ -37,44 +38,78 @@ export class scene02 extends BaseScene {
         genContainer.class("chelsea-market bigText genContainer borderRadius transition");
 
 
-        const rotAmount = 2;
+        const rotAmount = 0.7;
 
-        const die = p.createP("Die");
+        const die = p.createP("");
         die.parent(genContainer);
-        die.class("shadow borderRadius genText");
+        die.class("shadow borderRadius genText click");
         die.style("transform", `rotate(${getRandomDegree() * rotAmount}deg)`);
+        const dieSpan = p.createSpan("Die");
+        dieSpan.parent(die);
 
-        const adjDom = p.createP(this.adj);
+        const adjDom = p.createP("");
         adjDom.parent(genContainer);
-        adjDom.class("shadow borderRadius genText");
+        adjDom.class("shadow borderRadius genText ");
         adjDom.style("transform", `rotate(${getRandomDegree() * rotAmount}deg)`);
+        const adjSpan = p.createSpan(this.adj);
+        adjSpan.parent(adjDom);
+
         adjDom.mouseClicked(() => {
+            adjDom.style("transform", `rotate(${getRandomDegree() * rotAmount}deg)`);
             this.getAdj();
             this.setName();
-            adjDom.html(this.adj)
+            adjSpan.html(this.adj)
         })
 
-        const animalDom = p.createP(this.animal);
+        const animalDom = p.createP("");
         animalDom.parent(genContainer);
-        animalDom.class("shadow borderRadius genText");
+        animalDom.class("shadow borderRadius genText ");
         animalDom.style("transform", `rotate(${getRandomDegree() * rotAmount}deg)`);
+        const animalSpan = p.createSpan(this.animal);
+        animalSpan.parent(animalDom);
+
         animalDom.mouseClicked(() => {
+            animalDom.style("transform", `rotate(${getRandomDegree() * rotAmount}deg)`);
             this.getAnimal();
             this.setName();
-            animalDom.html(this.animal)
+            animalSpan.html(this.animal)
         })
 
         die.mouseClicked(() => {
+            die.style("transform", `rotate(${getRandomDegree() * rotAmount}deg)`);
             this.getALetter();
             this.getAdj();
             this.getAnimal();
             this.setName();
-            adjDom.html(this.adj);
-            animalDom.html(this.animal)
-
-
+            adjSpan.html(this.adj);
+            animalSpan.html(this.animal)
         })
 
+        const offsetX = -10;
+        const offsetY = -20;
+        const rotation = 32;
+        const size = globalVariables.ui.objectWidth / 2.6;
+
+        const click1 = p.createImg(clickHere);
+        click1.parent(die);
+        click1.class("clickHereButton dropShadow borderRadius");
+        click1.position(offsetX, offsetY);
+        click1.size(size, size);
+        click1.style("transform", `rotate(${getRandomDegree() * rotation + 270}deg)`);
+
+        const click2 = p.createImg(clickHere);
+        click2.parent(adjDom);
+        click2.class("clickHereButton dropShadow borderRadius");
+        click2.position(offsetX, offsetY);
+        click2.size(size, size);
+        click2.style("transform", `rotate(${getRandomDegree() * rotation + 270}deg)`);
+
+        const click3 = p.createImg(clickHere);
+        click3.parent(animalDom);
+        click3.class("clickHereButton dropShadow borderRadius");
+        click3.position(offsetX, offsetY);
+        click3.size(size, size);
+        click3.style("transform", `rotate(${getRandomDegree() * rotation + 270}deg)`);
 
 
         this.domElements.push(header);

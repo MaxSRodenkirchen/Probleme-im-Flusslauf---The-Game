@@ -111,11 +111,25 @@ canvas {
   padding: 20px;
   display: flex;
   gap: 20px;
+
 }
 
 .genText {
   padding: var(--padding-mid);
   cursor: pointer;
+
+  /* transition: all 1s ease; */
+}
+
+.genText:hover {
+  background-color: var(--color-success);
+  color: var(--color-darkblue);
+}
+
+.clickHereButton {
+  position: absolute;
+  /* background-color: var(--color-darkblue); */
+  z-index: 888;
 }
 
 button {
