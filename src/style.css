@@ -238,6 +238,12 @@ button:focus-visible {
   color: var(--color-light)
 }
 
+.highlight {
+  color: var(--color-success);
+  /* font-weight: bold; */
+}
+
+
 .characterContainer {
   overflow: hidden;
   position: absolute;
@@ -305,9 +311,9 @@ button:focus-visible {
   color: var(--color-dark);
 }
 
-/* .debug {
+.debug {
   border: 1px solid red;
-} */
+}
 
 .mediumText {
   font-size: var(--font-size-small);

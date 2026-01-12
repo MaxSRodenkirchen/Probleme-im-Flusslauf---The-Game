@@ -1,19 +1,20 @@
 import { BaseScene } from './_BaseScene.js';
 import { globalVariables } from '../globalVariables.js';
 
-import maxMareUrl from '../images/scene03/MaxMare_angry.png';
+import maxMareUrl from '../images/scene08/maxMare.png';
 
 
-export class scene03 extends BaseScene {
+export class scene08 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
-        super("scene03", p, sceneManager, uiManager);
-
+        super("scene08", p, sceneManager, uiManager);
         this.speech = null;
     }
 
     async setup(p) {
         this.uiManager.setup();
-        this.speech = ` Hey, ihr da. Wir haben ein großes Problem und brauchen dringend die Stimme der Meere. Könnt ihr, die <span class="highlight">${globalVariables.teamName}</span>, uns helfen?`;
+        this.speech = `Die <span class="highlight">${globalVariables.teamName}</span> haben sich bewiesen. Euch möchte ich diese äußerst wichtige Mission anvertrauen. Aber nun schreitet los. Mein Freund <span class="highlight">Norbert Nass</span>  wird euch unterstützen. `;
+
+
 
         const name = p.createDiv("Max Mare");
         name.id("nameBig");
