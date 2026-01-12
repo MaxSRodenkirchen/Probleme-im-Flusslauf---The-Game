@@ -19,7 +19,7 @@ export class scene06 extends BaseScene {
     }
 
     async setup(p) {
-        const text = "Sehr gut! Dann wisst ihr bestimmt auch viel über die Meere. <br>Welche Fakten stimmen?";
+        const text = "Ihr seid gut. Dann ahnt ihr bestimmt auch schon was unser Problem ist. <br>Was gehört hier nicht ins Meer?";
         this.uiManager.displayCharacter(max1, "Max Mare", text);
 
         this.uiManager.setup();
@@ -30,7 +30,7 @@ export class scene06 extends BaseScene {
     draw(p) {
         this.game.draw();
         // this.uiManager.toggleLastSceneButton(true);
-        // this.uiManager.toggleNextSceneButton(true);
+        this.uiManager.toggleNextSceneButton(this.completed);
     }
 
     cleanup(p) {

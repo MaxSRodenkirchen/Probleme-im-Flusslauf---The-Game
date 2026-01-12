@@ -359,9 +359,9 @@ button:focus-visible {
   color: var(--color-success);
 }
 
-.logEmpty {}
-
-.logFilled {}
+.logFilled {
+  display: flex;
+}
 
 
 .letter {

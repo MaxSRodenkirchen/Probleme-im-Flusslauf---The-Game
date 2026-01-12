@@ -7,8 +7,6 @@ export class wimmelbild extends BaseGame {
 
         this.imgSize = globalVariables.ui.objectWidth * 2;
 
-
-
         this.bgImageUrl = bgImageUrl;
         this.overlayImagesUrls = overlayImagesUrls;
         // console.log(overlayImagesUrls);
@@ -20,14 +18,15 @@ export class wimmelbild extends BaseGame {
             { x: 740, y: this.p.height / 2 + 30, r: 100 },
             { x: 438, y: this.p.height / 2 - 43, r: 80 },
         ]
+
+        this.counter = 0;
     }
 
     setup(p) {
-
+        this.counter = 0;
 
         this.container = p.createDiv("");
         this.container.class("shadow wimmelbildContainer borderRadius shadow");
-
 
 
         const bgImage = p.createImg(this.bgImageUrl, "Wimmelbild vom Ökosystem Meer mit Plastikmüll");
@@ -43,11 +42,16 @@ export class wimmelbild extends BaseGame {
             field.mouseClicked(() => {
                 if (field.hasClass("used")) return;
                 field.addClass("used");
-
+                this.counter++;
                 const img = p.createImg(url, `Müll gefunden`);
                 img.parent(this.container);
                 img.class("wimmelbild");
                 this.domElements.push(img);
+
+                if (this.counter === 4) {
+                    this.scene.completed = true;
+                }
+
             })
             this.domElements.push(field);
         })
@@ -55,9 +59,11 @@ export class wimmelbild extends BaseGame {
         this.domElements.push(this.container);
     }
 
+    showSolution() {
+
+    }
+
     draw() {
-
-
     }
 
     cleanup() {

@@ -69,7 +69,7 @@ const sketch = (p) => {
     initDebugSceneSwitcher(p, sceneManager);
 
     // Start with first scene (index 0)
-    await sceneManager.switchScene(0, p);
+    await sceneManager.switchScene(5, p);
 
     // Initial scale
     updateScale();
