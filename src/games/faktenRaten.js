@@ -14,7 +14,7 @@ export class faktenRaten extends BaseGame {
         this.amountOfCorrectFacts = 0;
         this.shuffleFacts();
         const w = this.p.width - globalVariables.ui.sideSpace * 4 - globalVariables.ui.objectWidth;
-        const h = this.p.height - globalVariables.ui.sideSpace * 4;
+        const h = this.p.height - globalVariables.ui.sideSpace * 8;
 
         const container = this.p.createDiv("");
         container.class("factGrid");

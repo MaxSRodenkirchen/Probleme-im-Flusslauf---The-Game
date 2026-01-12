@@ -72,7 +72,7 @@ canvas {
   --padding-low: 4px;
   --padding-mid: 24px;
 
-  --sideSpace: 100px;
+  --sideSpace: 50px;
   --font-size-smaller: 16px;
 
   --font-size-small: 20px;
@@ -341,8 +341,18 @@ button:focus-visible {
 }
 
 .imgContainer {
-  position: absolute;
+  position: relative;
   transform: rotate(-1deg);
+}
+
+.bilderRatenContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  display: flex !important;
+  align-items: center;
+  gap: 40px;
 }
 
 .keyboard {
@@ -393,7 +403,7 @@ button:focus-visible {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(0.4deg);
+  transform: translate(-48%, -48%) rotate(-0.5deg) scale(1.28);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -404,10 +414,12 @@ button:focus-visible {
 
 .wimmelbild {
   position: absolute;
-  width: 100%
+  width: 100%;
+  pointer-events: none;
 }
 
 .clickField {
   aspect-ratio: 1/1;
   border-radius: 100%;
+  position: relative;
 }

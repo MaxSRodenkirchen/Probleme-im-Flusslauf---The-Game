@@ -17,7 +17,7 @@ export const globalVariables = {
         objectHeight: 100,
         paddingLow: 4,
         paddingMid: 24,
-        sideSpace: 100,
+        sideSpace: 50,
         fontSize: 20,
         borderWidth: 2
     },

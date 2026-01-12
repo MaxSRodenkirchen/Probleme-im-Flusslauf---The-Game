@@ -5,7 +5,7 @@ export class bilderRaten extends BaseGame {
     constructor(p, scene, uiManager, imageUrls, text) {
         super(p, scene, uiManager);
 
-        this.imgSize = globalVariables.ui.objectWidth * 2;
+        this.imgSize = globalVariables.ui.objectWidth * 2.5;
 
         this.correctLetters = text.split("");
         this.shuffledLetters = super.shuffle(this.correctLetters);
@@ -20,7 +20,7 @@ export class bilderRaten extends BaseGame {
         this.typedLetters = [];
         this.shuffledLetters = super.shuffle(this.correctLetters);
 
-        const letterSize = 50;
+        const letterSize = 70;
         const spacing = 40; // Spacing between images and keyboard
         const gap = globalVariables.ui.paddingLow;
         const keyboardWidth = letterSize * 3 + 60; // Width including padding/gaps
@@ -29,8 +29,12 @@ export class bilderRaten extends BaseGame {
         const totalWidth = imgBlockWidth + spacing + keyboardWidth;
         const totalHeight = this.imgSize * 2 + gap;
 
-        const startX = (p.width - totalWidth) / 2;
-        const startY = (p.height - totalHeight) / 2;
+        // const startX = 0;
+        // const startY = 0;
+
+        this.mainContainer = p.createDiv("");
+        this.mainContainer.class("bilderRatenContainer");
+        this.domElements.push(this.mainContainer);
 
 
         this.positions = [
@@ -41,8 +45,9 @@ export class bilderRaten extends BaseGame {
         ];
 
         const imgContainer = p.createDiv("");
+        imgContainer.parent(this.mainContainer);
         imgContainer.class("imgContainer");
-        imgContainer.position(startX, startY);
+        // imgContainer.position(startX, startY);
         imgContainer.size(imgBlockWidth, imgBlockWidth);
         this.domElements.push(imgContainer);
 
@@ -58,8 +63,9 @@ export class bilderRaten extends BaseGame {
         });
 
         const letterContainer = p.createDiv("");
+        letterContainer.parent(this.mainContainer);
         letterContainer.class("keyboard borderRadius");
-        letterContainer.position(startX + imgBlockWidth + spacing, startY);
+        // letterContainer.position(startX + imgBlockWidth + spacing, startY);
         letterContainer.style('width', `${keyboardWidth}px`); // 3 columns + padding
         this.domElements.push(letterContainer);
 

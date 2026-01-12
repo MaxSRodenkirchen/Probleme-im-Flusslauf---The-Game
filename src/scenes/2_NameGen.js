@@ -31,7 +31,7 @@ export class scene02 extends BaseScene {
         const header = p.createP("Bevor ihr losreisen könnt<br> braucht ihr einen Teamnamen.")
         header.class("chelsea-market bigText");
         header.style("transform", 'rotate(-4deg)');
-        header.position(globalVariables.ui.sideSpace, globalVariables.ui.sideSpace)
+        header.position(globalVariables.ui.sideSpace, globalVariables.ui.sideSpace * 1.8)
 
 
         const genContainer = p.createDiv("");

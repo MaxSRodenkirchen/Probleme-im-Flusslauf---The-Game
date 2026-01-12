@@ -13,10 +13,10 @@ export class wimmelbild extends BaseGame {
         this.container = null;
 
         this.positions = [
-            { x: 575, y: this.p.height / 2 + 140, r: 100 },
-            { x: 570, y: this.p.height / 2 - 70, r: 175 },
-            { x: 740, y: this.p.height / 2 + 30, r: 100 },
-            { x: 438, y: this.p.height / 2 - 43, r: 80 },
+            { x: 306, y: 360, r: 100 },
+            { x: 301, y: 150, r: 175 },
+            { x: 471, y: 245, r: 100 },
+            { x: 169, y: 172, r: 80 },
         ]
 
         this.counter = 0;
@@ -36,7 +36,8 @@ export class wimmelbild extends BaseGame {
 
         this.overlayImagesUrls.forEach((url, index) => {
             const field = p.createDiv("");
-            field.class("  borderRadius clickField");
+            field.parent(this.container);
+            field.class("  borderRadius clickField"); //clickMe
             field.position(this.positions[index].x, this.positions[index].y);
             field.size(this.positions[index].r)
             field.mouseClicked(() => {
