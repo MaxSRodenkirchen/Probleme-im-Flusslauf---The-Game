@@ -4,52 +4,57 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
   padding: 0;
+  width: 100dvw;
+  height: 100dvh;
   overflow: hidden;
+  position: fixed;
+  /* Prevent tablet browser from expanding scroll area */
   font-family: "Roboto", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 
-  /* Centering logic */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-
-  /* Background image that covers entire body */
+  /* Background restored to body (without buggy fixed attachment) */
   background-image: url('./images/ui/background.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-color: #000;
+  /* Fallback */
 }
 
 #game-container {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* GOLD STANDARD: Use CSS for centering, JS only for scale value */
+  transform: translate(-50%, -50%) scale(var(--game-scale, 1));
+  transform-origin: center;
+
   width: 1194px;
   height: 834px;
   background-color: transparent;
-  transform-origin: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  /* Allow overflow for shadows or rotations if needed */
+  /* Visual overflow is allowed, but body is locked to prevent layout shifts */
   overflow: visible;
 
+  /* Flex is no longer needed as everything is absolute. 
+     Keeping it can cause layout shifts if children size varies. */
+  display: block;
+  flex-shrink: 0;
 }
 
 canvas {
   display: block;
-  /* border: 1px solid var(--color-error); */
+  /* position: absolute; - handled by parent if needed, but p5 does it */
   position: absolute;
   top: 0;
   left: 0;
-  /* No width/height 100% here as p5 handles it */
+  background-color: transparent;
+  /* Ensure canvas doesn't cover body background */
 }
 
 :root {
@@ -84,9 +89,31 @@ canvas {
   transform: rotate(3DEG);
 }
 
-#startText:hover {
-  color: var(--color-success);
-  cursor: pointer;
+@media (hover: hover) {
+  #startText:hover {
+    color: var(--color-success);
+    cursor: pointer;
+  }
+
+  .genText:hover {
+    background-color: var(--color-success);
+    color: var(--color-darkblue);
+  }
+
+  button:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  .factCard:hover {
+    transform: scale(1.02) rotate(10.5deg);
+    /* border-color: var(--color-accent); */
+  }
+
+  .letter:hover {
+    background-color: var(--color-light);
+    color: var(--color-darkblue);
+    cursor: pointer;
+  }
 }
 
 .iconOverlay {
@@ -121,10 +148,7 @@ canvas {
   /* transition: all 1s ease; */
 }
 
-.genText:hover {
-  background-color: var(--color-success);
-  color: var(--color-darkblue);
-}
+/* .genText:hover moved to hover media query */
 
 .clickHereButton {
   position: absolute;
@@ -190,9 +214,7 @@ img {
   border: var(--border-width) solid var(--color-success);
 }
 
-button:hover:not(:disabled) {
-  opacity: 0.9;
-}
+/* button:hover moved to hover media query */
 
 button:active:not(:disabled) {
   transform: scale(0.98);
@@ -275,10 +297,7 @@ button:focus-visible {
 
 }
 
-.factCard:hover {
-  transform: scale(1.02) rotate(10.5deg);
-  /* border-color: var(--color-accent); */
-}
+/* .factCard:hover moved to hover media query */
 
 .factCard p {
   margin: 0;
@@ -286,9 +305,9 @@ button:focus-visible {
   color: var(--color-dark);
 }
 
-.debug {
+/* .debug {
   border: 1px solid red;
-}
+} */
 
 .mediumText {
   font-size: var(--font-size-small);
@@ -362,20 +381,19 @@ button:focus-visible {
 
 
 
-.letter:hover {
-  background-color: var(--color-light);
-  color: var(--color-darkblue);
-  cursor: pointer;
-}
+/* .letter:hover moved to hover media query */
 
 .wimmelbildContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0.4deg);
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 55%;
   height: 55%;
   overflow: hidden;
-  transform: rotate(0.4deg);
-
 }
 
 .wimmelbild {

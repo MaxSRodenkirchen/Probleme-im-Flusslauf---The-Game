@@ -11,7 +11,7 @@ import max1 from '../images/scene04/MaxMare1.png';
 
 export class scene06 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
-        super("plainScene", p, sceneManager, uiManager);
+        super("scene06", p, sceneManager, uiManager);
 
 
         this.game = new wimmelbild(p, this, this.uiManager, bgImageUrl, [img1, img2, img3, img4]);

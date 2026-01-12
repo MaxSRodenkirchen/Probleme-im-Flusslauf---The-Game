@@ -30,11 +30,13 @@ const sketch = (p) => {
     const baseHeight = globalVariables.canvasHeight;
     const scaling = Math.min(window.innerWidth / baseWidth, window.innerHeight / baseHeight);
 
-    container.style.transform = `scale(${scaling})`;
+    // Set scale as CSS variable - layout is centered via CSS translate
+    document.documentElement.style.setProperty('--game-scale', scaling);
   };
 
 
   p.setup = async () => {
+    p.pixelDensity(1);
     const canvas = p.createCanvas(globalVariables.canvasWidth, globalVariables.canvasHeight);
     canvas.parent('game-container');
 
@@ -67,7 +69,7 @@ const sketch = (p) => {
     initDebugSceneSwitcher(p, sceneManager);
 
     // Start with first scene (index 0)
-    await sceneManager.switchScene(5, p);
+    await sceneManager.switchScene(0, p);
 
     // Initial scale
     updateScale();
