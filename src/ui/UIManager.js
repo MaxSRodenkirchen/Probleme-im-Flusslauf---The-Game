@@ -72,12 +72,10 @@ export class UIManager {
         this.fullscreenButton.style('background-position', 'center');
         this.fullscreenButton.style('background-color', 'transparent');
         this.fullscreenButton.style('z-index', '9999');
-        // this.fullscreenButton.mousePressed(async () => {
-
-        //     await globalVariables.currentScene--;
-        //     await this.sceneManager.switchScene(globalVariables.currentScene, this.p);
-
-        // });
+        this.fullscreenButton.mousePressed(() => {
+            let fs = this.p.fullscreen();
+            this.p.fullscreen(!fs);
+        });
         this.elements.push(this.fullscreenButton);
 
     }
@@ -110,7 +108,7 @@ export class UIManager {
 
         img.position(posX, posY);
         img.size(size, size);
-        img.class("dropShadow iconOverlay borderRadius shadow").UIManager
+        img.class("dropShadow iconOverlay borderRadius shadow");
         img.style('transform', `rotate(${getRandomDegree() * 4}deg)`);
 
         if (condition) {
