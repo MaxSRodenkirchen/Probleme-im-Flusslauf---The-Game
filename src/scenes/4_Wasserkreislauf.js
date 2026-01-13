@@ -18,7 +18,7 @@ export class scene04 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
         super("scene04", p, sceneManager, uiManager);
 
-        this.imageUrls = [img1, img2, img3, img4];
+        this.imageUrls = [[img1, "Verdunstung"], [img2, "Kondensation"], [img3, "Niederschlag"], [img4, "Versickerung"]];
         this.bgTilesUrls = [field, field, field, field];
         this.game = new ablaufRaten(p, this, this.bgTilesUrls, this.imageUrls, this.uiManager);
 

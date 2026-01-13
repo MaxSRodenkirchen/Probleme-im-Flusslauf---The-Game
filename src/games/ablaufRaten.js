@@ -5,7 +5,6 @@ export class ablaufRaten extends BaseGame {
     constructor(p, scene, bgTilesUrls, imageUrls, uiManager) {
         super(p, scene, uiManager);
 
-        this.imgSize = globalVariables.ui.objectWidth * 2;
         this.currentField = 0;
         this.clickedOrder = [];
 
@@ -18,29 +17,58 @@ export class ablaufRaten extends BaseGame {
 
         this.imageAmount = this.imageUrls.length;
 
-        const center = {
-            w: p.width / 2,
-            h: p.height / 2
-        };
+        // Base height for the game area (dynamic)
+        this.gameHeight = 500; // Matches CSS height for now, but can be dynamic
+        this.imgSize = (this.gameHeight - globalVariables.ui.paddingLow) / 2;
+
         const gap = globalVariables.ui.paddingLow / 2;
-        this.positions = [
-            { width: center.w + gap, height: center.h + gap },                           // index 0 (BR)
-            { width: center.w + gap, height: center.h - this.imgSize - gap },              // index 1 (TR)
-            { width: center.w - this.imgSize - gap, height: center.h - this.imgSize - gap }, // index 2 (TL)
-            { width: center.w - this.imgSize - gap, height: center.h + gap }              // index 3 (BL)
-        ];
+
+        // Positions relative to imageContainer (now filling the container height)
+        this.positions = null;
     }
 
     async setup(p) {
+        const gap = globalVariables.ui.paddingLow / 2;
+
+        this.gameContainer = p.createDiv();
+        this.gameContainer.class("ablaufGameContainer");
+        this.gameContainer.parent("#game-container");
+        this.imgSize = (this.gameHeight - gap * 2) / 2;
+
+        this.positions = [
+            { width: 0, height: this.imgSize + gap * 2 },                        // index 0 (BL)
+            { width: 0, height: 0 },                                          // index 1 (TL)
+            { width: this.imgSize + gap * 2, height: 0 },                       // index 2 (TR)
+            { width: this.imgSize + gap * 2, height: this.imgSize + gap * 2 } // index 3 (BR)
+        ];
+
+        this.domElements.push(this.gameContainer);
+
+        this.imageContainer = p.createDiv();
+        this.imageContainer.class("imgContainer");
+        this.imageContainer.parent(this.gameContainer);
+        this.imageContainer.size(this.gameHeight, this.gameHeight);
+        this.domElements.push(this.imageContainer);
+
+        // Create container for the shuffle/pick images
+        this.pickContainer = p.createDiv();
+        this.pickContainer.class("pickContainer borderRadius");
+        this.pickContainer.parent(this.gameContainer);
+        // Set width for pickContainer so flex layout works and it doesn't collapse
+        const pickItemSize = (this.gameHeight - (2 * globalVariables.ui.paddingLow)) / 3;
+        this.pickContainer.size(pickItemSize, this.gameHeight);
+        this.domElements.push(this.pickContainer);
+
         this.bgTilesUrls.forEach((url, index) => {
             const img = p.createImg(url, 'image ' + index);
+            img.parent(this.imageContainer);
             img.position(this.positions[index].width, this.positions[index].height);
             img.size(this.imgSize, this.imgSize);
-            const rotations = [-270, 0, -90, 180]; // degrees for each index
-            const rot = rotations[index] + (getRandomDegree() * 8);
-            img.style('transform', `rotate(${rot}deg)`);
+            const rotations = [270, 0, 90, 180]; // degrees for each index (BL, TL, TR, BR)
+            const rot = rotations[index] + (getRandomDegree() * 0.35);
+            img.style('transform', `rotate(${rot}deg) scaleX(-1)`);
             img.style("opacity", "0.15")
-            img.class(" borderRadius");
+            img.class(" borderRadius shadow clickMe");
 
             this.bgTileDoms.push(img);
         });
@@ -54,40 +82,69 @@ export class ablaufRaten extends BaseGame {
         this.scene.completed = false;
         this.currentField = 0;
         this.shuffleImages();
-        this.shuffledImageUrlArray.forEach(([url, originalIndex], shuffledIndex) => {
-            const img = this.p.createImg(url, 'image ' + shuffledIndex);
-            const size = this.imgSize / 2 - globalVariables.ui.paddingMid / 2;
-            const posX = this.p.width / 2 - this.imgSize + (shuffledIndex * this.imgSize / 2);
-            const posY = this.p.height - globalVariables.ui.sideSpace - size;
-            img.position(posX, posY);
-            img.size(size, size);
-            img.class("transition shadow borderRadius ");
-            img.style('transform', `rotate(${getRandomDegree()}deg)`);
+
+        // Calculate size for selection items (3 items fit vertically)
+        const pickItemSize = (this.gameHeight - (globalVariables.ui.paddingMid * 2) - (globalVariables.ui.paddingLow * 2)) / 3;
+
+        this.shuffledImageUrlArray.forEach(([data, originalIndex], shuffledIndex) => {
+            const [url, description] = data;
+
+            const container = this.p.createDiv();
+            container.class("imageItemContainer transition shadow borderRadius");
+
+            const img = this.p.createImg(url, description || ('image ' + shuffledIndex));
+            img.parent(container);
+
+            // Create label
+            // if (description) {
+            //     const label = this.p.createP(description);
+            //     label.class("imageLabel chelsea-market smallestText");
+            //     label.parent(container);
+            // }
+
             if (originalIndex === 0) {
-                img.addClass("clickMe");
+                // Auto-place the first image in the grid
+                container.parent(this.imageContainer);
+                container.position(this.positions[0].width, this.positions[0].height);
+                container.size(this.imgSize, this.imgSize);
+                this.clickedOrder.push(0);
+                this.currentField = 1;
+            } else {
+                container.parent(this.pickContainer);
+                container.addClass("clickMe")
+                // Position logic for vertical list in flex pickContainer
+                // Using absolute within the relative/flex container for transition stability
+                const adjustedShuffledIndex = shuffledIndex - (this.shuffledImageUrlArray.findIndex(item => item[1] === 0) < shuffledIndex ? 1 : 0);
+                const posY = globalVariables.ui.paddingMid + adjustedShuffledIndex * (pickItemSize + globalVariables.ui.paddingLow);
+
+                container.position(globalVariables.ui.paddingMid, posY);
+                container.size(pickItemSize, pickItemSize);
+                container.style('transform', `rotate(${getRandomDegree()}deg)`);
+                container.mouseClicked(() => this.positionImages(container, originalIndex, shuffledIndex));
             }
 
-            img.mouseClicked(() => this.positionImages(img, originalIndex, shuffledIndex));
-
-            this.imageDoms[originalIndex] = img;
+            this.imageDoms[originalIndex] = container;
         });
         this.styleCurrentBgTile();
     }
 
-    positionImages(img, originalIndex, shuffledIndex) {
+    positionImages(container, originalIndex, shuffledIndex) {
         if (this.clickedOrder.includes(originalIndex)) {
             return;
         }
-
+        container.removeClass("clickMe");
         if (originalIndex === 0) {
-            img.removeClass("clickMe");
+
         }
         if (this.currentField < this.imageAmount) {
+            // Reparent to imageContainer when moving to the grid
+            container.parent(this.imageContainer);
+
             const newPosX = this.positions[this.currentField].width;
             const newPosY = this.positions[this.currentField].height;
 
-            img.position(newPosX, newPosY);
-            img.size(this.imgSize, this.imgSize);
+            container.position(newPosX, newPosY);
+            container.size(this.imgSize, this.imgSize);
 
             this.clickedOrder.push(originalIndex);
             this.nextField();
@@ -140,16 +197,17 @@ export class ablaufRaten extends BaseGame {
     }
 
     shuffleImages() {
-        const pairs = this.imageUrls.map((url, index) => [url, index]);
+        const pairs = this.imageUrls.map((data, index) => [data, index]);
         this.shuffledImageUrlArray = this.shuffle(pairs);
         return this.shuffledImageUrlArray;
     }
 
     cleanup() {
         super.cleanup();
-        this.bgTileDoms.forEach(element => element.remove());
         this.bgTileDoms = [];
-        this.imageDoms.forEach(element => element.remove());
         this.imageDoms = [];
+        if (this.gameContainer) {
+            this.gameContainer.remove();
+        }
     }
 }

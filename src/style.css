@@ -73,6 +73,9 @@ canvas {
   --padding-mid: 24px;
 
   --sideSpace: 50px;
+
+  --font-size-smallest: 12px;
+
   --font-size-smaller: 16px;
 
   --font-size-small: 20px;
@@ -315,6 +318,11 @@ button:focus-visible {
   border: 1px solid red;
 }
 
+.smallestText {
+  font-size: var(--font-size-smallest);
+  line-height: 135%;
+}
+
 .mediumText {
   font-size: var(--font-size-small);
   line-height: 135%;
@@ -340,10 +348,34 @@ button:focus-visible {
 
 }
 
+.ablaufGameContainer {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: var(--padding-mid);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+
 .imgContainer {
   position: relative;
-  transform: rotate(-1deg);
+  height: 100%;
+  aspect-ratio: 1/1;
+  /* background-color: rgba(255,255,255,0.05); */
 }
+
+.pickContainer {
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px;
+}
+
 
 .bilderRatenContainer {
   position: absolute;
@@ -422,4 +454,31 @@ button:focus-visible {
   aspect-ratio: 1/1;
   border-radius: 100%;
   position: relative;
+}
+
+.imageItemContainer {
+  position: absolute;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex !important;
+  flex-direction: column;
+}
+
+.imageItemContainer img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.imageLabel {
+  background-color: var(--color-darkblue);
+  color: var(--color-light);
+  width: 100%;
+  text-align: center;
+  padding: var(--padding-low);
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.8;
 }
