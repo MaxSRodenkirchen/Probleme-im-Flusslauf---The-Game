@@ -25,8 +25,8 @@ export class bilderRaten extends BaseGame {
         const gap = globalVariables.ui.paddingLow;
         const keyboardWidth = letterSize * 3 + 60; // Width including padding/gaps
 
-        const imgBlockWidth = this.imgSize * 2 + gap;
-        const totalWidth = imgBlockWidth + spacing + keyboardWidth;
+        this.imgBlockWidth = this.imgSize * 2 + gap;
+        this.totalWidth = this.imgBlockWidth + spacing + keyboardWidth;
         const totalHeight = this.imgSize * 2 + gap;
 
         // const startX = 0;
@@ -48,7 +48,7 @@ export class bilderRaten extends BaseGame {
         imgContainer.parent(this.mainContainer);
         imgContainer.class("imgContainer");
         // imgContainer.position(startX, startY);
-        imgContainer.size(imgBlockWidth, imgBlockWidth);
+        imgContainer.size(this.imgBlockWidth, this.imgBlockWidth);
         this.domElements.push(imgContainer);
 
         this.shuffledUrls.forEach((url, index) => {
@@ -125,13 +125,22 @@ export class bilderRaten extends BaseGame {
     }
 
     checkSolution() {
+
+        const iconSize = globalVariables.ui.objectHeight * 2;
+        const startX = this.p.width / 2 - this.totalWidth / 2;
+
+        const imgContainerMiddle = {
+            x: startX + this.imgBlockWidth / 2 - iconSize / 2,
+            y: this.p.height / 2 - iconSize / 2,
+        }
+
         const currentWord = this.typedLetters.map(item => item.char).join('');
         if (currentWord === this.correctLetters.join('')) {
             this.scene.completed = true;
-            this.uiManager.showSolutionUi(true);
+            this.uiManager.showSolutionUi(true, imgContainerMiddle);
 
         } else if (this.typedLetters.length === this.correctLetters.length) {
-            this.uiManager.showSolutionUi(false);
+            this.uiManager.showSolutionUi(false, imgContainerMiddle);
 
             setTimeout(() => {
                 this.cleanup();

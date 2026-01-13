@@ -34,6 +34,7 @@ export class scene03 extends BaseScene {
         text.style("transform", 'rotate(-1deg)')
 
         this.domElements.push(name, maxMare, text)
+        this.uiManager.showAnswer("Los geht's!");
 
     }
 

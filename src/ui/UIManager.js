@@ -110,7 +110,7 @@ export class UIManager {
         img.position(posX, posY);
         img.size(size, size);
         img.class("dropShadow iconOverlay borderRadius shadow");
-        img.style('transform', `rotate(${getRandomDegree() * 4}deg)`);
+        img.style('transform', `rotate(${getRandomDegree() * 0.6}deg)`);
 
         if (condition) {
             img.style("background-color", globalVariables.colors.darkBlue)
@@ -151,6 +151,23 @@ export class UIManager {
 
         this.elements.push(container, nameTag, speech);
 
+    }
+
+    showAnswer(answer) {
+        const text = this.p.createP(answer);
+        text.class("chelsea-market mediumText");
+        text.style("text-align", "right");
+
+
+        const posX = this.p.width - globalVariables.ui.sideSpace - globalVariables.ui.objectHeight / 2 - 45 - globalVariables.ui.paddingMid;
+        const posY = this.p.height - globalVariables.ui.sideSpace - globalVariables.ui.objectHeight / 2 + 15;
+
+        text.position(posX, posY);
+
+        // Move the anchor point from top-left (0,0) to bottom-right (100%, 100%)
+        text.style("transform", `translate(-100%, -100%) rotate(${getRandomDegree()}deg)`);
+
+        this.elements.push(text);
     }
 
 

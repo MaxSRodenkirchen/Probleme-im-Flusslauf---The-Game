@@ -116,6 +116,8 @@ export class scene02 extends BaseScene {
         this.domElements.push(header);
         this.domElements.push(genContainer);
 
+        this.uiManager.showAnswer("Zufrieden?");
+
     }
 
     getALetter() {

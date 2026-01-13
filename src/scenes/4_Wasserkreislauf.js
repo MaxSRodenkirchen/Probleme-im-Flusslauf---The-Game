@@ -32,10 +32,11 @@ export class scene04 extends BaseScene {
 
 
 
-        const text = "Ich muss euch allerdings erstmal prüfen:<br>Wie funktioniert ein Wasserkreislauf? ";
+        const text = `Eure Hilfe ist gerne gesehen. Aber bitte zeigt mir das ihr den Aufgaben gewachsen seid.<br>
+             Wie funktioniert ein <span class= "highlight">Wasserkreislauf?</span> Klickt in der richtigen Reihenfolge auf die Bilder.  `;
         this.uiManager.displayCharacter(max1, "Max Mare", text);
 
-    }
+    } 2
 
     draw(p) {
         this.game.draw(p);
