@@ -51,6 +51,8 @@ export class wimmelbild extends BaseGame {
 
                 if (this.counter === 4) {
                     this.scene.completed = true;
+                    this.uiManager.showSolutionUi(true);
+
                 }
 
             })

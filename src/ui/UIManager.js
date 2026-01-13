@@ -96,15 +96,16 @@ export class UIManager {
         }
     }
 
-    showSolutionUi(condition) {
+    showSolutionUi(condition, pos) {
 
         const imgUrl = condition ? correct : wrong;
-
         const img = this.p.createImg(imgUrl, condition ? 'Correct' : 'Wrong');
+        img.parent("#game-container");
 
-        const size = globalVariables.ui.objectHeight;
-        const posX = (this.p.width - size) / 2;
-        const posY = (this.p.height - size) / 2;
+        const size = globalVariables.ui.objectHeight * 2;
+
+        const posX = pos?.x ?? (this.p.width - size) / 2;
+        const posY = pos?.y ?? (this.p.height - size) / 2;
 
         img.position(posX, posY);
         img.size(size, size);

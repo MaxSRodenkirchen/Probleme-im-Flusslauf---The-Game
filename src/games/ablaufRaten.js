@@ -55,9 +55,21 @@ export class ablaufRaten extends BaseGame {
         this.pickContainer.class("pickContainer borderRadius");
         this.pickContainer.parent(this.gameContainer);
         // Set width for pickContainer so flex layout works and it doesn't collapse
-        const pickItemSize = (this.gameHeight - (2 * globalVariables.ui.paddingLow)) / 3;
+        const pickItemSize = (this.gameHeight - (2 * globalVariables.ui.paddingMid)) / 3 - globalVariables.ui.paddingMid;
         this.pickContainer.size(pickItemSize, this.gameHeight);
         this.domElements.push(this.pickContainer);
+
+        // Calculate the center of the imageContainer (grid) relative to the setup width
+        // Accounts for the flex gap and the side-by-side containers
+        const flexGap = globalVariables.ui.paddingMid;
+        const totalContentWidth = this.gameHeight + flexGap + pickItemSize;
+        const iconSize = globalVariables.ui.objectHeight * 2;
+
+        this.gridCenter = {
+            // Start of flex content + half of grid width - half of icon size
+            x: (p.width - totalContentWidth) / 2 + (this.gameHeight / 2) - (iconSize / 2),
+            y: (p.height / 2) - (iconSize / 2)
+        };
 
         this.bgTilesUrls.forEach((url, index) => {
             const img = p.createImg(url, 'image ' + index);
@@ -168,10 +180,10 @@ export class ablaufRaten extends BaseGame {
             this.clickedOrder[2] === 2 &&
             this.clickedOrder[3] === 3) {
             this.correct = true;
-            this.uiManager.showSolutionUi(this.correct);
+            this.uiManager.showSolutionUi(this.correct, this.gridCenter);
             return;
         };
-        this.uiManager.showSolutionUi(this.correct);
+        this.uiManager.showSolutionUi(this.correct, this.gridCenter);
 
         if (this.correct === false) {
             setTimeout(() => {
