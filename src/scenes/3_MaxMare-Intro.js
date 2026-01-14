@@ -13,7 +13,7 @@ export class scene03 extends BaseScene {
 
     async setup(p) {
         this.uiManager.setup();
-        this.speech = ` Hey, ihr da. Wir haben ein großes Problem und brauchen dringend die Stimme der Meere. Ihr, die <span class="highlight">${globalVariables.teamName}</span>, müsst uns helfen?`;
+        this.speech = ` Hey, ihr da. Wir haben ein großes Problem und brauchen dringend die Stimme der Meere. Ihr, die <span class="highlight">${globalVariables.teamName}</span>, müsst uns helfen!`;
 
         const name = p.createDiv("Max Mare");
         name.id("nameBig");
