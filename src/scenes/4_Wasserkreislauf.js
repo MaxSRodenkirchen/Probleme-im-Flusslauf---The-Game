@@ -34,12 +34,12 @@ export class scene04 extends BaseScene {
 
         const sonnenImg = this.p.createImg(sonne, "An image of the sun");
         sonnenImg.parent("#game-container");
-        sonnenImg.class("imageItemContainer transition shadow borderRadius");
+        // sonnenImg.class("transition shadow borderRadius");
         sonnenImg.style("z-index", "-999");
-        sonnenImg.style("transform", "scale(-1,1)");
-        const size = globalVariables.ui.objectHeight
+        sonnenImg.style("transform", "rotate(4deg)");
+        const size = globalVariables.ui.objectHeight * 3.5;
         sonnenImg.size(size, size)
-        sonnenImg.position(globalVariables.ui.sideSpace, this.p.height / 2 - size / 2);
+        sonnenImg.position(globalVariables.ui.sideSpace - size / 2, this.p.height / 2 - size / 2);
         this.domElements.push(sonnenImg)
 
         const text = `Eure Hilfe ist gerne gesehen. Aber bitte zeigt mir das ihr den Aufgaben gewachsen seid.<br>
