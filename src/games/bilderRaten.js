@@ -58,6 +58,7 @@ export class bilderRaten extends BaseGame {
             img.size(this.imgSize, this.imgSize);
             img.style('transform', `rotate(${getRandomDegree() * 0.6}deg)`);
             img.class(" borderRadius shadow");
+            img.style("background-color", "#fff")
             // No need to push to domElements individually if parent is pushed, but safe to keep
             this.domElements.push(img);
         });

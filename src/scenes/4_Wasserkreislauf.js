@@ -4,10 +4,12 @@ import { globalVariables } from '../globalVariables.js';
 import { ablaufRaten } from '../games/ablaufRaten.js';
 
 
-import img1 from '../images/scene04/verdunstung.png';
-import img2 from '../images/scene04/wolkenbildung.png';
-import img3 from '../images/scene04/regen.png';
-import img4 from '../images/scene04/ablauf.png';
+import img1 from '../images/scene04/final/Verdunstung.png';
+import img2 from '../images/scene04/final/Kondensation.png';
+import img3 from '../images/scene04/final/Niederschlag.png';
+import img4 from '../images/scene04/final/Versickerung.png';
+
+import sonne from '../images/scene04/final/Sonne.png';
 
 import field from '../images/ui/arrowTurnLeft.png';
 import max1 from '../images/scene04/MaxMare1.png';
@@ -30,13 +32,21 @@ export class scene04 extends BaseScene {
         // await this.game.loadImages(p, this.imageUrls, this.bgFieldUrls);
         await this.game.setup(p);
 
-
+        const sonnenImg = this.p.createImg(sonne, "An image of the sun");
+        sonnenImg.parent("#game-container");
+        sonnenImg.class("imageItemContainer transition shadow borderRadius");
+        sonnenImg.style("z-index", "-999");
+        sonnenImg.style("transform", "scale(-1,1)");
+        const size = globalVariables.ui.objectHeight
+        sonnenImg.size(size, size)
+        sonnenImg.position(globalVariables.ui.sideSpace, this.p.height / 2 - size / 2);
+        this.domElements.push(sonnenImg)
 
         const text = `Eure Hilfe ist gerne gesehen. Aber bitte zeigt mir das ihr den Aufgaben gewachsen seid.<br>
              Wie funktioniert ein <span class= "highlight">Wasserkreislauf?</span> Klickt in der richtigen Reihenfolge auf die Bilder.  `;
         this.uiManager.displayCharacter(max1, "Max Mare", text);
 
-    } 2
+    }
 
     draw(p) {
         this.game.draw(p);

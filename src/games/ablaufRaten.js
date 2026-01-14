@@ -79,7 +79,7 @@ export class ablaufRaten extends BaseGame {
             const rotations = [270, 0, 90, 180]; // degrees for each index (BL, TL, TR, BR)
             const rot = rotations[index] + (getRandomDegree() * 0.35);
             img.style('transform', `rotate(${rot}deg) scaleX(-1)`);
-            img.style("opacity", "0.15")
+            img.style("opacity", "0.15");
             img.class(" borderRadius shadow clickMe");
 
             this.bgTileDoms.push(img);
