@@ -1,6 +1,6 @@
 # Architektur-Anleitung: P5.js Instance Mode mit SceneManager
 
-Eine vollständige Anleitung zur Verwendung der SceneManager-basierten Architektur für dein p5.js Projekt.
+Eine vollständige Anleitung zur Verwendung der SceneManager-basierten Architektur für dein p5.js Projekt (Stand: Januar 2026).
 
 ---
 
@@ -9,9 +9,9 @@ Eine vollständige Anleitung zur Verwendung der SceneManager-basierten Architekt
 1. [Architektur-Überblick](#architektur-überblick)
 2. [Kernkomponenten](#kernkomponenten)
 3. [Neue Szene erstellen](#neue-szene-erstellen)
-4. [State Management](#state-management)
-5. [UI-Elemente hinzufügen](#ui-elemente-hinzufügen)
-6. [Assets laden](#assets-laden)
+4. [Global Variables (State Management)](#global-variables-state-management)
+5. [UI-Elemente & UIManager](#ui-elemente--uimanager)
+6. [Assets & Image Loading](#assets--image-loading)
 7. [Best Practices](#best-practices)
 
 ---
@@ -20,324 +20,151 @@ Eine vollständige Anleitung zur Verwendung der SceneManager-basierten Architekt
 
 ### Das Konzept
 
-Die Architektur basiert auf dem **Scene Pattern**: Jedes Minigame oder jeder Bildschirm ist eine eigene **Szene** (Scene). Der **SceneManager** verwaltet, welche Szene gerade aktiv ist und kümmert sich um Übergänge.
+Die Architektur basiert auf dem **Scene Pattern**: Jedes Minigame oder jeder Bildschirm ist eine eigene **Szene** (Scene). Der **SceneManager** verwaltet, welche Szene gerade aktiv ist und kümmert sich um die Übergänge.
 
 ```
-┌─────────────────────────────────────┐
-│          main.js (p5 Instance)      │
-│  ┌───────────────────────────────┐  │
-│  │      SceneManager             │  │
-│  │  ┌─────────────────────────┐  │  │
-│  │  │   Aktuelle Szene        │  │  │
-│  │  │  (MenuScene/GameScene)  │  │  │
-│  │  └─────────────────────────┘  │  │
-│  └───────────────────────────────┘  │
-│                                     │
-│  ┌───────────────────────────────┐  │
-│  │      UIManager (Optional)     │  │
-│  │   (Persistentes Overlay)      │  │
-│  └───────────────────────────────┘  │
-└─────────────────────────────────────┘
-         ↓ verwendet ↓
-    ┌─────────────────┐
-    │    state.js     │
-    │ (Globaler State)│
-    └─────────────────┘
+┌───────────────────────────────────────────┐
+│           main.js (p5 Instance)           │
+│  ┌─────────────────────────────────────┐  │
+│  │           SceneManager              │  │
+│  │  ┌───────────────────────────────┐  │  │
+│  │  │        Aktuelle Szene         │  │  │
+│  │  │ (scene01, scene02, ...)       │  │  │
+│  │  └───────────────────────────────┘  │  │
+│  └─────────────────────────────────────┘  │
+│                                           │
+│  ┌─────────────────────────────────────┐  │
+│  │            UIManager                │  │
+│  │      (Buttons, Dialoge, Icons)      │  │
+│  └─────────────────────────────────────┘  │
+└───────────────────────────────────────────┘
+               ↓ verwendet ↓
+      ┌───────────────────────────┐
+      │     globalVariables.js    │
+      │  (Zustand & Einstellungen)│
+      └───────────────────────────3
 ```
 
 ### Dateistruktur
 
 ```
 src/
-├── main.js                 # p5 Instance Mode Setup
-├── state.js                # Globaler Spielzustand
+├── main.js                 # Einstiegspunkt & Asset-Preloading
+├── globalVariables.js      # Globaler Spielzustand & UI-Konstanten
 ├── SceneManager.js         # Szenen-Verwaltung
+├── ui/
+│   └── UIManager.js        # Zentrales UI-System (Buttons, Charakter-Dialoge)
 ├── scenes/
-│   ├── BaseScene.js        # Basis-Klasse (alle Szenen erben davon)
-│   ├── MenuScene.js        # Beispiel: Menü-Szene
-│   └── GameScene.js        # Beispiel: Spiel-Szene
-└── ui/
-    └── UIManager.js        # Optional: Persistentes UI
+│   ├── _BaseScene.js       # Basis-Klasse (alle Szenen erben davon)
+│   ├── 1_startScreen.js    # Konkrete Szenen-Implementierung
+│   └── ...
+└── games/
+    ├── _BaseGame.js        # Basis-Klasse für Minispiele
+    ├── wimmelbild.js       # Beispiel für ein Spiel-Modul
+    └── ...
 ```
 
 ---
 
 ## Kernkomponenten
 
-### 1. state.js - Der globale Zustand
+### 1. globalVariables.js - Die "Single Source of Truth"
 
-**Zweck:** Zentrale Datenhaltung für alle Szenen.
+**Zweck:** Zentrale Datenhaltung für alle Szenen und UI-Einstellungen.
 
 ```javascript
-export const state = {
-    currentScene: 'menu',
-    score: 0,
-    lives: 3,
-    currentLevel: 1,
-    
-    // Deine eigenen Variablen:
-    playerName: '',
-    highscore: 0,
-    // ...
+export const globalVariables = {
+    teamName: "flinken Fische",
+    currentScene: 0,
+    ui: {
+        objectWidth: 100,
+        sideSpace: 50
+    },
+    colors: {
+        darkBlue: "#467DFC"
+    }
 };
 ```
 
 **Verwendung in Szenen:**
 ```javascript
-import { state } from '../state.js';
+import { globalVariables } from '../globalVariables.js';
 
 // Lesen
-console.log(state.score);
+console.log(globalVariables.teamName);
 
 // Schreiben
-state.score += 10;
-state.lives--;
+globalVariables.currentScene++;
 ```
 
-### 2. SceneManager.js - Die Schaltzentrale
+### 2. main.js - Der Motor
 
-**Zweck:** Verwaltet alle Szenen und deren Übergänge.
+**Zweck:** Initialisiert p5.js, lädt **alle** Bilder vorab (Preloading per async/await) und startet den SceneManager.
 
-**Wichtige Methoden:**
-- `addScene(name, scene)` - Szene registrieren
-- `switchScene(name, p)` - Zu anderer Szene wechseln
-- `update(p)` - Aktualisiert aktive Szene
-- `draw(p)` - Zeichnet aktive Szene
+*   **Preloading:** Nutzt `import.meta.glob`, um alle Assets in den Cache zu schaufeln, bevor der Ladebildschirm verschwindet.
+*   **Auto-Parenting:** Sorgt dafür, dass alle p5 DOM-Elemente automatisch im `#game-container` landen.
 
-**Du musst hier normalerweise nichts ändern!**
+### 3. _BaseScene.js - Das Fundament
 
-### 3. BaseScene.js - Die Basis-Klasse
-
-**Zweck:** Definiert das Interface, das alle Szenen haben müssen.
+**Zweck:** Jede Szene muss von dieser Klasse erben. Sie bietet automatische Aufräumfunktionen (`cleanup`).
 
 **Pflicht-Methoden:**
-- `setup(p)` - Wird beim Aktivieren der Szene aufgerufen
-- `draw(p)` - Wird jeden Frame aufgerufen
-
-**Optionale Methoden:**
-- `update(p)` - Für Spiel-Logik (vor draw)
-- `cleanup()` - Wird beim Verlassen der Szene aufgerufen
-- `keyPressed(p)` - Tastatur-Input
-- `mousePressed(p)` - Maus-Input
-
-### 4. main.js - Der Einstiegspunkt
-
-**Zweck:** Initialisiert p5.js im Instance Mode und startet das Spiel.
-
-```javascript
-// Szenen registrieren
-sceneManager.addScene('menu', new MenuScene(sceneManager));
-sceneManager.addScene('game', new GameScene(sceneManager));
-
-// Start-Szene festlegen
-sceneManager.switchScene('menu', p);
-```
+- `async setup(p)` - Wird beim Aktivieren aufgerufen (wichtig: `this.uiManager.setup()` nicht vergessen!)
+- `draw(p)` - Die p5-Zeichenschleife der Szene.
 
 ---
 
 ## Neue Szene erstellen
 
-### Schritt-für-Schritt Anleitung
+### Schritt-für-Schritt
 
-#### 1. Neue Datei erstellen
-
-Erstelle `src/scenes/MeineNeueScene.js`:
+#### 1. Datei anlegen
+Erstelle `src/scenes/X_MeineSzene.js`:
 
 ```javascript
-import { BaseScene } from './BaseScene.js';
-import { state } from '../state.js';
+import { BaseScene } from './_BaseScene.js';
+import { globalVariables } from '../globalVariables.js';
 
-export class MeineNeueScene extends BaseScene {
-    constructor(sceneManager) {
-        super('meineNeueScene');
-        this.sceneManager = sceneManager;
-        
-        // Deine Variablen
-        this.counter = 0;
+export class MeineSzene extends BaseScene {
+    constructor(p, sceneManager, uiManager) {
+        super("meineSzene", p, sceneManager, uiManager);
     }
 
-    setup(p) {
-        console.log('MeineNeueScene setup');
-        // Initialisierung hier
+    async setup(p) {
+        // 1. UI Standard-Buttons initialisieren
+        this.uiManager.setup();
+        
+        // 2. Eigene Elemente erstellen
+        const text = p.createDiv("Willkommen!");
+        text.position(100, 100);
+        
+        // 3. In domElements Array pushen für automatisches Cleanup
+        this.domElements.push(text);
     }
 
     draw(p) {
-        p.background(100);
-        
-        // Zeichne hier
-        p.fill(255);
-        p.textAlign(p.CENTER, p.CENTER);
-        p.textSize(32);
-        p.text('Meine neue Szene!', p.width / 2, p.height / 2);
-    }
-
-    keyPressed(p) {
-        // ESC = zurück zum Menü
-        if (p.keyCode === 27) {
-            this.sceneManager.switchScene('menu', p);
-        }
-    }
-
-    cleanup() {
-        console.log('MeineNeueScene cleanup');
-        // Aufräumen (z.B. DOM-Elemente entfernen)
+        // UI Steuerung (Buttons zeigen/verstecken)
+        this.uiManager.toggleNextSceneButton(true);
     }
 }
 ```
 
-#### 2. Szene in main.js registrieren
-
-```javascript
-import { MeineNeueScene } from './scenes/MeineNeueScene.js';
-
-// In p.setup():
-sceneManager.addScene('meineNeue', new MeineNeueScene(sceneManager));
-```
-
-#### 3. Zur Szene wechseln
-
-Von einer anderen Szene aus:
-```javascript
-this.sceneManager.switchScene('meineNeue', p);
-```
+#### 2. In main.js registrieren
+Importiere die Szene oben und füge sie dem `sceneManager` hinzu.
 
 ---
 
-## State Management
+## Assets & Image Loading
 
-### Wann state.js verwenden?
+Wir nutzen ein **Automatisches Preloading System**:
 
-✅ **Verwende state.js für:**
-- Daten, die über mehrere Szenen hinweg benötigt werden
-- Spieler-Statistiken (Score, Lives, Level)
-- Globale Einstellungen
-- Daten, die im UI angezeigt werden sollen
+1.  Bilder liegen in `src/images/`.
+2.  `main.js` lädt alle Bilder beim Start in den Cache.
+3.  In den Szenen importierst du Bilder weiterhin per Variable:
+    `import maxImg from '../images/scene03/max.png';`
+4.  Der Browser nimmt das Bild dann blitzschnell aus dem Cache statt es neu zu laden (verhindert flackernde Texte).
 
-❌ **Verwende NICHT state.js für:**
-- Szenen-spezifische Variablen (z.B. Position eines Balls)
-- Temporäre Berechnungen
-- p5.js Objekte (Images, Sounds)
-
-### Beispiel: Punkte-System
-
-```javascript
-// In state.js
-export const state = {
-    score: 0,
-    highscore: 0
-};
-
-// In deiner Szene
-import { state } from '../state.js';
-
-// Punkte hinzufügen
-state.score += 10;
-
-// Highscore aktualisieren
-if (state.score > state.highscore) {
-    state.highscore = state.score;
-}
-```
-
----
-
-## UI-Elemente hinzufügen
-
-### Option 1: Canvas-basiertes UI (empfohlen für Spiele)
-
-Zeichne UI direkt im `draw()`:
-
-```javascript
-draw(p) {
-    p.background(0);
-    
-    // Spiel-Inhalt
-    // ...
-    
-    // UI oben drüber
-    p.fill(255);
-    p.textSize(20);
-    p.text(`Score: ${state.score}`, 10, 30);
-    p.text(`Lives: ${state.lives}`, 10, 60);
-}
-```
-
-### Option 2: DOM-basiertes UI (für Buttons, Eingabefelder)
-
-Verwende p5.js DOM-Funktionen:
-
-```javascript
-setup(p) {
-    // Button erstellen
-    this.startButton = p.createButton('Start');
-    this.startButton.position(p.width / 2 - 50, p.height / 2);
-    this.startButton.mousePressed(() => {
-        this.sceneManager.switchScene('game', p);
-    });
-}
-
-cleanup() {
-    // WICHTIG: Button entfernen!
-    if (this.startButton) {
-        this.startButton.remove();
-    }
-}
-```
-
-> **⚠️ Wichtig:** DOM-Elemente **müssen** in `cleanup()` entfernt werden, sonst entstehen Memory Leaks!
-
----
-
-## Assets laden
-
-### Bilder und Sounds
-
-#### 1. Assets in `public/` Ordner legen
-
-```
-public/
-├── images/
-│   ├── player.png
-│   └── enemy.png
-└── sounds/
-    └── jump.mp3
-```
-
-#### 2. In Szene laden
-
-```javascript
-export class GameScene extends BaseScene {
-    constructor(sceneManager) {
-        super('game');
-        this.sceneManager = sceneManager;
-        this.playerImg = null;
-    }
-
-    setup(p) {
-        // Bild laden
-        this.playerImg = p.loadImage('/images/player.png');
-        
-        // Sound laden
-        this.jumpSound = p.loadSound('/sounds/jump.mp3');
-    }
-
-    draw(p) {
-        p.background(0);
-        
-        // Bild zeichnen
-        if (this.playerImg) {
-            p.image(this.playerImg, 100, 100);
-        }
-    }
-
-    keyPressed(p) {
-        if (p.key === ' ') {
-            // Sound abspielen
-            this.jumpSound.play();
-        }
-    }
-}
-```
+Für Details siehe: `IMAGE-LOADING-ANLEITUNG.md`
 
 ---
 
@@ -345,221 +172,16 @@ export class GameScene extends BaseScene {
 
 ### ✅ DO's
 
-1. **Immer `cleanup()` implementieren**
-   ```javascript
-   cleanup() {
-       // DOM-Elemente entfernen
-       if (this.button) this.button.remove();
-       // Sounds stoppen
-       if (this.bgMusic) this.bgMusic.stop();
-   }
-   ```
-
-2. **State für globale Daten verwenden**
-   ```javascript
-   // Gut
-   state.score += 10;
-   
-   // Schlecht
-   this.globalScore = 10; // Geht bei Szenenwechsel verloren!
-   ```
-
-3. **SceneManager für Übergänge nutzen**
-   ```javascript
-   // Gut
-   this.sceneManager.switchScene('menu', p);
-   
-   // Schlecht
-   // Manuell Szenen wechseln
-   ```
-
-4. **Hardcoded KeyCodes verwenden**
-   ```javascript
-   // Gut (funktioniert in Instance Mode)
-   if (p.keyCode === 39) { // RIGHT_ARROW
-   
-   // Schlecht (funktioniert nicht in p5.js 2.0 Instance Mode)
-   if (p.keyCode === p.RIGHT_ARROW) {
-   ```
+1.  **Immer `this.domElements.push(el)`**: Wenn du ein p5-Element (Button, Div, Img) erstellst, füge es diesem Array hinzu. `_BaseScene` entfernt es dann automatisch bei Szenenwechsel.
+2.  **`this.uiManager.setup()`**: Muss in jedem `setup()` aufgerufen werden, damit die Navigations-Buttons korrekt erscheinen.
+3.  **Relative Pfade in globalVariables**: UI-Maße (Paddings, Größen) sollten dort definiert sein, um ein konsistentes Look-and-Feel zu garantieren.
 
 ### ❌ DON'Ts
 
-1. **Keine globalen Variablen außerhalb von state.js**
-   ```javascript
-   // Schlecht
-   let globalScore = 0;
-   
-   // Gut
-   // In state.js: score: 0
-   ```
-
-2. **Keine DOM-Elemente ohne cleanup()**
-   ```javascript
-   // Schlecht - Memory Leak!
-   setup(p) {
-       this.button = p.createButton('Click');
-       // Kein cleanup()!
-   }
-   ```
-
-3. **Nicht direkt p5 Funktionen in state.js**
-   ```javascript
-   // Schlecht
-   export const state = {
-       canvas: createCanvas(400, 400) // ❌ p5 nicht verfügbar!
-   };
-   ```
+1.  **Kein `preload()` mehr verwenden**: Da wir p5.js mit `async setup` nutzen, ist das alte `preload` veraltet und führt zu hängenden Ladebildschirmen.
+2.  **Keine Inline-Styles im Übermaß**: Nutze nach Möglichkeit CSS-Klassen in `style.css` (z.B. `.chelsea-market`, `.shadow`).
+3.  **Keine Hard-Werte für Farben**: Nutze die Variablen aus `globalVariables.colors` oder die CSS-Variablen in `:root`.
 
 ---
 
-## Häufige Szenarien
-
-### Szenario 1: Minigame mit Zeitlimit
-
-```javascript
-export class TimedGameScene extends BaseScene {
-    constructor(sceneManager) {
-        super('timedGame');
-        this.sceneManager = sceneManager;
-        this.timeLeft = 30; // Sekunden
-        this.lastTime = 0;
-    }
-
-    setup(p) {
-        this.lastTime = p.millis();
-    }
-
-    update(p) {
-        // Zeit runterzählen
-        const currentTime = p.millis();
-        if (currentTime - this.lastTime >= 1000) {
-            this.timeLeft--;
-            this.lastTime = currentTime;
-            
-            // Zeit abgelaufen?
-            if (this.timeLeft <= 0) {
-                this.sceneManager.switchScene('gameOver', p);
-            }
-        }
-    }
-
-    draw(p) {
-        p.background(0);
-        p.fill(255);
-        p.textSize(32);
-        p.text(`Zeit: ${this.timeLeft}s`, p.width / 2, 50);
-    }
-}
-```
-
-### Szenario 2: Mehrere Levels in einer Szene
-
-```javascript
-export class LevelScene extends BaseScene {
-    constructor(sceneManager) {
-        super('levels');
-        this.sceneManager = sceneManager;
-        this.currentLevel = 1;
-        this.maxLevels = 5;
-    }
-
-    nextLevel() {
-        this.currentLevel++;
-        if (this.currentLevel > this.maxLevels) {
-            // Alle Levels geschafft
-            this.sceneManager.switchScene('victory', p);
-        } else {
-            // Nächstes Level laden
-            this.loadLevel(this.currentLevel);
-        }
-    }
-
-    loadLevel(levelNum) {
-        // Level-spezifische Logik
-        console.log(`Loading level ${levelNum}`);
-    }
-}
-```
-
-### Szenario 3: Pause-Menü
-
-```javascript
-export class GameScene extends BaseScene {
-    constructor(sceneManager) {
-        super('game');
-        this.sceneManager = sceneManager;
-        this.paused = false;
-    }
-
-    update(p) {
-        if (!this.paused) {
-            // Spiel-Logik nur wenn nicht pausiert
-            // ...
-        }
-    }
-
-    draw(p) {
-        // Spiel zeichnen
-        // ...
-        
-        // Pause-Overlay
-        if (this.paused) {
-            p.fill(0, 0, 0, 150);
-            p.rect(0, 0, p.width, p.height);
-            p.fill(255);
-            p.textSize(48);
-            p.text('PAUSE', p.width / 2, p.height / 2);
-        }
-    }
-
-    keyPressed(p) {
-        if (p.key === 'p' || p.key === 'P') {
-            this.paused = !this.paused;
-        }
-    }
-}
-```
-
----
-
-## Debugging-Tipps
-
-### Console Logs nutzen
-
-```javascript
-setup(p) {
-    console.log(`${this.name} setup`);
-}
-
-cleanup() {
-    console.log(`${this.name} cleanup`);
-}
-```
-
-### State im Browser inspizieren
-
-Öffne die Browser-Konsole und tippe:
-```javascript
-import('./src/state.js').then(m => console.log(m.state));
-```
-
-### Szenen-Wechsel testen
-
-```javascript
-// In der Konsole
-import('./src/SceneManager.js').then(m => {
-    // SceneManager ist nicht global, aber du kannst state ändern
-});
-```
-
----
-
-## Zusammenfassung
-
-1. **Jede Szene** = Eine Klasse, die von `BaseScene` erbt
-2. **SceneManager** = Verwaltet Szenen und Übergänge
-3. **state.js** = Globale Daten, die überall verfügbar sein müssen
-4. **cleanup()** = Immer implementieren, um Memory Leaks zu vermeiden
-5. **p5 Instance** = Wird als Parameter `p` übergeben
-
-**Viel Erfolg beim Entwickeln deines Spiels! 🎮**
+**Viel Erfolg beim Entwickeln! Bei Fragen zum Image-Loading schau in die neue Anleitung.**

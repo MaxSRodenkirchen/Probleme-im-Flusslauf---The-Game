@@ -123,39 +123,86 @@ export class UIManager {
         }, globalVariables.timeOutTime);
     }
 
-    displayCharacter(url, name, text) {
-        const container = this.p.createDiv("");
+    displayCharacter(url, name, textArray) {
+
+        let textCounter = 0;
+
+        // 1. Fullscreen Overlay (Blocker & Dimmer)
+        const overlay = this.p.createDiv("");
+        overlay.class("characterOverlay");
+        this.elements.push(overlay);
+
         const posX = globalVariables.ui.sideSpace;
         const posY = globalVariables.ui.sideSpace;
         const size = globalVariables.ui.objectHeight;
 
-        container.position(posX, posY);
-        container.size(size, size);
-        container.style('transform', `rotate(-1deg)`);
-        container.class("shadow borderRadius characterContainer");
+        // 2. Character Dialog Container
+        const fullContainer = this.p.createDiv("");
+        fullContainer.class("fullCharacterContainer borderRadius shadow is-active");
+        fullContainer.position(posX, 0); // Y wird durch CSS (.is-active) auf 50% gesetzt
+
+
+        this.elements.push(fullContainer);
+
+
+        const imgContainer = this.p.createDiv("");
+        imgContainer.parent(fullContainer);
+        imgContainer.size(size * 2, size * 2);
+        imgContainer.style('transform', `rotate(-1deg)`);
+        imgContainer.class("shadow borderRadius characterContainer");
 
         const img = this.p.createImg(url, "An image of the Character");
-        img.parent(container);
+        img.parent(imgContainer);
         img.class("characterImage");
 
         const nameTag = this.p.createP(name);
-        nameTag.position(posX + globalVariables.ui.paddingLow, posY + size + globalVariables.ui.paddingLow);
-        nameTag.class("nameTag chelsea-market");
+        nameTag.parent(fullContainer);
+        nameTag.class("nameTag chelsea-market mediumText");
         nameTag.style('transform', `rotate(0.7deg)`);
 
-        const speech = this.p.createP(text);
-        speech.position(posX + size + globalVariables.ui.paddingMid, posY + globalVariables.ui.paddingMid);
-        speech.class("nameTag chelsea-market");
+        const speech = this.p.createP(textArray[textCounter]);
+        speech.parent(fullContainer);
+        speech.class("chelsea-market mediumText speech");
         speech.style('transform', `rotate(-0.3deg)`);
 
+        const nextButton = this.p.createButton("");
+        const w = globalVariables.ui.objectWidth;
+        const h = globalVariables.ui.objectHeight;
+        nextButton.size(w, h);
+        nextButton.class("dropShadow borderRadius nextSpeechButton");
+        nextButton.parent(fullContainer);
+        nextButton.style('background-image', `url(${arrowRightImg})`);
+        nextButton.style('background-size', 'contain');
+        nextButton.style('background-repeat', 'no-repeat');
+        nextButton.style('background-position', 'center');
+        // nextButton.style('background-color', 'transparent');
+        nextButton.style('z-index', '100001');
 
-        this.elements.push(container, nameTag, speech);
+        nextButton.mousePressed(() => {
+            textCounter++;
 
+            if (textCounter < textArray.length) {
+                speech.html(textArray[textCounter]);
+            } else {
+                overlay.remove();
+                nextButton.remove();
+
+                nameTag.removeClass("mediumText");
+                speech.removeClass("mediumText");
+                fullContainer.removeClass("is-active");
+                fullContainer.removeClass("shadow");
+
+                fullContainer.position(posX, posY);
+                imgContainer.size(size, size);
+            }
+        });
+
+        this.elements.push(fullContainer)
     }
 
     showAnswer(answer) {
         const text = this.p.createP(answer);
-        text.class("chelsea-market mediumText");
+        text.class("chelsea-market smallText");
         text.style("text-align", "right");
 
 
@@ -165,7 +212,7 @@ export class UIManager {
         text.position(posX, posY);
 
         // Move the anchor point from top-left (0,0) to bottom-right (100%, 100%)
-        text.style("transform", `translate(-100%, -100%) rotate(${getRandomDegree()}deg)`);
+        text.style("transform", `translate(-100 %, -100 %) rotate(${getRandomDegree()}deg)`);
 
         this.elements.push(text);
     }

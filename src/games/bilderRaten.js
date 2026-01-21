@@ -72,14 +72,14 @@ export class bilderRaten extends BaseGame {
 
         const log = p.createDiv("");
         log.parent(letterContainer);
-        log.class("chelsea-market shadow borderRadius transition mediumText log");
+        log.class("chelsea-market shadow borderRadius transition smallText log");
         log.style('height', `${letterSize}px`);
         this.logDisplay = log;
 
         this.shuffledLetters.forEach((letter) => {
             const aLetter = p.createP(letter);
             aLetter.parent(letterContainer);
-            aLetter.class("chelsea-market shadow borderRadius transition mediumText letter ");
+            aLetter.class("chelsea-market shadow borderRadius transition smallText letter ");
             // aLetter.style('transform', `rotate(${getRandomDegree() * 2}deg)`);
             aLetter.mouseClicked(() => {
                 if (aLetter.hasClass("used")) return;
@@ -94,7 +94,7 @@ export class bilderRaten extends BaseGame {
 
         const deleteButton = p.createP("<");
         deleteButton.parent(letterContainer);
-        deleteButton.class("chelsea-market shadow borderRadius transition mediumText letter");
+        deleteButton.class("chelsea-market shadow borderRadius transition smallText letter");
 
         // Calculate remaining slots in the 3-column grid
         const remainingSlots = 3 - (this.shuffledLetters.length % 3);

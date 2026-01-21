@@ -75,15 +75,43 @@ canvas {
   --sideSpace: 50px;
 
   --font-size-smallest: 12px;
-
   --font-size-smaller: 16px;
-
   --font-size-small: 20px;
-  --font-size-medium: 50px;
+  --font-size-medium: 28px;
+  --font-size-big: 50px;
   --font-size-huge: 106px;
 
   --border-width: 4px;
   --border-radius: 20px;
+}
+
+.debug {
+  border: 1px solid red;
+}
+
+.smallestText {
+  font-size: var(--font-size-smallest);
+  line-height: 135%;
+}
+
+.smallText {
+  font-size: var(--font-size-small);
+  line-height: 135%;
+}
+
+.mediumText {
+  font-size: var(--font-size-medium);
+  line-height: 135%;
+}
+
+.bigText {
+  font-size: var(--font-size-big);
+  line-height: 115%;
+}
+
+.hugeText {
+  font-size: var(--font-size-huge);
+  line-height: 135%;
 }
 
 #startText {
@@ -247,11 +275,85 @@ button:focus-visible {
 }
 
 
+.characterOverlay {
+  position: fixed;
+  /* Wirkt wie absolute innerhalb eines transformierten Containers */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200vmax;
+  /* Deckt garantiert den ganzen Bildschirm ab */
+  height: 200vmax;
+  background-color: var(--color-darkblue);
+  opacity: 0.5;
+  z-index: 100000;
+  pointer-events: auto;
+}
+
+.fullCharacterContainer {
+  position: absolute;
+  z-index: 100001;
+  display: grid;
+  grid-template-areas:
+    "avatar speech"
+    "name .";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: 10px var(--padding-mid);
+  align-items: start;
+  pointer-events: none;
+  width: calc(100% - 130px);
+  height: auto;
+
+  /* Sanfter Übergang beim Verschieben */
+  transition: all 0.5s ease;
+  overflow: visible;
+  /* Wichtig, damit der Button rausragen kann */
+}
+
+/* Wenn der Dialog aktiv ist, wird er mittig zentriert */
+.fullCharacterContainer.is-active {
+  padding: 20px;
+  background-color: var(--color-darkblue);
+
+  top: 50% !important;
+  transform: translateY(-50%) rotate(-0.5deg) !important;
+}
+
+.characterContainer {
+  grid-area: avatar;
+}
+
+.nameTag {
+  grid-area: name;
+}
+
+.speech {
+  grid-area: speech;
+  align-self: center;
+  /* Vertikal mittig zum Rest (Avatar + Name) */
+}
+
+.nextSpeechButton {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translate(25%, 25%);
+  pointer-events: auto;
+  z-index: 10;
+  background-color: #467DFC;
+}
+
+.nextSpeechButton:active {
+  transform: translate(25%, 25%) scale(0.95) !important;
+}
+
 .characterContainer {
   overflow: hidden;
-  position: absolute;
+  position: relative;
+  /* Wichtig für das Bild darin, aber bleibt im Grid-Fluss */
   background-color: var(--color-light);
-  /* border-radius: 100%; */
+  border-radius: var(--border-radius);
 }
 
 .characterImage {
@@ -264,13 +366,12 @@ button:focus-visible {
   pointer-events: none;
 }
 
+
 .nameTag {
-  /* width: 200%;
-  height: auto; */
-  /* position: absolute; */
-  /* top: 50%; */
-  /* left: 50%; */
-  /* transform: translate(-1%, -25%); */
+  /* width: max-content;
+  min-width: 50px;
+  max-width: 600px; */
+  white-space: normal;
   pointer-events: none;
 }
 
@@ -314,29 +415,7 @@ button:focus-visible {
   color: var(--color-dark);
 }
 
-.debug {
-  border: 1px solid red;
-}
 
-.smallestText {
-  font-size: var(--font-size-smallest);
-  line-height: 135%;
-}
-
-.mediumText {
-  font-size: var(--font-size-small);
-  line-height: 135%;
-}
-
-.bigText {
-  font-size: var(--font-size-medium);
-  line-height: 135%;
-}
-
-.hugeText {
-  font-size: var(--font-size-huge);
-  line-height: 135%;
-}
 
 .banner {
   background-color: var(--color-darkblue);
@@ -482,4 +561,50 @@ button:focus-visible {
   left: 0;
   pointer-events: none;
   opacity: 0.8;
+}
+
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: var(--color-darkblue);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-light);
+  font-family: "Chelsea Market", system-ui;
+  font-size: var(--font-size-small);
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#loading-screen.hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--color-light);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }

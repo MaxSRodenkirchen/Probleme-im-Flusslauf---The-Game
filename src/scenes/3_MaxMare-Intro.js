@@ -28,7 +28,7 @@ export class scene03 extends BaseScene {
         maxMare.size(p.width * size, p.height * size);
 
         const text = p.createDiv(this.speech);
-        text.class("chelsea-market mediumText")
+        text.class("chelsea-market smallText")
         text.size(500, 0);
         text.position(p.width - 570, p.height - 370)
         text.style("transform", 'rotate(-1deg)')

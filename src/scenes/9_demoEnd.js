@@ -37,13 +37,13 @@ export class scene09 extends BaseScene {
         // text2.style('transform', `rotate(-2deg)`);
 
         const text3 = p.createDiv("Max S. Rodenkirchen<br>in Zusammenarbeit mit<br> Die Stimme der Meere e.V.");
-        text3.class("chelsea-market mediumText");
+        text3.class("chelsea-market smallText");
         text3.position(98 + globalVariables.ui.sideSpace + globalVariables.ui.objectHeight, p.height - globalVariables.ui.sideSpace - globalVariables.ui.objectHeight);
         // text3.style('transform', `rotate(-1deg)`);
         text3.style('text-align', `left`);
 
         const text2 = p.createDiv("Mehr unter<br>www.max-rodenkirchen.de<br>www.stimme-der-meere.de");
-        text2.class("chelsea-market mediumText");
+        text2.class("chelsea-market smallText");
         text2.position(420 + globalVariables.ui.sideSpace + globalVariables.ui.objectHeight, p.height - globalVariables.ui.sideSpace - globalVariables.ui.objectHeight);
         // text3.style('transform', `rotate(-1deg)`);
         text2.style('text-align', `left`);
