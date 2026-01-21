@@ -52,17 +52,24 @@ export class ablaufRaten extends BaseGame {
 
         // Create container for the shuffle/pick images
         this.pickContainer = p.createDiv();
-        this.pickContainer.class("pickContainer borderRadius");
+        this.pickContainer.class("pickContainer borderRadius shadow");
         this.pickContainer.parent(this.gameContainer);
-        // Set width for pickContainer so flex layout works and it doesn't collapse
-        const pickItemSize = (this.gameHeight - (2 * globalVariables.ui.paddingMid)) / 3 - globalVariables.ui.paddingMid;
-        this.pickContainer.size(pickItemSize, this.gameHeight);
+        // Set size for pickContainer items and the container itself
+        // Ensure this calculation is used for both the container width and the items inside
+        this.pickItemSize = (this.gameHeight - (globalVariables.ui.paddingMid * 2) - (globalVariables.ui.paddingLow * 2)) / 3;
+        const pickContainerWidth = this.pickItemSize + (2 * globalVariables.ui.paddingMid);
+
+        this.pickContainer.size(pickContainerWidth, this.gameHeight);
+        this.pickContainer.style('flex-shrink', '0'); // Prevent squeezing
         this.domElements.push(this.pickContainer);
+
+
 
         // Calculate the center of the imageContainer (grid) relative to the setup width
         // Accounts for the flex gap and the side-by-side containers
-        const flexGap = globalVariables.ui.paddingMid;
-        const totalContentWidth = this.gameHeight + flexGap + pickItemSize;
+        const flexGap = 80; // Matches gap in style.css (.ablaufGameContainer)
+        const totalContentWidth = this.gameHeight + flexGap + pickContainerWidth;
+
         const iconSize = globalVariables.ui.objectHeight * 2;
 
         this.gridCenter = {
@@ -76,11 +83,9 @@ export class ablaufRaten extends BaseGame {
             img.parent(this.imageContainer);
             img.position(this.positions[index].width, this.positions[index].height);
             img.size(this.imgSize, this.imgSize);
-            const rotations = [270, 0, 90, 180]; // degrees for each index (BL, TL, TR, BR)
-            const rot = rotations[index] + (getRandomDegree() * 0.35);
-            img.style('transform', `rotate(${rot}deg) scaleX(-1)`);
-            img.style("opacity", "0.15");
-            img.class(" borderRadius shadow clickMe");
+
+            img.style("opacity", "0.25");
+            img.class(" borderRadius clickMe shadow");// 
 
             this.bgTileDoms.push(img);
         });
@@ -95,8 +100,8 @@ export class ablaufRaten extends BaseGame {
         this.currentField = 0;
         this.shuffleImages();
 
-        // Calculate size for selection items (3 items fit vertically)
-        const pickItemSize = (this.gameHeight - (globalVariables.ui.paddingMid * 2) - (globalVariables.ui.paddingLow * 2)) / 3;
+        // Use the pickItemSize calculated in setup()
+
 
         this.shuffledImageUrlArray.forEach(([data, originalIndex], shuffledIndex) => {
             const [url, description] = data;
@@ -127,10 +132,11 @@ export class ablaufRaten extends BaseGame {
                 // Position logic for vertical list in flex pickContainer
                 // Using absolute within the relative/flex container for transition stability
                 const adjustedShuffledIndex = shuffledIndex - (this.shuffledImageUrlArray.findIndex(item => item[1] === 0) < shuffledIndex ? 1 : 0);
-                const posY = globalVariables.ui.paddingMid + adjustedShuffledIndex * (pickItemSize + globalVariables.ui.paddingLow);
+                const posY = globalVariables.ui.paddingMid + adjustedShuffledIndex * (this.pickItemSize + globalVariables.ui.paddingLow);
 
                 container.position(globalVariables.ui.paddingMid, posY);
-                container.size(pickItemSize, pickItemSize);
+                container.size(this.pickItemSize, this.pickItemSize);
+
                 container.style('transform', `rotate(${getRandomDegree()}deg)`);
                 container.mouseClicked(() => this.positionImages(container, originalIndex, shuffledIndex));
             }
@@ -201,7 +207,7 @@ export class ablaufRaten extends BaseGame {
 
     styleCurrentBgTile() {
         this.bgTileDoms.forEach(tile => {
-            tile.style("opacity", "0.05")
+            tile.style("opacity", "0.15")
         });
 
         let tile = this.bgTileDoms[this.currentField];

@@ -11,7 +11,10 @@ import img4 from '../images/scene04/final/Versickerung.png';
 
 import sonne from '../images/scene04/final/Sonne.png';
 
-import field from '../images/ui/arrowTurnLeft.png';
+import field1 from '../images/scene04/final/arrow1.png';
+import field2 from '../images/scene04/final/arrow2.png';
+import field3 from '../images/scene04/final/arrow3.png';
+import field4 from '../images/scene04/final/arrow4.png';
 import max1 from '../images/scene04/MaxMare1.png';
 
 
@@ -21,7 +24,7 @@ export class scene04 extends BaseScene {
         super("scene04", p, sceneManager, uiManager);
 
         this.imageUrls = [[img1, "Verdunstung"], [img2, "Kondensation"], [img3, "Niederschlag"], [img4, "Versickerung"]];
-        this.bgTilesUrls = [field, field, field, field];
+        this.bgTilesUrls = [field1, field2, field3, field4];
         this.game = new ablaufRaten(p, this, this.bgTilesUrls, this.imageUrls, this.uiManager);
 
     }
@@ -42,7 +45,7 @@ export class scene04 extends BaseScene {
         sonnenImg.position(globalVariables.ui.sideSpace - size / 2, this.p.height / 2 - size / 2);
         this.domElements.push(sonnenImg)
 
-        const textArray = [`Eure Hilfe ist gerne gesehen. Aber bitte zeigt mir das ihr den kommenden Aufgaben gewachsen seid.`,
+        const textArray = [`Schön, dass ihr helft! Aber zuerst müssen wir sehen, ob ihr bereit für die Aufgaben seid.`,
             `Wie funktioniert ein <span class= "highlight">Wasserkreislauf?</span> Klickt in der richtigen Reihenfolge auf die Bilder rechts.<br> Eins habe ich euch schonmal eingefügt.  `];
         this.uiManager.displayCharacter(max1, "Max Mare", textArray);
 

@@ -152,22 +152,23 @@ export class UIManager {
         const imgContainer = this.p.createDiv("");
         imgContainer.parent(fullContainer);
         imgContainer.size(size * 2, size * 2);
-        imgContainer.style('transform', `rotate(-1deg)`);
         imgContainer.class("shadow borderRadius characterContainer");
 
         const img = this.p.createImg(url, "An image of the Character");
         img.parent(imgContainer);
         img.class("characterImage");
 
+        const speechContent = this.p.createDiv("");
+        speechContent.parent(fullContainer);
+        speechContent.class("speech-content");
+
         const nameTag = this.p.createP(name);
-        nameTag.parent(fullContainer);
-        nameTag.class("nameTag chelsea-market mediumText");
-        nameTag.style('transform', `rotate(0.7deg)`);
+        nameTag.parent(speechContent);
+        nameTag.class("nameTag chelsea-market smallText");
 
         const speech = this.p.createP(textArray[textCounter]);
-        speech.parent(fullContainer);
+        speech.parent(speechContent);
         speech.class("chelsea-market mediumText speech");
-        speech.style('transform', `rotate(-0.3deg)`);
 
         const nextButton = this.p.createButton("");
         const w = globalVariables.ui.objectWidth;
@@ -186,8 +187,13 @@ export class UIManager {
             overlay.remove();
             nextButton.remove();
 
-            nameTag.removeClass("mediumText");
+            nameTag.removeClass("smallText");
             speech.removeClass("mediumText");
+
+            imgContainer.style('transform', `rotate(-1deg)`);
+            nameTag.style('transform', `rotate(-0.7deg)`);
+            speech.style('transform', `rotate(-0.3deg)`);
+
 
             // CSS-Klasse entfernen, damit der Kasten nicht mehr zentriert wird
             fullContainer.removeClass("is-active");

@@ -116,7 +116,7 @@ canvas {
 
 #startText {
   color: var(--color-light);
-  font-size: var(--font-size-medium);
+  /* font-size: var(--font-size-medium); */
   transform: rotate(3DEG);
 }
 
@@ -155,7 +155,6 @@ canvas {
 
 #nameBig {
   color: var(--color-light);
-  font-size: var(--font-size-medium);
   transform: rotate(-3DEG);
 }
 
@@ -289,24 +288,17 @@ button:focus-visible {
 .fullCharacterContainer {
   position: absolute;
   z-index: 100001;
-  display: grid;
-  grid-template-areas:
-    "avatar speech"
-    "name .";
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto;
-  gap: 10px var(--padding-mid);
-  align-items: start;
+  display: flex;
+  flex-direction: row;
+  gap: var(--padding-mid);
+  /* align-items: center; */
+  /* Zentriert Avatar und Text vertikal zueinander */
   pointer-events: none;
   width: 1094px;
-  /* Canvas-Breite minus Margin */
   max-width: 90vw;
   height: auto;
-
-  /* Sanfter Übergang beim Verschieben */
   transition: all 0.5s ease;
   overflow: visible;
-  /* Wichtig, damit der Button rausragen kann */
 }
 
 /* Wenn der Dialog aktiv ist, wird er mittig zentriert */
@@ -319,18 +311,22 @@ button:focus-visible {
   transform: translate(-50%, -50%) scale(var(--game-scale, 1)) rotate(-0.5deg) !important;
 }
 
-.characterContainer {
-  grid-area: avatar;
+.speech-content {
+  display: flex;
+
+  flex-direction: column;
+  /* justify-content: center; */
+  gap: 10px;
+  /* border: 1px solid red; */
 }
 
-.nameTag {
-  grid-area: name;
-}
-
+.nameTag,
 .speech {
-  grid-area: speech;
-  align-self: center;
-  /* Vertikal mittig zum Rest (Avatar + Name) */
+  margin: 0;
+}
+
+.characterContainer {
+  flex-shrink: 0;
 }
 
 .nextSpeechButton {
@@ -340,7 +336,7 @@ button:focus-visible {
   transform: translate(25%, 25%);
   pointer-events: auto;
   z-index: 10;
-  background-color: #467DFC;
+  background-color: var(--color-darkblue);
 }
 
 .nextSpeechButton:active {
@@ -451,7 +447,7 @@ button:focus-visible {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  padding: 20px;
+  /* padding: 20px; - Removed to match manual p5 positioning */
 }
 
 

@@ -39,22 +39,27 @@ export class wimmelbild extends BaseGame {
             field.parent(this.container);
             field.class("  borderRadius clickField"); //clickMe
             field.position(this.positions[index].x, this.positions[index].y);
-            field.size(this.positions[index].r)
+            field.size(this.positions[index].r);
+
+            // Create image but keep it hidden initially
+            const img = p.createImg(url, `Müll gefunden`);
+            img.parent(this.container);
+            img.class("wimmelbild");
+            img.hide();
+            this.domElements.push(img);
+
             field.mouseClicked(() => {
                 if (field.hasClass("used")) return;
                 field.addClass("used");
                 this.counter++;
-                const img = p.createImg(url, `Müll gefunden`);
-                img.parent(this.container);
-                img.class("wimmelbild");
-                this.domElements.push(img);
+
+                // Show the pre-created image instantly
+                img.show();
 
                 if (this.counter === 4) {
                     this.scene.completed = true;
                     this.uiManager.showSolutionUi(true);
-
                 }
-
             })
             this.domElements.push(field);
         })

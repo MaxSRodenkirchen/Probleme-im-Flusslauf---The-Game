@@ -19,7 +19,7 @@ export class scene06 extends BaseScene {
     }
 
     async setup(p) {
-        const textArray = ["Ihr seid gut. Dann ahnt ihr bestimmt auch schon was unser Problem ist.", `Was gehört hier nicht ins Meer? <br> Findet und klickt auf die <span class = "highlight"> vier Gegenstände</span>`];
+        const textArray = ["Ihr seid gut. Dann ahnt ihr bestimmt auch schon was unser Problem ist.", `Was gehört hier nicht ins Meer? <br> Findet und klickt auf die <span class = "highlight"> vier Gegenstände.</span>`];
         this.uiManager.displayCharacter(max1, "Max Mare", textArray);
 
         this.uiManager.setup();

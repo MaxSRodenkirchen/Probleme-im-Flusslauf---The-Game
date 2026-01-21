@@ -17,7 +17,7 @@ export class scene03 extends BaseScene {
 
         const name = p.createDiv("Max Mare");
         name.id("nameBig");
-        name.class("chelsea-market");
+        name.class("chelsea-market bigText");
         name.position(globalVariables.ui.sideSpace, globalVariables.ui.sideSpace);
 
         const maxMare = p.createImg(maxMareUrl, "Image with Text: Probleme im Flusslauf");

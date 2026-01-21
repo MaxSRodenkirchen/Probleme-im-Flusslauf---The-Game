@@ -3,7 +3,7 @@ import "./style.css";
 import { globalVariables } from "./globalVariables.js";
 import { drawGrid } from "./utils/drawGrid.js";
 import { SceneManager } from "./SceneManager.js";
-import { initDebugSceneSwitcher } from "./utils/debugSceneSwitcher.js";
+
 
 import { UIManager } from "./ui/UIManager.js";
 import { scene01 } from "./scenes/1_startScreen.js";
@@ -109,12 +109,17 @@ const sketch = (p) => {
 
     sceneManager.addScene(new scene09(p, sceneManager, uiManager));
 
-    // Initialize debug helper
-    initDebugSceneSwitcher(p, sceneManager);
+    // Initialize debug helper only in development
+    if (import.meta.env.DEV) {
+      import("./utils/debugSceneSwitcher.js").then((module) => {
+        module.initDebugSceneSwitcher(p, sceneManager);
+      });
+    }
+
 
     // Start with first scene (index 0)
     try {
-      await sceneManager.switchScene(3, p);
+      await sceneManager.switchScene(0, p);
     } catch (err) {
       console.error("[Game] Error während Szenen-Setup:", err);
     }
