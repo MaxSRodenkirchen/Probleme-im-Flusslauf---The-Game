@@ -4,6 +4,8 @@ import arrowLeftImg from '../images/ui/arrow-left.png';
 import fullscreen from '../images/ui/fullscreen.png';
 import correct from '../images/ui/correct.png';
 import wrong from '../images/ui/wrong.png';
+import background from '../images/ui/background.png';
+
 
 export class UIManager {
     constructor(p, sceneManager) {
@@ -13,7 +15,7 @@ export class UIManager {
         this.lastSceneButton = null;
         this.nextSceneButton = null;
         this.fullscreenButton = null;
-
+        this.isGoingBack = false;
     }
 
     setup() {
@@ -35,7 +37,7 @@ export class UIManager {
         this.lastSceneButton.style('background-color', 'transparent');
         this.lastSceneButton.style('z-index', '9999');
         this.lastSceneButton.mousePressed(async () => {
-
+            this.isGoingBack = true;
             await globalVariables.currentScene--;
             await this.sceneManager.switchScene(globalVariables.currentScene, this.p);
 
@@ -54,6 +56,7 @@ export class UIManager {
         this.nextSceneButton.style('background-color', 'transparent');
         this.nextSceneButton.style('z-index', '9999');
         this.nextSceneButton.mousePressed(async () => {
+            this.isGoingBack = false;
             await globalVariables.currentScene++;
             await this.sceneManager.switchScene(globalVariables.currentScene, this.p);
         });
@@ -112,6 +115,8 @@ export class UIManager {
         img.class("dropShadow iconOverlay borderRadius shadow");
         img.style('transform', `rotate(${getRandomDegree() * 0.6}deg)`);
 
+        this.elements.push(img); // Wichtig für den Cleanup bei Szenenwechsel
+
         if (condition) {
             img.style("background-color", globalVariables.colors.darkBlue)
         } else {
@@ -128,8 +133,9 @@ export class UIManager {
         let textCounter = 0;
 
         // 1. Fullscreen Overlay (Blocker & Dimmer)
-        const overlay = this.p.createDiv("");
+        const overlay = this.p.createImg(background, "The background image");
         overlay.class("characterOverlay");
+        overlay.parent(document.body); // Raus aus dem transformierten Game-Container
         this.elements.push(overlay);
 
         const posX = globalVariables.ui.sideSpace;
@@ -139,9 +145,7 @@ export class UIManager {
         // 2. Character Dialog Container
         const fullContainer = this.p.createDiv("");
         fullContainer.class("fullCharacterContainer borderRadius shadow is-active");
-        fullContainer.position(posX, 0); // Y wird durch CSS (.is-active) auf 50% gesetzt
-
-
+        fullContainer.parent(document.body); // Auch raus aus dem transformierten Container
         this.elements.push(fullContainer);
 
 
@@ -178,22 +182,35 @@ export class UIManager {
         // nextButton.style('background-color', 'transparent');
         nextButton.style('z-index', '100001');
 
+        const finishDialogue = () => {
+            overlay.remove();
+            nextButton.remove();
+
+            nameTag.removeClass("mediumText");
+            speech.removeClass("mediumText");
+
+            // CSS-Klasse entfernen, damit der Kasten nicht mehr zentriert wird
+            fullContainer.removeClass("is-active");
+            fullContainer.removeClass("shadow");
+
+            // Zurück in den Game-Container verschieben
+            fullContainer.parent("#game-container");
+            fullContainer.position(posX, posY);
+            imgContainer.size(size, size);
+        };
+
+        if (this.isGoingBack) {
+            speech.html(textArray[textArray.length - 1]);
+            finishDialogue();
+        }
+
         nextButton.mousePressed(() => {
             textCounter++;
 
             if (textCounter < textArray.length) {
                 speech.html(textArray[textCounter]);
             } else {
-                overlay.remove();
-                nextButton.remove();
-
-                nameTag.removeClass("mediumText");
-                speech.removeClass("mediumText");
-                fullContainer.removeClass("is-active");
-                fullContainer.removeClass("shadow");
-
-                fullContainer.position(posX, posY);
-                imgContainer.size(size, size);
+                finishDialogue();
             }
         });
 
@@ -206,8 +223,8 @@ export class UIManager {
         text.style("text-align", "right");
 
 
-        const posX = this.p.width - globalVariables.ui.sideSpace - globalVariables.ui.objectHeight / 2 - 45 - globalVariables.ui.paddingMid;
-        const posY = this.p.height - globalVariables.ui.sideSpace - globalVariables.ui.objectHeight / 2 + 15;
+        const posX = this.p.width - globalVariables.ui.sideSpace - globalVariables.ui.objectHeight / 2 - 150 - globalVariables.ui.paddingMid;
+        const posY = this.p.height - globalVariables.ui.sideSpace - globalVariables.ui.objectHeight * 0.62;
 
         text.position(posX, posY);
 

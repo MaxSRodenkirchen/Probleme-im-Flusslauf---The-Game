@@ -43,7 +43,7 @@ export class scene04 extends BaseScene {
         this.domElements.push(sonnenImg)
 
         const textArray = [`Eure Hilfe ist gerne gesehen. Aber bitte zeigt mir das ihr den kommenden Aufgaben gewachsen seid.`,
-            `Wie funktioniert ein <span class= "highlight">Wasserkreislauf?</span> Klickt in der richtigen Reihenfolge auf die Bilder.  `];
+            `Wie funktioniert ein <span class= "highlight">Wasserkreislauf?</span> Klickt in der richtigen Reihenfolge auf die Bilder rechts.<br> Eins habe ich euch schonmal eingefügt.  `];
         this.uiManager.displayCharacter(max1, "Max Mare", textArray);
 
     }

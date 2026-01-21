@@ -17,7 +17,7 @@ export class scene01 extends BaseScene {
 
         const startText = p.createDiv("Starte Spiel");
         startText.id("startText");
-        startText.class("chelsea-market");
+        startText.class("chelsea-market bigText");
         startText.position(p.width / 2 - 250, p.height - 200);
         await startText.mousePressed(() => {
             globalVariables.currentScene++;

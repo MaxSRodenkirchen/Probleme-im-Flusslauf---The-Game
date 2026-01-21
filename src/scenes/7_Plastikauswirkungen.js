@@ -33,8 +33,8 @@ export class scene07 extends BaseScene {
 
 
 
-        const text = "Gut erkannt. Das Plastik ist ein großes Problem für uns. <br>Manche Teile erkennt man nicht einmal richtig. Wisst ihr was ich meine?";
-        this.uiManager.displayCharacter(max1, "Max Mare", text);
+        const textArray = [`Gut erkannt. Das Plastik ist wirklich ein großes Problem für uns.`, `Manche Teilchen erkennen wir nicht einmal richtig. Wisst ihr was ich meine?`, `Die Buchstaben in der Tastatur ergeben das gemeinte Wort. Welches ist es wohl?`];
+        this.uiManager.displayCharacter(max1, "Max Mare", textArray);
 
     }
 

@@ -38,8 +38,8 @@ export class scene05 extends BaseScene {
 
         this.uiManager.setup();
 
-        const text = "Sehr gut! Dann wisst ihr bestimmt auch viel über die Meere. <br>Welche Fakten stimmen?";
-        this.uiManager.displayCharacter(max1, "Max Mare", text);
+        const textArray = ["Sehr gut! Dann wisst ihr bestimmt auch noch viel mehr über die Meere.", ` Welche Fakten stimmen? <br>Klickt auf die <span class = "highlight"> drei </span> richtigen Felder!`];
+        this.uiManager.displayCharacter(max1, "Max Mare", textArray);
 
     }
 
