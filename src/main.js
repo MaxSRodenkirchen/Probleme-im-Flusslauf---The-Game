@@ -4,17 +4,26 @@ import { globalVariables } from "./globalVariables.js";
 import { drawGrid } from "./utils/drawGrid.js";
 import { SceneManager } from "./SceneManager.js";
 
-
 import { UIManager } from "./ui/UIManager.js";
-import { scene01 } from "./scenes/1_startScreen.js";
-import { scene02 } from "./scenes/2_NameGen.js";
-import { scene03 } from "./scenes/3_MaxMare-Intro.js";
-import { scene04 } from "./scenes/4_Wasserkreislauf.js";
-import { scene05 } from "./scenes/5_MeerFakten.js";
-import { scene06 } from "./scenes/6_Plastikverschmutzung.js";
-import { scene07 } from "./scenes/7_Plastikauswirkungen.js";
-import { scene08 } from "./scenes/8_MaxMare-Mission.js";
-import { scene09 } from "./scenes/9_demoEnd.js";
+import { scene01 } from "./scenes/0_startScreen.js";
+import { scene02 } from "./scenes/1_NameGen.js";
+import { scene03 } from "./scenes/2_MaxMare-Intro.js";
+import { scene04 } from "./scenes/3_Wasserkreislauf.js";
+import { scene05 } from "./scenes/4_MeerFakten.js";
+import { scene06 } from "./scenes/5_Plastikverschmutzung.js";
+import { scene07 } from "./scenes/6_Plastikauswirkungen.js";
+import { scene08 } from "./scenes/7_MaxMare-Mission.js";
+import { scene09 } from "./scenes/8_Flusslauf.js";
+import { scene10 } from "./scenes/9_BioReinigung.js";
+import { scene11 } from "./scenes/10_UrsacheVerschmutzung.js";
+import { scene12 } from "./scenes/11_Kläranlage.js";
+import { scene13 } from "./scenes/12_BixBiber.js";
+import { scene14 } from "./scenes/13_AufbauKläranlage.js";
+import { scene15 } from "./scenes/14_MaterialSuchen.js";
+import { scene16 } from "./scenes/15_WortZuFluss.js";
+import { scene17 } from "./scenes/16_WasKannManNochTun.js";
+import { scene18 } from "./scenes/17_MaxMareEnde.js";
+import { scene99 } from "./scenes/99_demoEnd.js";
 
 const sketch = (p) => {
   let sceneManager;
@@ -45,10 +54,13 @@ const sketch = (p) => {
 
     // --- ASSET LOADING START ---
     try {
-      const imageModules = import.meta.glob("./images/**/*.{png,jpg,jpeg,svg,webp}", {
-        eager: true,
-        import: "default",
-      });
+      const imageModules = import.meta.glob(
+        "./images/**/*.{png,jpg,jpeg,svg,webp}",
+        {
+          eager: true,
+          import: "default",
+        },
+      );
 
       const urls = Object.values(imageModules);
       console.log(`[Game] Starte Laden von ${urls.length} Bildern...`);
@@ -108,6 +120,17 @@ const sketch = (p) => {
     sceneManager.addScene(new scene08(p, sceneManager, uiManager));
 
     sceneManager.addScene(new scene09(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene10(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene11(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene12(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene13(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene14(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene15(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene16(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene17(p, sceneManager, uiManager));
+    sceneManager.addScene(new scene18(p, sceneManager, uiManager));
+
+    sceneManager.addScene(new scene99(p, sceneManager, uiManager));
 
     // Initialize debug helper only in development
     if (import.meta.env.DEV) {
@@ -116,10 +139,9 @@ const sketch = (p) => {
       });
     }
 
-
     // Start with first scene (index 0)
     try {
-      await sceneManager.switchScene(0, p);
+      await sceneManager.switchScene(8, p);
     } catch (err) {
       console.error("[Game] Error während Szenen-Setup:", err);
     }
