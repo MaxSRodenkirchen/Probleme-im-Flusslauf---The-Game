@@ -1,0 +1,15 @@
+{
+  "hash": "ad9e3f18",
+  "configHash": "4d9a6cfe",
+  "lockfileHash": "09fbaec0",
+  "browserHash": "3109281b",
+  "optimized": {
+    "p5": {
+      "src": "../../node_modules/p5/dist/app.js",
+      "file": "p5.js",
+      "fileHash": "db186e28",
+      "needsInterop": false
+    }
+  },
+  "chunks": {}
+}
