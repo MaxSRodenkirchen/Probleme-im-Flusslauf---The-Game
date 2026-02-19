@@ -41,7 +41,7 @@ body {
   /* Visual overflow is allowed, but body is locked to prevent layout shifts */
   overflow: visible;
 
-  /* Flex is no longer needed as everything is absolute. 
+  /* Flex is no longer needed as everything is absolute.
      Keeping it can cause layout shifts if children size varies. */
   display: block;
   flex-shrink: 0;
@@ -226,15 +226,11 @@ img {
 }
 
 .shadow {
-  box-shadow: var(--padding-low) var(--padding-low) calc(var(--padding-low) * 2)
-    rgba(0, 0, 0, 0.3);
+  box-shadow: var(--padding-low) var(--padding-low) calc(var(--padding-low) * 2) rgba(0, 0, 0, 0.3);
 }
 
 .dropShadow {
-  filter: drop-shadow(
-    var(--padding-low) var(--padding-low) calc(var(--padding-low) * 2)
-      rgba(0, 0, 0, 0.3)
-  );
+  filter: drop-shadow(var(--padding-low) var(--padding-low) calc(var(--padding-low) * 2) rgba(0, 0, 0, 0.3));
 }
 
 .transition {
@@ -374,6 +370,7 @@ button:focus-visible {
   /* transform: translate(-60%, -25%); */
   pointer-events: none;
 }
+
 .nameTag {
   /* width: max-content;
   min-width: 50px;
@@ -447,6 +444,19 @@ button:focus-visible {
   aspect-ratio: 1/1;
   /* background-color: white; */
 }
+
+.ablaufHorizontal {
+  flex-direction: row;
+  width: 100%;
+}
+
+.imgContainer.horizontalGrid {
+  aspect-ratio: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .pickContainer {
   position: relative;

@@ -1,12 +1,13 @@
 import { BaseScene } from "./_BaseScene.js";
 import { globalVariables } from "../globalVariables.js";
 
-import { ablaufRaten } from "../games/ablaufRaten.js";
+import { ablaufRaten_horizontal } from "../games/ablaufRaten_horizontal.js";
 
 import img1 from "../images/scene04/final/Verdunstung.png";
 import img2 from "../images/scene04/final/Kondensation.png";
 import img3 from "../images/scene04/final/Niederschlag.png";
 import img4 from "../images/scene04/final/Versickerung.png";
+import img5 from "../images/scene04/final/arrow1.png"; // Placeholder for 5th item
 
 import sonne from "../images/scene04/final/Sonne.png";
 
@@ -14,6 +15,7 @@ import field1 from "../images/scene04/final/arrow1.png";
 import field2 from "../images/scene04/final/arrow2.png";
 import field3 from "../images/scene04/final/arrow3.png";
 import field4 from "../images/scene04/final/arrow4.png";
+import field5 from "../images/scene04/final/arrow1.png"; // Placeholder
 import nnass from "../images/nnass.png";
 
 export class scene09 extends BaseScene {
@@ -25,9 +27,10 @@ export class scene09 extends BaseScene {
       [img2, "Kondensation"],
       [img3, "Niederschlag"],
       [img4, "Versickerung"],
+      [img5, "Abschnitt 5"],
     ];
-    this.bgTilesUrls = [field1, field2, field3, field4];
-    this.game = new ablaufRaten(
+    this.bgTilesUrls = [field1, field2, field3, field4, field5];
+    this.game = new ablaufRaten_horizontal(
       p,
       this,
       this.bgTilesUrls,
@@ -42,23 +45,23 @@ export class scene09 extends BaseScene {
     // await this.game.loadImages(p, this.imageUrls, this.bgFieldUrls);
     await this.game.setup(p);
 
-    const sonnenImg = this.p.createImg(sonne, "An image of the sun");
-    sonnenImg.parent("#game-container");
-    // sonnenImg.class("transition shadow borderRadius");
-    sonnenImg.style("z-index", "-999");
-    sonnenImg.style("transform", "rotate(4deg)");
-    const size = globalVariables.ui.objectHeight * 3.5;
-    sonnenImg.size(size, size);
-    sonnenImg.position(
-      globalVariables.ui.sideSpace - size / 2,
-      this.p.height / 2 - size / 2,
-    );
-    this.domElements.push(sonnenImg);
+    // const sonnenImg = this.p.createImg(sonne, "An image of the sun");
+    // sonnenImg.parent("#game-container");
+    // // sonnenImg.class("transition shadow borderRadius");
+    // sonnenImg.style("z-index", "-999");
+    // sonnenImg.style("transform", "rotate(4deg)");
+    // const size = globalVariables.ui.objectHeight * 3.5;
+    // sonnenImg.size(size, size);
+    // sonnenImg.position(
+    //   globalVariables.ui.sideSpace - size / 2,
+    //   this.p.height / 2 - size / 2,
+    // );
+    // this.domElements.push(sonnenImg);
 
     const textArray = [
       `Hallo Freunde, danke für eure Hilfe. <br> Wisst ihr, auch mich belastet die Verschmutzung sehr.`,
       `Lasst uns als Erstes zum <span class= "highlight">Mittellauf</span>  des Flusses aufbrechen. Ich hörte von den Barben, dass dort nicht alles mit rechten Dingen zugeht.`,
-      `Kennt ihr die Flussabschnitte? <br> Klickt in der richtigen Reihenfolge auf die Bilder rechts`,
+      `Kennt ihr die Flussabschnitte? <br> Klickt in der richtigen Reihenfolge auf die Bilder rechts.`,
     ];
     this.uiManager.displayCharacter(nnass, "Norbert Nass", textArray);
   }

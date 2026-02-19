@@ -9,7 +9,7 @@ import { faktenRaten } from "../games/faktenRaten.js";
 // import img4 from '../images/scene04/ablauf.png';
 
 // import field from '../images/ui/arrowTurnLeft.png';
-import max1 from '../images/MaxMare_Icon.png';
+import max1 from "../images/MaxMare_Icon.png";
 
 export class scene17 extends BaseScene {
   constructor(p, sceneManager, uiManager) {
