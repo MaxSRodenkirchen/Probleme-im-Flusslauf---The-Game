@@ -9,7 +9,7 @@ import img2 from '../images/scene07/final/shirt.png';
 import img3 from '../images/scene07/final/flasche.png';
 import img4 from '../images/scene07/final/zahnpasta.png';
 
-import max1 from '../images/scene04/MaxMare1.png';
+import max1 from '../images/MaxMare_Icon.png';
 import { drawGrid } from '../utils/drawGrid.js';
 
 

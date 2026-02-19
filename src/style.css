@@ -19,7 +19,7 @@ body {
   font-style: normal;
 
   /* Background restored to body (without buggy fixed attachment) */
-  background-image: url('./images/ui/background.png');
+  background-image: url("./images/ui/background.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -62,7 +62,7 @@ canvas {
   --color-light: #fff;
   --color-dark: #000;
   --color-accent: #afe0e6ff;
-  --color-darkblue: #467DFC;
+  --color-darkblue: #467dfc;
   --color-success: #afe0e6ff;
   --color-error: #f87171;
 
@@ -117,7 +117,7 @@ canvas {
 #startText {
   color: var(--color-light);
   /* font-size: var(--font-size-medium); */
-  transform: rotate(3DEG);
+  transform: rotate(3deg);
 }
 
 @media (hover: hover) {
@@ -155,7 +155,7 @@ canvas {
 
 #nameBig {
   color: var(--color-light);
-  transform: rotate(-3DEG);
+  transform: rotate(-3deg);
 }
 
 #maxMare01 {
@@ -168,7 +168,6 @@ canvas {
   padding: 20px;
   display: flex;
   gap: 20px;
-
 }
 
 .genText {
@@ -220,24 +219,31 @@ button {
 img {
   object-fit: cover;
   object-position: center;
-
 }
 
 .borderRadius {
   border-radius: var(--border-radius);
-
 }
 
 .shadow {
-  box-shadow: var(--padding-low) var(--padding-low) calc(var(--padding-low) * 2) rgba(0, 0, 0, 0.3);
+  box-shadow: var(--padding-low) var(--padding-low) calc(var(--padding-low) * 2)
+    rgba(0, 0, 0, 0.3);
 }
 
 .dropShadow {
-  filter: drop-shadow(var(--padding-low) var(--padding-low) calc(var(--padding-low) * 2) rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(
+    var(--padding-low) var(--padding-low) calc(var(--padding-low) * 2)
+      rgba(0, 0, 0, 0.3)
+  );
 }
 
 .transition {
-  transition: transform 0.3s ease, left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    left 0.3s ease,
+    top 0.3s ease,
+    width 0.3s ease,
+    height 0.3s ease;
 }
 
 .clickMe {
@@ -265,14 +271,13 @@ button:focus-visible {
   font-family: "Chelsea Market", system-ui;
   font-weight: 400;
   font-style: normal;
-  color: var(--color-light)
+  color: var(--color-light);
 }
 
 .highlight {
   color: var(--color-success);
   /* font-weight: bold; */
 }
-
 
 .characterOverlay {
   position: fixed;
@@ -351,7 +356,7 @@ button:focus-visible {
   border-radius: var(--border-radius);
 }
 
-.characterImage {
+/* .characterImage {
   width: 200%;
   height: auto;
   position: absolute;
@@ -359,9 +364,16 @@ button:focus-visible {
   left: 50%;
   transform: translate(-60%, -25%);
   pointer-events: none;
+} */
+.characterImage {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  /* top: 50%;
+  left: 50%; */
+  /* transform: translate(-60%, -25%); */
+  pointer-events: none;
 }
-
-
 .nameTag {
   /* width: max-content;
   min-width: 50px;
@@ -394,12 +406,10 @@ button:focus-visible {
 
 .factCardCorrect {
   background-color: var(--color-success);
-
 }
 
 .factCardFalse {
   background-color: var(--color-error);
-
 }
 
 /* .factCard:hover moved to hover media query */
@@ -410,8 +420,6 @@ button:focus-visible {
   color: var(--color-dark);
 }
 
-
-
 .banner {
   background-color: var(--color-darkblue);
   width: 3000px;
@@ -419,7 +427,6 @@ button:focus-visible {
   padding-left: 1000px; */
   display: flex;
   justify-content: center;
-
 }
 
 .ablaufGameContainer {
@@ -450,7 +457,6 @@ button:focus-visible {
   /* padding: 20px; - Removed to match manual p5 positioning */
 }
 
-
 .bilderRatenContainer {
   position: absolute;
   top: 50%;
@@ -466,7 +472,6 @@ button:focus-visible {
   grid-template-columns: repeat(3, 1fr);
   gap: var(--padding-low);
   transform: rotate(0.4deg);
-
 }
 
 .log {
@@ -485,7 +490,6 @@ button:focus-visible {
   display: flex;
 }
 
-
 .letter {
   background-color: var(--color-darkblue);
   display: flex;
@@ -500,8 +504,6 @@ button:focus-visible {
 .used {
   pointer-events: none;
 }
-
-
 
 /* .letter:hover moved to hover media query */
 
@@ -573,7 +575,9 @@ button:focus-visible {
   color: var(--color-light);
   font-family: "Chelsea Market", system-ui;
   font-size: var(--font-size-small);
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
 }
 
 #loading-screen.hidden {

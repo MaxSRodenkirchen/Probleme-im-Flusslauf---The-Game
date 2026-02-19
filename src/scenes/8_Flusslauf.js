@@ -14,7 +14,7 @@ import field1 from "../images/scene04/final/arrow1.png";
 import field2 from "../images/scene04/final/arrow2.png";
 import field3 from "../images/scene04/final/arrow3.png";
 import field4 from "../images/scene04/final/arrow4.png";
-import max1 from "../images/scene04/MaxMare1.png";
+import nnass from "../images/nnass.png";
 
 export class scene09 extends BaseScene {
   constructor(p, sceneManager, uiManager) {
@@ -56,10 +56,11 @@ export class scene09 extends BaseScene {
     this.domElements.push(sonnenImg);
 
     const textArray = [
-      `Schön, dass ihr helft! Aber zuerst müssen wir sehen, ob ihr bereit für die Aufgaben seid.`,
-      `Wie funktioniert ein <span class= "highlight">Wasserkreislauf?</span> Klickt in der richtigen Reihenfolge auf die Bilder rechts.<br> Eins habe ich euch schonmal eingefügt.  `,
+      `Hallo Freunde, danke für eure Hilfe. <br> Wisst ihr, auch mich belastet die Verschmutzung sehr.`,
+      `Lasst uns als Erstes zum <span class= "highlight">Mittellauf</span>  des Flusses aufbrechen. Ich hörte von den Barben, dass dort nicht alles mit rechten Dingen zugeht.`,
+      `Kennt ihr die Flussabschnitte? <br> Klickt in der richtigen Reihenfolge auf die Bilder rechts`,
     ];
-    this.uiManager.displayCharacter(max1, "Max Mare", textArray);
+    this.uiManager.displayCharacter(nnass, "Norbert Nass", textArray);
   }
 
   draw(p) {

@@ -7,7 +7,7 @@ import img1 from "../images/scene06/flasche.png";
 import img2 from "../images/scene06/netz.png";
 import img3 from "../images/scene06/shirt.png";
 import img4 from "../images/scene06/tüte.png";
-import max1 from "../images/scene04/MaxMare1.png";
+import max1 from '../images/MaxMare_Icon.png';
 
 export class scene15 extends BaseScene {
   constructor(p, sceneManager, uiManager) {

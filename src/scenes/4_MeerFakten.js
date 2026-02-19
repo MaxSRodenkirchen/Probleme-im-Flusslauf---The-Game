@@ -10,7 +10,7 @@ import { faktenRaten } from '../games/faktenRaten.js';
 // import img4 from '../images/scene04/ablauf.png';
 
 // import field from '../images/ui/arrowTurnLeft.png';
-import max1 from '../images/scene04/MaxMare1.png';
+import max1 from '../images/MaxMare_Icon.png';
 
 
 

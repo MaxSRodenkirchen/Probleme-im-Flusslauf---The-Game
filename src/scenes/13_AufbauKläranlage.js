@@ -14,7 +14,7 @@ import field1 from "../images/scene04/final/arrow1.png";
 import field2 from "../images/scene04/final/arrow2.png";
 import field3 from "../images/scene04/final/arrow3.png";
 import field4 from "../images/scene04/final/arrow4.png";
-import max1 from "../images/scene04/MaxMare1.png";
+import max1 from '../images/MaxMare_Icon.png';
 
 export class scene14 extends BaseScene {
   constructor(p, sceneManager, uiManager) {
