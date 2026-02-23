@@ -17,28 +17,28 @@ export class scene10 extends BaseScene {
 
     this.facts = [
       [
-        "Die Gezeiten (Ebbe und Flut) entstehen dadurch, dass riesige Unterwasservulkane am Meeresboden zweimal täglich gleichzeitig ausbrechen und das Wasser an die Küsten drücken.",
-        false,
-      ],
-      [
-        "Nur etwa 5 % bis 10 % der Weltmeere sind bisher erforscht. Der Großteil der Tiefsee bleibt für uns Menschen ein ungelöstes Rätsel.",
+        "Bakterien und Pilze wirken als „Destruenten“ und bauen organisches Material wie Laub, Exkremente und tote Lebewesen im Wasser ab.",
         true,
       ],
       [
-        "Blauwale sind so riesig, dass sie bei jedem Tauchgang bis zu 500 Liter Salzwasser durch ihre Haut aufsaugen können, um ihren Durst zu löschen.",
+        "Moderne Kläranlagen arbeiten heute rein technisch; man verzichtet dort komplett auf den Einsatz von Lebewesen wie Bakterien.",
         false,
       ],
       [
-        "Der tiefste Punkt der Erde liegt im Pazifischen Ozean. Er wird Marianengraben genannt und ist mit rund 11.000 Metern tiefer als der Mount Everest hoch ist.",
+        " Algen unterstützen die Reinigung indirekt, indem sie durch Photosynthese den Sauerstoff produzieren, den die Bakterien für den Abbau von Schmutz benötigen.",
         true,
       ],
       [
-        "Wale sind die einzigen Tiere, die kein Wasser trinken müssen, da sie ihren gesamten Flüssigkeitsbedarf durch das Filtern von Wolken decken.",
+        "Die Selbstreinigung im Fluss funktioniert nur im kalten Wasser der Quelle; sobald der Fluss im Unterlauf wärmer wird, hört der biologische Abbau auf.",
         false,
+      ],
+      [
+        "Wenn zu wenig Sauerstoff im Wasser ist, entsteht bei der Reinigung Schwefelwasserstoff – ein giftiges Gas, das für Fische gefährlich ist.",
+        true,
       ],
 
       [
-        "In den Ozeanen gibt es riesige Müllstrudel. Der bekannteste ist der „Great Pacific Garbage Patch“.",
+        "Fische sind die Hauptverantwortlichen für die Wasserreinigung, da sie Giftstoffe aus dem Wasser filtern und in reine Energie für ihr Wachstum umwandeln.",
         true,
       ],
     ];

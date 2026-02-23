@@ -39,8 +39,12 @@ export class faktenRaten extends BaseGame {
             p.parent(card);
             p.class("chelsea-market");
 
+            let guessed = false;
             card.mousePressed(() => {
+                if (guessed) return;
+
                 if (isCorrect) {
+                    guessed = true;
                     card.addClass("factCardCorrect");
                     this.correctGuesses++;
                     if (this.correctGuesses === this.amountOfCorrectFacts) {
@@ -48,6 +52,7 @@ export class faktenRaten extends BaseGame {
                         this.scene.completed = true;
                     }
                 } else {
+                    guessed = true;
                     card.addClass("factCardFalse");
                     this.uiManager.showSolutionUi(false);
 
