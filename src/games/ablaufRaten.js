@@ -216,7 +216,31 @@ export class ablaufRaten extends BaseGame {
 
     shuffleImages() {
         const pairs = this.imageUrls.map((data, index) => [data, index]);
-        this.shuffledImageUrlArray = this.shuffle(pairs);
+
+        let shuffled;
+        let isValid = false;
+        let attempts = 0;
+
+        while (!isValid && attempts < 200) {
+            shuffled = this.shuffle(pairs);
+            isValid = true;
+
+            // In the original ablaufRaten, index 0 is auto-placed, 
+            // but we still want the remaining ones to be non-consecutive 
+            // or just ensure the whole shuffled array avoids neighbors for consistency.
+            for (let i = 0; i < shuffled.length - 1; i++) {
+                const indexA = shuffled[i][1];
+                const indexB = shuffled[i + 1][1];
+
+                if (Math.abs(indexA - indexB) === 1) {
+                    isValid = false;
+                    break;
+                }
+            }
+            attempts++;
+        }
+
+        this.shuffledImageUrlArray = shuffled;
         return this.shuffledImageUrlArray;
     }
 

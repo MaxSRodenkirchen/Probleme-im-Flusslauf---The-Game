@@ -3,11 +3,11 @@ import { globalVariables } from "../globalVariables.js";
 
 import { ablaufRaten_horizontal } from "../games/ablaufRaten_horizontal.js";
 
-import img1 from "../images/scene04/final/Verdunstung.png";
-import img2 from "../images/scene04/final/Kondensation.png";
-import img3 from "../images/scene04/final/Niederschlag.png";
-import img4 from "../images/scene04/final/Versickerung.png";
-import img5 from "../images/scene04/final/arrow1.png"; // Placeholder for 5th item
+import img1 from "../images/Flusslauf/Quelle.png";
+import img2 from "../images/Flusslauf/Oberlauf.png";
+import img3 from "../images/Flusslauf/Mittellauf.png";
+import img4 from "../images/Flusslauf/Unterlauf.png";
+import img5 from "../images/Flusslauf/Mündung.png";
 
 import sonne from "../images/scene04/final/Sonne.png";
 
@@ -61,7 +61,7 @@ export class scene09 extends BaseScene {
     const textArray = [
       `Hallo Freunde, danke für eure Hilfe. <br> Wisst ihr, auch mich belastet die Verschmutzung sehr.`,
       `Lasst uns als Erstes zum <span class= "highlight">Mittellauf</span>  des Flusses aufbrechen. Ich hörte von den Barben, dass dort nicht alles mit rechten Dingen zugeht.`,
-      `Kennt ihr die Flussabschnitte? <br> Klickt in der richtigen Reihenfolge auf die Bilder rechts.`,
+      `Kennt ihr die Flussabschnitte? <br> Klickt in der richtigen Reihenfolge auf die Bilder unten.`,
     ];
     this.uiManager.displayCharacter(nnass, "Norbert Nass", textArray);
   }

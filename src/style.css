@@ -441,12 +441,11 @@ button:focus-visible {
 .imgContainer {
   position: relative;
   height: 100%;
-  aspect-ratio: 1/1;
   /* background-color: white; */
 }
 
 .ablaufHorizontal {
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -465,6 +464,10 @@ button:focus-visible {
   justify-content: space-between;
   height: 100%;
   /* padding: 20px; - Removed to match manual p5 positioning */
+}
+
+.horizontalPick {
+  flex-direction: row !important;
 }
 
 .bilderRatenContainer {

@@ -29,19 +29,21 @@ export class ablaufRaten_horizontal extends BaseGame {
 
     async setup(p) {
         const gap = globalVariables.ui.paddingLow / 2;
+        const ablaufWidth = p.width * 0.9;
 
         this.gameContainer = p.createDiv();
         this.gameContainer.class("ablaufGameContainer ablaufHorizontal");
         this.gameContainer.parent("#game-container");
 
-        // In horizontal layout, we want 5 images side by side.
-        // Let's define imgSize based on a reasonable height
         this.imgSize = 160;
+
+        const gridWidth = this.imageAmount * (this.imgSize + gap * 2);
+        const gridOffset = (ablaufWidth - gridWidth) / 2;
 
         this.positions = [];
         for (let i = 0; i < this.imageAmount; i++) {
             this.positions.push({
-                width: i * (this.imgSize + gap * 2),
+                width: gridOffset + i * (this.imgSize + gap * 2),
                 height: 0
             });
         }
@@ -52,8 +54,7 @@ export class ablaufRaten_horizontal extends BaseGame {
         this.imageContainer.class("imgContainer horizontalGrid");
         this.imageContainer.parent(this.gameContainer);
 
-        const containerWidth = this.imageAmount * (this.imgSize + gap * 2);
-        this.imageContainer.size(containerWidth, this.imgSize + gap * 2);
+        this.imageContainer.size(ablaufWidth, this.imgSize + gap * 2);
         this.domElements.push(this.imageContainer);
 
         // Create container for the shuffle/pick images
@@ -61,25 +62,19 @@ export class ablaufRaten_horizontal extends BaseGame {
         this.pickContainer.class("pickContainer borderRadius shadow horizontalPick");
         this.pickContainer.parent(this.gameContainer);
 
-        // For horizontal pick container, we might want it below or to the side. 
-        // The user said "5 images horizontal", usually this refers to the target grid.
-        // Let's keeps the pick container to the side for now but adjust its size.
-        const remainingImages = this.imageAmount - 1;
-        this.pickItemSize = (this.gameHeight - (globalVariables.ui.paddingMid * 2) - (globalVariables.ui.paddingLow * (remainingImages - 1))) / remainingImages;
-        const pickContainerWidth = this.pickItemSize + (2 * globalVariables.ui.paddingMid);
+        const pickContainerWidth = ablaufWidth / 2;
+        this.pickItemSize = (pickContainerWidth - (globalVariables.ui.paddingMid * 2) - (globalVariables.ui.paddingLow * (this.imageAmount - 1))) / this.imageAmount;
+        const pickContainerHeight = this.pickItemSize + (2 * globalVariables.ui.paddingMid);
 
-        this.pickContainer.size(pickContainerWidth, this.gameHeight);
+        this.pickContainer.size(pickContainerWidth, pickContainerHeight);
         this.pickContainer.style('flex-shrink', '0');
         this.domElements.push(this.pickContainer);
-
-        const flexGap = 80;
-        const totalContentWidth = containerWidth + flexGap + pickContainerWidth;
 
         const iconSize = globalVariables.ui.objectHeight * 2;
 
         this.gridCenter = {
-            x: (p.width - totalContentWidth) / 2 + (containerWidth / 2) - (iconSize / 2),
-            y: (p.height / 2) - (iconSize / 2)
+            x: (p.width - iconSize) / 2,
+            y: (p.height / 2) - (iconSize / 2) - (pickContainerHeight / 2) // Roughly center of grid area
         };
 
         this.bgTilesUrls.forEach((url, index) => {
@@ -114,26 +109,16 @@ export class ablaufRaten_horizontal extends BaseGame {
             const img = this.p.createImg(url, description || ('image ' + shuffledIndex));
             img.parent(container);
 
-            if (originalIndex === 0) {
-                // Auto-place the first image in the grid
-                container.parent(this.imageContainer);
-                container.position(this.positions[0].width, this.positions[0].height);
-                container.size(this.imgSize, this.imgSize);
-                this.clickedOrder.push(0);
-                this.currentField = 1;
-            } else {
-                container.parent(this.pickContainer);
-                container.addClass("clickMe")
+            container.parent(this.pickContainer);
+            container.addClass("clickMe")
 
-                const adjustedShuffledIndex = shuffledIndex - (this.shuffledImageUrlArray.findIndex(item => item[1] === 0) < shuffledIndex ? 1 : 0);
-                const posY = globalVariables.ui.paddingMid + adjustedShuffledIndex * (this.pickItemSize + globalVariables.ui.paddingLow);
+            const posX = globalVariables.ui.paddingMid + shuffledIndex * (this.pickItemSize + globalVariables.ui.paddingLow);
 
-                container.position(globalVariables.ui.paddingMid, posY);
-                container.size(this.pickItemSize, this.pickItemSize);
+            container.position(posX, globalVariables.ui.paddingMid);
+            container.size(this.pickItemSize, this.pickItemSize);
 
-                container.style('transform', `rotate(${getRandomDegree()}deg)`);
-                container.mouseClicked(() => this.positionImages(container, originalIndex, shuffledIndex));
-            }
+            container.style('transform', `rotate(${getRandomDegree()}deg)`);
+            container.mouseClicked(() => this.positionImages(container, originalIndex, shuffledIndex));
 
             this.imageDoms[originalIndex] = container;
         });
@@ -211,7 +196,29 @@ export class ablaufRaten_horizontal extends BaseGame {
 
     shuffleImages() {
         const pairs = this.imageUrls.map((data, index) => [data, index]);
-        this.shuffledImageUrlArray = this.shuffle(pairs);
+
+        let shuffled;
+        let isValid = false;
+        let attempts = 0;
+
+        while (!isValid && attempts < 200) {
+            shuffled = this.shuffle(pairs);
+            isValid = true;
+
+            for (let i = 0; i < shuffled.length - 1; i++) {
+                const indexA = shuffled[i][1];
+                const indexB = shuffled[i + 1][1];
+
+                // If original indices are consecutive (e.g. 0 and 1, 1 and 2), it's invalid
+                if (Math.abs(indexA - indexB) === 1) {
+                    isValid = false;
+                    break;
+                }
+            }
+            attempts++;
+        }
+
+        this.shuffledImageUrlArray = shuffled;
         return this.shuffledImageUrlArray;
     }
 
