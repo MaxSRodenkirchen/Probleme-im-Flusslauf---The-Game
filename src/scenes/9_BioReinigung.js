@@ -39,7 +39,7 @@ export class scene10 extends BaseScene {
 
       [
         "Fische sind die Hauptverantwortlichen für die Wasserreinigung, da sie Giftstoffe aus dem Wasser filtern und in reine Energie für ihr Wachstum umwandeln.",
-        true,
+        false,
       ],
     ];
 
