@@ -23,12 +23,13 @@ export class scene09 extends BaseScene {
     super("scene09", p, sceneManager, uiManager);
 
     this.imageUrls = [
-      [img1, "Verdunstung"],
-      [img2, "Kondensation"],
-      [img3, "Niederschlag"],
-      [img4, "Versickerung"],
-      [img5, "Abschnitt 5"],
+      [img1, "Quelle"],
+      [img2, "Oberlauf"],
+      [img3, "Mittellauf"],
+      [img4, "Unterlauf"],
+      [img5, "Mündung"],
     ];
+
     this.bgTilesUrls = [field1, field2, field3, field4, field5];
     this.game = new ablaufRaten_horizontal(
       p,

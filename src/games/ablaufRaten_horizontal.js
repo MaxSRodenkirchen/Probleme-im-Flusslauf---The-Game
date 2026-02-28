@@ -57,19 +57,21 @@ export class ablaufRaten_horizontal extends BaseGame {
         this.imageContainer.size(ablaufWidth, this.imgSize + gap * 2);
         this.domElements.push(this.imageContainer);
 
+
         // Create container for the shuffle/pick images
         this.pickContainer = p.createDiv();
-        this.pickContainer.class("pickContainer borderRadius shadow horizontalPick");
+        this.pickContainer.class("pickContainer borderRadius  horizontalPick"); //shadow
         this.pickContainer.parent(this.gameContainer);
 
-        const pickContainerWidth = ablaufWidth / 2;
-        this.pickItemSize = (pickContainerWidth - (globalVariables.ui.paddingMid * 2) - (globalVariables.ui.paddingLow * (this.imageAmount - 1))) / this.imageAmount;
-        const pickContainerHeight = this.pickItemSize + (2 * globalVariables.ui.paddingMid);
+        const pickContainerWidth = ablaufWidth;
+        const pickContainerHeight = this.imgSize + gap * 2;
 
         this.pickContainer.size(pickContainerWidth, pickContainerHeight);
         this.pickContainer.style('flex-shrink', '0');
         this.domElements.push(this.pickContainer);
 
+        this.pickItemSize = this.imgSize;
+        this.pickGridOffset = gridOffset;
         const iconSize = globalVariables.ui.objectHeight * 2;
 
         this.gridCenter = {
@@ -79,21 +81,26 @@ export class ablaufRaten_horizontal extends BaseGame {
 
         this.bgTilesUrls.forEach((url, index) => {
             if (index >= this.imageAmount) return;
+
+            const container = p.createDiv();
+            container.class("imageItemContainer borderRadius  shadow"); //clickMe
+            container.parent(this.imageContainer);
+            container.position(this.positions[index].width, this.positions[index].height);
+            container.size(this.imgSize, this.imgSize);
+            container.style("opacity", "0.25");
+
             const img = p.createImg(url, 'image ' + index);
-            img.parent(this.imageContainer);
-            img.position(this.positions[index].width, this.positions[index].height);
-            img.size(this.imgSize, this.imgSize);
+            img.parent(container);
+            img.size('100%', '100%');
 
-            img.style("opacity", "0.25");
-            img.class(" borderRadius clickMe shadow");
-
-            this.bgTileDoms.push(img);
+            this.bgTileDoms.push(container);
         });
 
         this.setupImages();
     }
 
     setupImages() {
+        const gap = globalVariables.ui.paddingLow / 2;
         this.correct = false;
         this.clickedOrder = [];
         this.scene.completed = false;
@@ -109,12 +116,16 @@ export class ablaufRaten_horizontal extends BaseGame {
             const img = this.p.createImg(url, description || ('image ' + shuffledIndex));
             img.parent(container);
 
+            const title = this.p.createDiv(description);
+            title.class("imgTitle smallestText chelsea-market");
+            title.parent(container);
+
             container.parent(this.pickContainer);
-            container.addClass("clickMe")
+            // container.addClass("clickMe")
 
-            const posX = globalVariables.ui.paddingMid + shuffledIndex * (this.pickItemSize + globalVariables.ui.paddingLow);
+            const posX = this.pickGridOffset + shuffledIndex * (this.pickItemSize + gap * 2);
 
-            container.position(posX, globalVariables.ui.paddingMid);
+            container.position(posX, gap);
             container.size(this.pickItemSize, this.pickItemSize);
 
             container.style('transform', `rotate(${getRandomDegree()}deg)`);
@@ -190,7 +201,7 @@ export class ablaufRaten_horizontal extends BaseGame {
 
         if (this.bgTileDoms[this.currentField]) {
             let tile = this.bgTileDoms[this.currentField];
-            tile.style("opacity", "1")
+            tile.style("opacity", "0.5")
         }
     }
 
