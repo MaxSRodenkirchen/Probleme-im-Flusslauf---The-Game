@@ -9,7 +9,7 @@ import { faktenRaten } from "../games/faktenRaten.js";
 // import img4 from '../images/scene04/ablauf.png';
 
 // import field from '../images/ui/arrowTurnLeft.png';
-import max1 from "../images/MaxMare_Icon.png";
+import bärbel from "../images/bbarbe.png";
 
 export class scene10 extends BaseScene {
   constructor(p, sceneManager, uiManager) {
@@ -51,11 +51,13 @@ export class scene10 extends BaseScene {
 
     this.uiManager.setup();
 
+    //<span class = "highlight"> drei </span>
     const textArray = [
-      "Sehr gut! Dann wisst ihr bestimmt auch noch viel mehr über die Meere.",
-      ` Welche Fakten stimmen? <br>Klickt auf die <span class = "highlight"> drei </span> richtigen Felder!`,
+      `Was sucht ihr denn hier bei uns im Mittellauf? <br> Wollt ihr noch mehr Unheil anrichten?`,
+      `Achso, <span class = "highlight">Max Mare</span> schickt euch um zu helfen? <br> Wisst ihr denn überhaupt wie hier im Fluss unsere Systeme funktionieren? `,
+      `Welche Fakten stimmen? Klickt auf die <span class = "highlight"> drei </span> richtigen Felder.`
     ];
-    this.uiManager.displayCharacter(max1, "Max Mare", textArray);
+    this.uiManager.displayCharacter(bärbel, "Bärbel Barbe", textArray);
   }
 
   draw(p) {

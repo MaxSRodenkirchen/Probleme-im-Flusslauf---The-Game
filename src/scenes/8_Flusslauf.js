@@ -65,6 +65,8 @@ export class scene09 extends BaseScene {
       `Kennt ihr die Flussabschnitte? <br> Klickt in der richtigen Reihenfolge auf die Bilder unten.`,
     ];
     this.uiManager.displayCharacter(nnass, "Norbert Nass", textArray);
+
+
   }
 
   draw(p) {
@@ -72,6 +74,10 @@ export class scene09 extends BaseScene {
 
     this.uiManager.toggleLastSceneButton(true);
     this.uiManager.toggleNextSceneButton(this.completed);
+  }
+
+  onCompleted() {
+    this.uiManager.showAnswer("Bring uns zum Mittellauf!");
   }
 
   cleanup() {

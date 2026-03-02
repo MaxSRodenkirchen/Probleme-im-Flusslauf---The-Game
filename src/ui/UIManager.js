@@ -221,23 +221,29 @@ export class UIManager {
     text.class("chelsea-market smallText");
     text.style("text-align", "right");
 
+
+
+    text.style("width", "auto");
+    text.style("white-space", "nowrap");
+
     const posX =
       this.p.width -
       globalVariables.ui.sideSpace -
       globalVariables.ui.objectHeight / 2 -
-      150 -
+      50 -
       globalVariables.ui.paddingMid;
     const posY =
       this.p.height -
       globalVariables.ui.sideSpace -
-      globalVariables.ui.objectHeight * 0.62;
+      globalVariables.ui.objectHeight * 0.35;
 
     text.position(posX, posY);
 
-    // Move the anchor point from top-left (0,0) to bottom-right (100%, 100%)
+    // Move the anchor point from top-left (0,0) to right-bottom (100%, 100%)
+    // This makes posX the point where the right edge of the text is anchored.
     text.style(
       "transform",
-      `translate(-100 %, -100 %) rotate(${getRandomDegree()}deg)`,
+      `translate(-100%, -100%) rotate(${getRandomDegree()}deg)`,
     );
 
     this.elements.push(text);

@@ -99,8 +99,8 @@ export class bilderRaten extends BaseGame {
         // Calculate remaining slots in the 3-column grid
         const remainingSlots = 3 - (this.shuffledLetters.length % 3);
         deleteButton.style('grid-column', `span ${remainingSlots}`);
+        deleteButton.style("height", "100%");
         deleteButton.style('aspect-ratio', 'auto');
-        deleteButton.style('height', `${letterSize}px`);
         // deleteButton.style('transform', `rotate(${getRandomDegree() * 2}deg)`);
         deleteButton.mouseClicked(() => {
             const last = this.typedLetters.pop();

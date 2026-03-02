@@ -7,8 +7,24 @@ export class BaseScene {
         this.p = p;
         this.sceneManager = sceneManager;
         this.uiManager = uiManager;
-        this.completed = false;  // Szene abgeschlossen?
+        this._completed = false;  // Szene abgeschlossen?
         this.domElements = [];
+    }
+
+    get completed() {
+        return this._completed;
+    }
+
+    set completed(value) {
+        if (value === true && this._completed === false) {
+            this.onCompleted();
+        }
+        this._completed = value;
+    }
+
+    // Triggered automatically when the game is won
+    onCompleted() {
+        // Can be overridden by subclasses
     }
 
     // Called once when scene is activated
