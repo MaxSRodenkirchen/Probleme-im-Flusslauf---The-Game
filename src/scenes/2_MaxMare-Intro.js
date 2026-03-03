@@ -20,7 +20,7 @@ export class scene03 extends BaseScene {
         name.class("chelsea-market bigText");
         name.position(globalVariables.ui.sideSpace, globalVariables.ui.sideSpace);
 
-        const maxMare = p.createImg(maxMareUrl, "Image with Text: Probleme im Flusslauf");
+        const maxMare = p.createImg(maxMareUrl, "Image of Max Mare");
         maxMare.position(-320, 150);
         maxMare.id("maxMare01")
 

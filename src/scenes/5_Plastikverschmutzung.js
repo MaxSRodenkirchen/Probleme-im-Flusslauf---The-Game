@@ -13,12 +13,19 @@ export class scene06 extends BaseScene {
   constructor(p, sceneManager, uiManager) {
     super("scene06", p, sceneManager, uiManager);
 
+    const positions = [
+      { x: 306, y: 360, r: 100 },
+      { x: 301, y: 150, r: 175 },
+      { x: 471, y: 245, r: 100 },
+      { x: 169, y: 172, r: 80 },
+    ]
+
     this.game = new wimmelbild(p, this, this.uiManager, bgImageUrl, [
       img1,
       img2,
       img3,
       img4,
-    ]);
+    ], positions);
   }
 
   async setup(p) {

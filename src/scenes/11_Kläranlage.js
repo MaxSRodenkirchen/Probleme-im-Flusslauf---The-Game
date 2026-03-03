@@ -8,7 +8,7 @@ import img2 from "../images/Klaeranlage_4Bilder/Becken.png";
 import img3 from "../images/Klaeranlage_4Bilder/Rechen.png";
 import img4 from "../images/Klaeranlage_4Bilder/Schmutzwasser.png";
 
-import bärbel from "../images/bbarbe.png";
+import bärbel from "../images/bbarbe_besorgt.jpeg";
 import { drawGrid } from "../utils/drawGrid.js";
 
 export class scene12 extends BaseScene {

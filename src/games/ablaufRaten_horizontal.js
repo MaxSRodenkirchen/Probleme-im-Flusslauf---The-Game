@@ -89,9 +89,9 @@ export class ablaufRaten_horizontal extends BaseGame {
             container.size(this.imgSize, this.imgSize);
             container.style("opacity", "0.25");
 
-            const img = p.createImg(url, 'image ' + index);
-            img.parent(container);
-            img.size('100%', '100%');
+            // const img = p.createImg(url, 'image ' + index);
+            // img.parent(container);
+            // img.size('100%', '100%');
 
             this.bgTileDoms.push(container);
         });

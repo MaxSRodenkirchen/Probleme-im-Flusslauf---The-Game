@@ -1,7 +1,7 @@
 import { BaseScene } from "./_BaseScene.js";
 import { globalVariables } from "../globalVariables.js";
 
-import maxMareUrl from "../images/scene08/maxMare.png";
+import bärbelUrl from "../images/bbarbe_character.png";
 
 export class scene13 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
@@ -13,20 +13,24 @@ export class scene13 extends BaseScene {
         this.uiManager.setup();
         this.speech = `Die <span class="highlight">${globalVariables.teamName}</span> haben sich bewiesen. Euch möchte ich diese äußerst wichtige Mission anvertrauen. Aber nun schreitet los. Mein Freund <span class="highlight">Norbert Nass</span>  wird euch unterstützen. `;
 
-        const name = p.createDiv("Max Mare");
+        this.speech = `Ihr meint also eine Kläranlage könnte unser Problem lösen? Wenn dem so ist, solltet ihr mit <span class="highlight">Bix Biber</span> sprechen. Sie ist eine der besten Wasserbauerinnen weit und breit. Ihr findet sie im Flussarm A43. Ich zähle auf euch!`;
+
+        const name = p.createDiv("Bärbel Barbe");
         name.id("nameBig");
         name.class("chelsea-market bigText");
         name.position(globalVariables.ui.sideSpace, globalVariables.ui.sideSpace);
 
-        const maxMare = p.createImg(
-            maxMareUrl,
-            "Image with Text: Probleme im Flusslauf",
+        const bärbel = p.createImg(
+            bärbelUrl,
+            "Image of Bärbel",
         );
-        maxMare.position(-320, 150);
-        maxMare.id("maxMare01");
+        bärbel.class("character-bg");
+        // bärbel.parent("#game-container");
+        bärbel.position(-280, 40);
 
-        const size = 0.92;
-        maxMare.size(p.width * size, p.height * size);
+        const size = 1.1;
+        bärbel.size(p.width * size, p.height * size);
+        bärbel.style("z-index", "-999");
 
         const text = p.createDiv(this.speech);
         text.class("chelsea-market smallText");
@@ -34,8 +38,8 @@ export class scene13 extends BaseScene {
         text.position(p.width - 570, p.height - 370);
         text.style("transform", "rotate(-1deg)");
 
-        this.domElements.push(name, maxMare, text);
-        this.uiManager.showAnswer("Los geht's!");
+        this.domElements.push(name, bärbel, text);
+        this.uiManager.showAnswer("Norbert Nass, bring uns zur A43!");
     }
 
     draw(p) {

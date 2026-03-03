@@ -43,21 +43,8 @@ export class scene09 extends BaseScene {
   async setup(p) {
     this.uiManager.setup();
 
-    // await this.game.loadImages(p, this.imageUrls, this.bgFieldUrls);
     await this.game.setup(p);
 
-    // const sonnenImg = this.p.createImg(sonne, "An image of the sun");
-    // sonnenImg.parent("#game-container");
-    // // sonnenImg.class("transition shadow borderRadius");
-    // sonnenImg.style("z-index", "-999");
-    // sonnenImg.style("transform", "rotate(4deg)");
-    // const size = globalVariables.ui.objectHeight * 3.5;
-    // sonnenImg.size(size, size);
-    // sonnenImg.position(
-    //   globalVariables.ui.sideSpace - size / 2,
-    //   this.p.height / 2 - size / 2,
-    // );
-    // this.domElements.push(sonnenImg);
 
     const textArray = [
       `Hallo Freunde, danke für eure Hilfe. <br> Wisst ihr, auch mich belastet die Verschmutzung sehr.`,

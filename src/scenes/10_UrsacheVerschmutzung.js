@@ -7,18 +7,25 @@ import img1 from "../images/Wimmelbild_Mittellauf/Muelldeponie.png";
 import img2 from "../images/Wimmelbild_Mittellauf/Personen.png";
 import img3 from "../images/Wimmelbild_Mittellauf/Picknick.png";
 import img4 from "../images/Wimmelbild_Mittellauf/Kanalrohr.png";
-import bärbel from "../images/bbarbe.png";
+import bärbel from "../images/bbarbe_interessiert.jpeg";
 
 export class scene11 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
         super("scene11", p, sceneManager, uiManager);
+
+        const positions = [
+            { x: 67, y: 5, r: 250 },
+            { x: 276, y: 175, r: 175 },
+            { x: 102, y: 354, r: 160 },
+            { x: 457, y: 266, r: 100 },
+        ]
 
         this.game = new wimmelbild(p, this, this.uiManager, bgImageUrl, [
             img1,
             img2,
             img3,
             img4,
-        ]);
+        ], positions);
     }
 
     async setup(p) {

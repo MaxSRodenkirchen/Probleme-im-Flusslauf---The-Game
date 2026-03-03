@@ -2,7 +2,7 @@ import { getRandomDegree, globalVariables } from '../globalVariables.js';
 import { BaseGame } from './_BaseGame.js';
 
 export class wimmelbild extends BaseGame {
-    constructor(p, scene, uiManager, bgImageUrl, overlayImagesUrls) {
+    constructor(p, scene, uiManager, bgImageUrl, overlayImagesUrls, pos) {
         super(p, scene, uiManager);
 
         this.imgSize = globalVariables.ui.objectWidth * 2;
@@ -12,14 +12,10 @@ export class wimmelbild extends BaseGame {
         // console.log(overlayImagesUrls);
         this.container = null;
 
-        this.positions = [
-            { x: 306, y: 360, r: 100 },
-            { x: 301, y: 150, r: 175 },
-            { x: 471, y: 245, r: 100 },
-            { x: 169, y: 172, r: 80 },
-        ]
+        this.positions = pos;
 
         this.counter = 0;
+        this.debug = false; // Set to true to see hit areas and log coordinates
     }
 
     setup(p) {
@@ -38,14 +34,20 @@ export class wimmelbild extends BaseGame {
             const field = p.createDiv("");
             field.parent(this.container);
             field.class("  borderRadius clickField"); //clickMe
-            field.position(this.positions[index].x, this.positions[index].y);
+
+            field.position(this.positions[index].x - this.positions[index].r / 2, this.positions[index].y - this.positions[index].r / 2);
             field.size(this.positions[index].r);
+
+            if (this.debug) {
+                field.style("border", "2px solid red");
+                field.style("background-color", "rgba(255, 0, 0, 0.2)");
+            }
 
             // Create image but keep it hidden initially
             const img = p.createImg(url, `Müll gefunden`);
             img.parent(this.container);
             img.class("wimmelbild");
-            img.hide();
+            img.style("opacity", "0");
             this.domElements.push(img);
 
             field.mouseClicked(() => {
@@ -54,7 +56,7 @@ export class wimmelbild extends BaseGame {
                 this.counter++;
 
                 // Show the pre-created image instantly
-                img.show();
+                img.style("opacity", "1");
 
                 if (this.counter === 4) {
                     this.scene.completed = true;
@@ -63,6 +65,17 @@ export class wimmelbild extends BaseGame {
             })
             this.domElements.push(field);
         })
+
+        // Debug helper: Click anywhere to get coordinates
+        this.container.elt.addEventListener('click', (e) => {
+            if (!this.debug) return;
+            const rect = this.container.elt.getBoundingClientRect();
+            // We need to account for the CSS scale(1.28) in the coordinates
+            const scale = rect.width / this.container.elt.offsetWidth;
+            const x = Math.round((e.clientX - rect.left) / scale);
+            const y = Math.round((e.clientY - rect.top) / scale);
+            console.log(`New Position: { x: ${x}, y: ${y}, r: 100 },`);
+        });
 
         this.domElements.push(this.container);
     }
