@@ -556,7 +556,8 @@ button:focus-visible {
   cursor: pointer;
   display: flex !important;
   flex-direction: column;
-  background-color: var(--color-darkblue);
+  /* background-color: var(--color-darkblue); */
+  background-color: white;
 }
 
 .imageItemContainer img {

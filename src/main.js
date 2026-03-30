@@ -141,7 +141,7 @@ const sketch = (p) => {
 
         // Start with first scene (index 0)
         try {
-            await sceneManager.switchScene(12, p);
+            await sceneManager.switchScene(5, p);
         } catch (err) {
             console.error("[Game] Error während Szenen-Setup:", err);
         }
