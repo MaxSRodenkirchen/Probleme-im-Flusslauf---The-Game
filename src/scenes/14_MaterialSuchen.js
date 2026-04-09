@@ -2,23 +2,31 @@ import { BaseScene } from "./_BaseScene.js";
 import { globalVariables, getRandomDegree } from "../globalVariables.js";
 import { wimmelbild } from "../games/wimmelbild.js";
 
-import bgImageUrl from "../images/scene06/wimmelbild.png";
-import img1 from "../images/scene06/flasche.png";
-import img2 from "../images/scene06/netz.png";
-import img3 from "../images/scene06/shirt.png";
-import img4 from "../images/scene06/tüte.png";
+import bgImageUrl from "../images/Wimmelbild_Material/Wimmelbild_Material.png";
+import img1 from "../images/Wimmelbild_Material/Bakterien.png";
+import img2 from "../images/Wimmelbild_Material/Sand.png";
+import img3 from "../images/Wimmelbild_Material/Steine.png";
+import img4 from "../images/Wimmelbild_Material/Algen.png";
 import max1 from "../images/MaxMare_Icon.png";
 
 export class scene15 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
         super("scene15", p, sceneManager, uiManager);
 
+
+        const positions = [
+            { x: 365, y: 29, r: 100 },
+            { x: 62, y: 190, r: 200 },
+            { x: 625, y: 190, r: 130 },
+            { x: 351, y: 385, r: 160 },
+        ]
+
         this.game = new wimmelbild(p, this, this.uiManager, bgImageUrl, [
             img1,
             img2,
             img3,
             img4,
-        ]);
+        ], positions);
     }
 
     async setup(p) {
