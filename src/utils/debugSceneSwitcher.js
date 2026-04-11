@@ -28,9 +28,10 @@ export function initDebugSceneSwitcher(p, sceneManager) {
     "12_BixBiber.js",
     "13_AufbauKläranlage.js",
     "14_MaterialSuchen.js",
-    "15_WortZuFluss.js",
+    "15_KläranlageBau.js",
     "16_WasKannManNochTun.js",
-    "17_MaxMareEnde.js",
+    "17_FußabdruckWort.js",
+    "18_MaxMareEnde.js",
     "99_demoEnd.js",
   ];
 

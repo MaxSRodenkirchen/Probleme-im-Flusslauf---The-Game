@@ -20,9 +20,10 @@ import { scene12 } from "./scenes/11_Kläranlage.js";
 import { scene13 } from "./scenes/12_BixBiber.js";
 import { scene14 } from "./scenes/13_AufbauKläranlage.js";
 import { scene15 } from "./scenes/14_MaterialSuchen.js";
-import { scene16 } from "./scenes/15_WortZuFluss.js";
+import { scene16 } from "./scenes/15_KläranlageBau.js";
 import { scene17 } from "./scenes/16_WasKannManNochTun.js";
-import { scene18 } from "./scenes/17_MaxMareEnde.js";
+import { scene18 } from "./scenes/17_FußabdruckWort.js";
+import { scene19 } from "./scenes/18_MaxMareEnde.js";
 import { scene99 } from "./scenes/99_demoEnd.js";
 
 const sketch = (p) => {
@@ -129,6 +130,7 @@ const sketch = (p) => {
         sceneManager.addScene(new scene16(p, sceneManager, uiManager));
         sceneManager.addScene(new scene17(p, sceneManager, uiManager));
         sceneManager.addScene(new scene18(p, sceneManager, uiManager));
+        sceneManager.addScene(new scene19(p, sceneManager, uiManager));
 
         sceneManager.addScene(new scene99(p, sceneManager, uiManager));
 
@@ -141,7 +143,7 @@ const sketch = (p) => {
 
         // Start with first scene (index 0)
         try {
-            await sceneManager.switchScene(14, p);
+            await sceneManager.switchScene(15, p);
         } catch (err) {
             console.error("[Game] Error während Szenen-Setup:", err);
         }

@@ -1,33 +1,35 @@
 import { BaseScene } from "./_BaseScene.js";
 import { globalVariables } from "../globalVariables.js";
 
-import { ablaufRaten } from "../games/ablaufRaten.js";
+import { ablaufRaten_horizontal } from "../games/ablaufRaten_horizontal.js";
 
-import img1 from "../images/scene04/final/Verdunstung.png";
-import img2 from "../images/scene04/final/Kondensation.png";
-import img3 from "../images/scene04/final/Niederschlag.png";
-import img4 from "../images/scene04/final/Versickerung.png";
-
-import sonne from "../images/scene04/final/Sonne.png";
+import img1 from "../images/Reihenfolge_Klaeranlage/Rechen.png";
+import img2 from "../images/Reihenfolge_Klaeranlage/Sandfang.png";
+import img3 from "../images/Reihenfolge_Klaeranlage/Vorklärbecken.png";
+import img4 from "../images/Reihenfolge_Klaeranlage/Belebungsbecken.png";
+import img5 from "../images/Reihenfolge_Klaeranlage/Nachklärbecken.png";
 
 import field1 from "../images/scene04/final/arrow1.png";
 import field2 from "../images/scene04/final/arrow2.png";
 import field3 from "../images/scene04/final/arrow3.png";
 import field4 from "../images/scene04/final/arrow4.png";
-import max1 from "../images/MaxMare_Icon.png";
+import field5 from "../images/scene04/final/arrow1.png"; // Placeholder
+import bix from "../images/BixBiber_Icon.png";
 
 export class scene14 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
         super("scene14", p, sceneManager, uiManager);
 
         this.imageUrls = [
-            [img1, "Verdunstung"],
-            [img2, "Kondensation"],
-            [img3, "Niederschlag"],
-            [img4, "Versickerung"],
+            [img1, "Rechen"],
+            [img2, "Sandfang"],
+            [img3, "Vorklärbecken"],
+            [img4, "Belebungsbecken"],
+            [img5, "Nachklärbecken"],
         ];
-        this.bgTilesUrls = [field1, field2, field3, field4];
-        this.game = new ablaufRaten(
+
+        this.bgTilesUrls = [field1, field2, field3, field4, field5];
+        this.game = new ablaufRaten_horizontal(
             p,
             this,
             this.bgTilesUrls,
@@ -39,27 +41,13 @@ export class scene14 extends BaseScene {
     async setup(p) {
         this.uiManager.setup();
 
-        // await this.game.loadImages(p, this.imageUrls, this.bgFieldUrls);
         await this.game.setup(p);
-
-        const sonnenImg = this.p.createImg(sonne, "An image of the sun");
-        sonnenImg.parent("#game-container");
-        // sonnenImg.class("transition shadow borderRadius");
-        sonnenImg.style("z-index", "-999");
-        sonnenImg.style("transform", "rotate(4deg)");
-        const size = globalVariables.ui.objectHeight * 3.5;
-        sonnenImg.size(size, size);
-        sonnenImg.position(
-            globalVariables.ui.sideSpace - size / 2,
-            this.p.height / 2 - size / 2,
-        );
-        this.domElements.push(sonnenImg);
 
         const textArray = [
             `Schön, dass ihr helft! Aber zuerst müssen wir sehen, ob ihr bereit für die Aufgaben seid.`,
-            `Wie funktioniert ein <span class= "highlight">Wasserkreislauf?</span> Klickt in der richtigen Reihenfolge auf die Bilder rechts.<br> Eins habe ich euch schonmal eingefügt.  `,
+            `Wie funktioniert eine <span class= "highlight">Kläranlage?</span> Klickt in der richtigen Reihenfolge auf die Bilder unten.`,
         ];
-        this.uiManager.displayCharacter(max1, "Max Mare", textArray);
+        this.uiManager.displayCharacter(bix, "Bix Biber", textArray);
     }
 
     draw(p) {
@@ -67,6 +55,10 @@ export class scene14 extends BaseScene {
 
         this.uiManager.toggleLastSceneButton(true);
         this.uiManager.toggleNextSceneButton(this.completed);
+    }
+
+    onCompleted() {
+        this.uiManager.showAnswer("Weiter geht's!");
     }
 
     cleanup() {

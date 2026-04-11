@@ -7,7 +7,7 @@ import img1 from "../images/Wimmelbild_Material/Bakterien.png";
 import img2 from "../images/Wimmelbild_Material/Sand.png";
 import img3 from "../images/Wimmelbild_Material/Steine.png";
 import img4 from "../images/Wimmelbild_Material/Algen.png";
-import max1 from "../images/MaxMare_Icon.png";
+import bix from "../images/BixBiber_Icon.png";
 
 export class scene15 extends BaseScene {
     constructor(p, sceneManager, uiManager) {
@@ -34,7 +34,7 @@ export class scene15 extends BaseScene {
             "Ihr seid gut. Dann ahnt ihr bestimmt auch schon was unser Problem ist.",
             `Was gehört hier nicht ins Meer? <br> Findet und klickt auf die <span class = "highlight"> vier Gegenstände.</span>`,
         ];
-        this.uiManager.displayCharacter(max1, "Max Mare", textArray);
+        this.uiManager.displayCharacter(bix, "Bix Biber", textArray);
 
         this.uiManager.setup();
         this.game.setup(p);
