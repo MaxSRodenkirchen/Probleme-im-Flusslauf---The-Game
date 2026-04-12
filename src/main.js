@@ -22,7 +22,7 @@ import { scene14 } from "./scenes/13_AufbauKläranlage.js";
 import { scene15 } from "./scenes/14_MaterialSuchen.js";
 import { scene16 } from "./scenes/15_KläranlageBau.js";
 import { scene17 } from "./scenes/16_WasKannManNochTun.js";
-import { scene18 } from "./scenes/17_FußabdruckWort.js";
+import { scene18 } from "./scenes/17_UpcyclingWord.js";
 import { scene19 } from "./scenes/18_MaxMareEnde.js";
 import { scene99 } from "./scenes/99_demoEnd.js";
 
@@ -143,7 +143,7 @@ const sketch = (p) => {
 
         // Start with first scene (index 0)
         try {
-            await sceneManager.switchScene(15, p);
+            await sceneManager.switchScene(18, p);
         } catch (err) {
             console.error("[Game] Error während Szenen-Setup:", err);
         }

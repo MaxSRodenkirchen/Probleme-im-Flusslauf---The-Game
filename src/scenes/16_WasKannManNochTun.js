@@ -11,28 +11,28 @@ export class scene17 extends BaseScene {
 
         this.facts = [
             [
-                "Ich kaufe nur noch 'Bioplastik'-Tüten, denn die verrotten in der Natur ganz schnell.",
+                "Man sollte mehr Bioplastik-Tüten nutzen. Sie sind völlig unbedenklich, denn sie verrotten in der Natur ganz schnell.",
                 false,
             ],
             [
-                "Ich nutze echte Naturkosmetik, da ist nämlich garantiert kein flüssiges Plastik drin.",
+                "Man sollte echte Naturkosmetik nutzen, denn dort ist garantiert kein flüssiges Plastik enthalten.",
                 true,
             ],
             [
-                "Ich trage meine Polyester-Pullis ewig. Solange ich sie nur wasche und nicht wegwerfe, landet auch kein Plastik im Meer.",
+                "Solange man Polyester-Kleidung nur wäscht und nicht wegwirft, gelangt davon auch kein Plastik ins Meer.",
                 false,
             ],
             [
-                "Auch wenn es umständlich ist: Ich trenne Plastik (wie den Aludeckel vom Joghurtbecher) immer restlos von anderen Materialien, bevor es in den Müll fliegt.",
+                "Auch wenn es umständlich ist: Man sollte Plastik immer restlos von anderen Materialien trennen, bevor es im Müll landet.",
                 true,
             ],
             [
-                "Ich verzichte an der Kasse auf Einweg-Papiertüten und habe für Spontankäufe einfach immer einen Stoffbeutel in der Jackentasche.",
+                "Für Spontankäufe sollte man immer einen Stoffbeutel in der Tasche haben, um an der Kasse auf Einweg-Tüten verzichten zu können.",
                 true,
             ],
 
             [
-                "Ich mache mir keine Sorgen um meinen vielen Plastikmüll, denn unsere Anlagen machen aus dem Abfall einfach wieder komplett gleichwertiges Plastik.",
+                "Die Menge an Plastikmüll ist kein Problem, denn Recyclinganlagen machen aus dem Abfall einfach wieder komplett gleichwertiges Plastik.",
                 false,
             ],
         ];
@@ -46,8 +46,10 @@ export class scene17 extends BaseScene {
         this.uiManager.setup();
 
         const textArray = [
-            "Sehr gut! Dann wisst ihr bestimmt auch noch viel mehr über die Meere.",
-            ` Welche Fakten stimmen? <br>Klickt auf die <span class = "highlight"> drei </span> richtigen Felder!`,
+            "Wie schön, dass ihr zurück seid. <br> Erzählt mir was ihr rausgefunden habt.",
+            `Aha, die Stadt im Mittellauf verursacht also viel Müll. <br> Konntet ihr mit Bärbel eine Lösung finden?`,
+            `Wie bitte? Ihr habt mit Bix Biber gleich eine ganze Kläranlage gebaut? <br> Ihr seid wirklich große Klasse.`,
+            `Um die Ursache zu beheben, müssten die Menschen allerdings mehr auf ihr Verhalten achten. <br><span class="highlight">Habt ihr eine Ahnung, was sie besser machen könnten?</span>`
         ];
         this.uiManager.displayCharacter(max1, "Max Mare", textArray);
     }

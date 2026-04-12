@@ -11,7 +11,7 @@ export class scene19 extends BaseScene {
 
     async setup(p) {
         this.uiManager.setup();
-        this.speech = `Die <span class="highlight">${globalVariables.teamName}</span> haben sich bewiesen. Euch möchte ich diese äußerst wichtige Mission anvertrauen. Aber nun schreitet los. Mein Freund <span class="highlight">Norbert Nass</span>  wird euch unterstützen. `;
+        this.speech = `Ich muss sagen, ich habe euch anfangs unterschätzt, aber die <span class="highlight">${globalVariables.teamName}</span> haben sich wirklich bewiesen. Durch euren Beitrag ist es nun wieder ein Stück sauberer geworden. Und ich möchte euch noch etwas verraten: Wir brauchen Leute wie euch, die sich für unsere Ökosysteme einsetzen. <span class="highlight"> Denn ihr seid die Stimme der Meere! </span> Ich hoffe euch bald wiederzusehen.  `;
 
         const name = p.createDiv("Max Mare");
         name.id("nameBig");
@@ -31,11 +31,11 @@ export class scene19 extends BaseScene {
         const text = p.createDiv(this.speech);
         text.class("chelsea-market smallText");
         text.size(500, 0);
-        text.position(p.width - 570, p.height - 370);
+        text.position(p.width - 570, p.height - 470);
         text.style("transform", "rotate(-1deg)");
 
         this.domElements.push(name, maxMare, text);
-        this.uiManager.showAnswer("Los geht's!");
+        this.uiManager.showAnswer("Bis bald Max!");
     }
 
     draw(p) {

@@ -14,7 +14,7 @@ export class scene16 extends BaseScene {
     async setup(p) {
         this.uiManager.setup();
 
-        this.speech = `Platzhalter: Diese neue Szene dient als Überleitung zwischen der Materialsuche und den weiteren Taten. Hier könnte Max Mare oder eine andere Figur etwas Wichtiges sagen!`;
+        this.speech = `Super Leute. Mit den von euch gesammelten Materialien und Organismen wird das Wasser ordentlich aufbereitet. Und die Anlage kann sich auch sehen lassen, oder?`;
 
         const name = p.createDiv("Bix Biber");
         name.id("nameBig");
@@ -37,25 +37,25 @@ export class scene16 extends BaseScene {
             "Image of the Kläranlage",
         );
 
-        const s = 0.65;
+        const s = 0.55;
         bau.style("width", p.width * s + "px");
         bau.style("height", "auto");
         // bau.class("transition shadow borderRadius");
         bau.style("mix-blend-mode", "multiply");
 
         bau.position(
-            400,
-            75
+            500,
+            80
         );
 
         const text = p.createDiv(this.speech);
         text.class("chelsea-market smallText");
         text.size(500, 0);
-        text.position(p.width - 570, p.height - 370);
+        text.position(p.width - 690, p.height - 300);
         text.style("transform", "rotate(-1deg)");
 
         this.domElements.push(name, bärbel, text, bau);
-        this.uiManager.showAnswer("Weiter zum nächsten Schritt!");
+        this.uiManager.showAnswer("Danke dir Bix! <br> Wir berichten nun Max Mare von unserem Erfolg.");
     }
 
     draw(p) {

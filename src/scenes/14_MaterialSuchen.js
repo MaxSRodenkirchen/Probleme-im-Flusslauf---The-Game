@@ -31,8 +31,9 @@ export class scene15 extends BaseScene {
 
     async setup(p) {
         const textArray = [
-            "Ihr seid gut. Dann ahnt ihr bestimmt auch schon was unser Problem ist.",
-            `Was gehört hier nicht ins Meer? <br> Findet und klickt auf die <span class = "highlight"> vier Gegenstände.</span>`,
+            `Ok, ich glaube ich habe eine Idee wie wir vorgehen. <br> Wir werden nur natürliche Inhalte nutzen!`,
+            ` <span class= "highlight"> Sucht 2 Materialien für ein Vorklärbecken und 2 Organismen für ein Belebungsbecken</span><br> Ich kümmere mich in der Zwischenzeit um den Bau von zwei Becken.
+            `,
         ];
         this.uiManager.displayCharacter(bix, "Bix Biber", textArray);
 

@@ -44,8 +44,9 @@ export class scene14 extends BaseScene {
         await this.game.setup(p);
 
         const textArray = [
-            `Schön, dass ihr helft! Aber zuerst müssen wir sehen, ob ihr bereit für die Aufgaben seid.`,
-            `Wie funktioniert eine <span class= "highlight">Kläranlage?</span> Klickt in der richtigen Reihenfolge auf die Bilder unten.`,
+            `Huch, wo kommt ihr denn auf einmal her? <br> Sucht ihr nach etwas?`,
+            `Ah, Max Mare  und Bärbel schicken euch also? <br> Dann wird es wichtig sein.`,
+            `Ihr meint eine Kläranlage könnte eine Lösung für die Verschmutzung sein? <br> Da müsst ihr mir ein wenig helfen. <span class= "highlight">Wie wird eine solche Anlage aufgebaut?</span>`
         ];
         this.uiManager.displayCharacter(bix, "Bix Biber", textArray);
     }
