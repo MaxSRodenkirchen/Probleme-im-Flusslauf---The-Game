@@ -2,7 +2,7 @@ import { BaseScene } from "./_BaseScene.js";
 import { globalVariables } from "../globalVariables.js";
 
 import bix from "../images/BixBiber.png";
-import Kläranlage from "../images/Kläranlage_Bau.png";
+import Kläranlage from "../images/Kläranlage_Bau_4.png";
 
 
 export class scene16 extends BaseScene {
@@ -37,13 +37,15 @@ export class scene16 extends BaseScene {
             "Image of the Kläranlage",
         );
 
-        const s = 0.4; // 60% of width
+        const s = 0.65;
         bau.style("width", p.width * s + "px");
         bau.style("height", "auto");
-        bau.class("transition shadow borderRadius");
+        // bau.class("transition shadow borderRadius");
+        bau.style("mix-blend-mode", "multiply");
+
         bau.position(
-            500,
-            100
+            400,
+            75
         );
 
         const text = p.createDiv(this.speech);
