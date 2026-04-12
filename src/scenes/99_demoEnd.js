@@ -61,7 +61,7 @@ export class scene99 extends BaseScene {
     banner.position(-1200, 100);
     banner.style("transform", `rotate(-16deg)`);
 
-    const bannerText = p.createP("DEMO BEENDET");
+    const bannerText = p.createP("SPIEL BEENDET");
     bannerText.class("chelsea-market bigText");
     bannerText.parent(banner);
 

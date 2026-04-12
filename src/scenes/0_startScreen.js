@@ -44,12 +44,12 @@ export class scene01 extends BaseScene {
         banner.position(-1200, 100);
         banner.style('transform', `rotate(-16deg)`);
 
-        const bannerText = p.createP("DEMO");
-        bannerText.class("chelsea-market bigText");
-        bannerText.parent(banner);
+        // const bannerText = p.createP("DEMO");
+        // bannerText.class("chelsea-market bigText");
+        // bannerText.parent(banner);
 
 
-        this.domElements.push(startText, head1, head2, head3, banner, bannerText);
+        this.domElements.push(startText, head1, head2, head3);
 
     }
 
