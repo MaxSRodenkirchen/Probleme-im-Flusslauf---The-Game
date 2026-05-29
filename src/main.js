@@ -43,6 +43,11 @@ const sketch = (p) => {
 
         // Set scale as CSS variable - layout is centered via CSS translate
         document.documentElement.style.setProperty("--game-scale", scaling);
+
+        // Force Safari/Chrome to recalculate touch hitboxes by triggering a reflow
+        container.style.height = (baseHeight + 0.1) + "px";
+        container.offsetHeight; // force reflow
+        container.style.height = baseHeight + "px";
     };
 
     p.setup = async () => {
@@ -169,6 +174,11 @@ const sketch = (p) => {
 
     p.windowResized = () => {
         updateScale();
+        
+        // Force recalculation after short delays to ensure Safari's layout settles after rotation
+        setTimeout(updateScale, 100);
+        setTimeout(updateScale, 300);
+        setTimeout(updateScale, 500);
     };
 };
 
