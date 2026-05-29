@@ -708,9 +708,9 @@ button:focus-visible {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
   }
 
-  /* Hide the main game container in portrait mode to disable interactions */
+  /* Use visibility: hidden instead of display: none to prevent collapsing the p5 canvas geometry */
   #game-container {
-    display: none !important;
+    visibility: hidden;
   }
 }
 

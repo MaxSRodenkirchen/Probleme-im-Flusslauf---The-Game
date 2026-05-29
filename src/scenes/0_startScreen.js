@@ -19,10 +19,10 @@ export class scene01 extends BaseScene {
         startText.id("startText");
         startText.class("chelsea-market bigText");
         startText.position(p.width / 2 - 250, p.height - 200);
-        await startText.mousePressed(() => {
+        startText.mouseClicked(async () => {
             globalVariables.currentScene++;
-            this.sceneManager.switchScene(globalVariables.currentScene, p);
-        })
+            await this.sceneManager.switchScene(globalVariables.currentScene, p);
+        });
 
         const head1 = p.createP("Probleme");
         head1.class("chelsea-market hugeText");

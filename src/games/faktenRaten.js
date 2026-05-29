@@ -40,7 +40,7 @@ export class faktenRaten extends BaseGame {
             p.class("chelsea-market");
 
             let guessed = false;
-            card.mousePressed(() => {
+            card.mouseClicked(() => {
                 if (guessed) return;
 
                 if (isCorrect) {
