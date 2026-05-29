@@ -1,3 +1,22 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/roboto-400.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/roboto-700.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Chelsea Market';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/chelsea-market-400.ttf') format('truetype');
+}
+
 * {
   margin: 0;
   padding: 0;
