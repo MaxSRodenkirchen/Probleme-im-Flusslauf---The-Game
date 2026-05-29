@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/Probleme-im-Flusslauf---The-Game/sw.js', { scope: '/Probleme-im-Flusslauf---The-Game/' })})}
