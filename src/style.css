@@ -648,3 +648,80 @@ button:focus-visible {
     transform: rotate(360deg);
   }
 }
+
+/* Portrait Lock Overlay */
+#portrait-lock-overlay {
+  display: none;
+}
+
+@media screen and (orientation: portrait) and (max-width: 1024px) {
+  #portrait-lock-overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    background: radial-gradient(circle, #1e3c72 0%, #0f5e9c 100%);
+    color: #fff;
+    z-index: 1000000; /* Must be above everything including loading screen */
+    text-align: center;
+    padding: var(--padding-mid);
+    font-family: "Chelsea Market", system-ui;
+    box-sizing: border-box;
+  }
+
+  .phone-icon-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-bottom: var(--padding-mid);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .phone-rotation-icon {
+    width: 45px;
+    height: 75px;
+    stroke: var(--color-light);
+    animation: rotatePhone 2.5s ease-in-out infinite;
+  }
+
+  #portrait-lock-overlay h2 {
+    font-size: var(--font-size-medium);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: var(--color-success);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  }
+
+  #portrait-lock-overlay p {
+    font-size: var(--font-size-small);
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 320px;
+    line-height: 1.4;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Hide the main game container in portrait mode to disable interactions */
+  #game-container {
+    display: none !important;
+  }
+}
+
+@keyframes rotatePhone {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
